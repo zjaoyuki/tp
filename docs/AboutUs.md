@@ -32,7 +32,7 @@ i love acacia
 * Role: Developer
 * Responsibilities: UI
 
-### Johnny Doe
+### Wong Wei Feng
 
 <img src="images/johndoe.png" width="200px">
 
