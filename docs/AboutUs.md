@@ -9,17 +9,19 @@ We are a team based in the [School of Computing, National University of Singapor
 
 You can reach us at the email `seer[at]comp.nus.edu.sg`
 
+I love chicken rice!
+
 ## Project team
 
-### John Doe
+### Deepa Malika
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/deepa_m1.png" width="200px">
 
 [[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
+[[github](https://github.com/deepa-m1)]
 [[portfolio](team/johndoe.md)]
 
-* Role: Project Advisor
+* Role: Software Developer
 
 ### Jane Doe
 
