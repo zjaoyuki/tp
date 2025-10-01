@@ -9,8 +9,6 @@ We are a team based in the [School of Computing, National University of Singapor
 
 You can reach us at the email `seer[at]comp.nus.edu.sg`
 
-I love chicken rice!
-
 ## Project team
 
 ### Deepa Malika
@@ -23,17 +21,16 @@ I love chicken rice!
 
 * Role: Software Developer
 
-### Jane Doe
+### Theresia
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/theresiaong.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/theresiaong)]
 
-* Role: Team Lead
+* Role: Developer
 * Responsibilities: UI
 
-### Johnny Doe
+### Wong Wei Feng
 
 <img src="images/johndoe.png" width="200px">
 
@@ -42,22 +39,18 @@ I love chicken rice!
 * Role: Developer
 * Responsibilities: Data
 
-### Jean Doe
+### Yang Yatong
 
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+<img src="images/yalasoo.png" width="200px">
 
 * Role: Developer
 * Responsibilities: Dev Ops + Threading
 
-### James Doe
+### Zeng Jing
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/zjaoyuki.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/zjaoyuki)]
 
 * Role: Developer
 * Responsibilities: UI
