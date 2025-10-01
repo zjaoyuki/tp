@@ -23,17 +23,16 @@ SEVENTEEN Right Here!
 
 * Role: Project Advisor
 
-### Jane Doe
+### Theresia
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/theresiaong.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/theresiaong)]
 
-* Role: Team Lead
+* Role: Developer
 * Responsibilities: UI
 
-### Johnny Doe
+### Wong Wei Feng
 
 <img src="images/johndoe.png" width="200px">
 
@@ -49,12 +48,11 @@ SEVENTEEN Right Here!
 * Role: Developer
 * Responsibilities: Dev Ops + Threading
 
-### James Doe
+### Zeng Jing
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/zjaoyuki.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/zjaoyuki)]
 
 * Role: Developer
 * Responsibilities: UI
