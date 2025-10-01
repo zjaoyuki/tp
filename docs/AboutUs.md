@@ -11,13 +11,6 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### Zeng Jing
-
-<img src="images/zengjing.png" width="200px">
-
-[[github](https://github.com/zjaoyuki)]
-
-
 ### John Doe
 
 <img src="images/johndoe.png" width="200px">
