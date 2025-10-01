@@ -13,11 +13,9 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Deepa Malika
 
-<img src="images/deepa_m1.png" width="200px">
+<img src="images/deepa-m1.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
 [[github](https://github.com/deepa-m1)]
-[[portfolio](team/johndoe.md)]
 
 * Role: Software Developer
 
@@ -32,9 +30,9 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Wong Wei Feng
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/hypovolemic.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/Hypovolemic)]
 
 * Role: Developer
 * Responsibilities: Data
@@ -42,6 +40,8 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 ### Yang Yatong
 
 <img src="images/yalasoo.png" width="200px">
+
+[[github](http://github.com/yalasoo)]
 
 * Role: Developer
 * Responsibilities: Dev Ops + Threading
