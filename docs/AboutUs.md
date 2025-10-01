@@ -9,7 +9,7 @@ We are a team based in the [School of Computing, National University of Singapor
 
 You can reach us at the email `seer[at]comp.nus.edu.sg`
 
-i love acacia
+SEVENTEEN Right Here!
 
 ## Project team
 
@@ -41,12 +41,9 @@ i love acacia
 * Role: Developer
 * Responsibilities: Data
 
-### Jean Doe
+### Yang Yatong
 
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+<img src="images/yalasoo.png" width="200px">
 
 * Role: Developer
 * Responsibilities: Dev Ops + Threading
