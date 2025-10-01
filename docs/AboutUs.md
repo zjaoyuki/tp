@@ -9,6 +9,8 @@ We are a team based in the [School of Computing, National University of Singapor
 
 You can reach us at the email `seer[at]comp.nus.edu.sg`
 
+i love acacia
+
 ## Project team
 
 ### John Doe
@@ -50,12 +52,11 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities: Dev Ops + Threading
 
-### James Doe
+### Zeng Jing
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/zjaoyuki.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/zjaoyuki)]
 
 * Role: Developer
 * Responsibilities: UI
