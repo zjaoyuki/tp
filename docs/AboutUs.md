@@ -23,14 +23,13 @@ i love acacia
 
 * Role: Project Advisor
 
-### Jane Doe
+### Theresia
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/theresiaong.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/theresiaong)]
 
-* Role: Team Lead
+* Role: Developer
 * Responsibilities: UI
 
 ### Johnny Doe
