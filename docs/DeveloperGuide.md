@@ -300,7 +300,55 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `LittleLogBook` and the **Actor** is the `user`, unless specified otherwise)
+
+**Use case: Add a contact**
+
+**MSS**
+
+1. Teacher enters command including the contact information.
+2. System validates input information.
+3. System saves contact and updates contact list.
+4. System displays success confirmation.
+
+   
+Use case ends.
+
+**Extensions**
+
+* 2a. The input information is invalid.
+
+    * 2a1. LittleLogBook shows an error message.
+
+      Use case resumes at step 1.
+
+* 3a. Duplicate contact detected.
+
+    * 3a1. LittleLogBook shows an error message.
+
+      Use case resumes at step 1.
+
+
+**Use case: View a contact**
+
+**MSS**
+
+1. Teacher enters command to view a specific contact.
+2. System validates input information and find the matching contact.
+3. System displays the contact information.
+
+
+Use case ends.
+
+**Extensions**
+
+* 2a. The input information is invalid.
+
+    * 2a1. LittleLogBook shows an error message.
+
+      Use case resumes at step 1.
+
+
 
 **Use case: Delete a person**
 
