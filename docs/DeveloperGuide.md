@@ -306,10 +306,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User opens LittleLogBook
-2.  LittleLogBook shows list of all the contacts added
-3.  User types commands to delete a specific contact in the list
-4.  LittleLogBook deletes the person
+1.  User opens LittleLogBook.
+2.  LittleLogBook shows list of all the contacts added.
+3.  User requests to delete a specific contact in the list.
+4.  LittleLogBook deletes the person.
 
     Use case ends.
 
@@ -324,10 +324,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User opens LittleLogBook
-2.  LittleLogBook shows list of all the contacts added
-3.  User types commands to search a contact in the list with partial information
-4.  LittleLogBook shows list of all contacts matching the information
+1.  User opens LittleLogBook.
+2.  LittleLogBook shows list of all the contacts added.
+3.  User requests to search a contact in the list with partial information.
+4.  LittleLogBook shows list of all contacts matching the information.
 
     Use case ends.
 
