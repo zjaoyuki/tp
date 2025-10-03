@@ -272,29 +272,28 @@ _{Explain here how the data archiving feature will be implemented}_
 
 ### Product scope
 
-**Target user profile**:
-
-* has a need to manage a significant number of contacts
+**Target user profile**: Kindergarten Teacher
+* an avid user of typed user commands interface
 * prefer desktop apps over other types
-* can type fast
-* prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
+* has multiple classes that holds multiple students
+* has multiple colleagues
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: Little LogBook helps kindergarten teachers stay organised by managing student and colleague details in one place, making parent contacts quick to access and freeing up more time for teaching
 
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                 | So that I can…​                                                        |
-|----------|--------------------------------------------|------------------------------|------------------------------------------------------------------------|
-| `* * *`  | new user                                   | see usage instructions       | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person             |                                                                        |
-| `* * *`  | user                                       | delete a person              | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name        | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name         | locate a person easily                                                 |
+| Priority | As a …​           | I want to …​                    | So that I can…​                                             |
+|----------|-------------------|---------------------------------|-------------------------------------------------------------|
+| `* * *`  | new teacher       | see usage instructions          | refer to instructions when I forget how to use the App      |
+| `* * *`  | teacher           | add a new person                |                                                             |
+| `* * *`  | teacher           | delete a person                 | remove contact that I no longer need                        |
+| `* * *`  | teacher           | find a person by name           | locate contact without having to go through the entire list |
+| `* *`    | teacher           | view a person's contact details |                                                             |
+| `* *`    | forgetful teacher | add notes to a person's entries | remember details about the person                           |
+| `* *`    | teacher           | mark attendance of my student   |                                                             |
 
 *{More to be added}*
 
@@ -332,13 +331,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
 2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+4.  Only authenticated users (teachers) can access the app.
+5.  Data should not be lost even if the app crashes unexpectedly.
 
 *{More to be added}*
 
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
-* **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Contact**: A person's name, class (for student), birthday (for student), phone number's (colleague), emails (colleague)
+* **Notes**: A section inside contact for additional information
 
 --------------------------------------------------------------------------------------------------------------------
 
