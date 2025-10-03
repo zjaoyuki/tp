@@ -337,7 +337,23 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     *    3a.1 LittleLogBook requests for valid input.
          Use case resumes at step 3.
 
-         
+**Use case: Marks attendance**
+
+**MSS**
+
+1.  User opens LittleLogBook.
+2.  LittleLogBook shows list of all the contacts added.
+3.  User requests to mark attendance of a specific student.
+4.  LittleLogBook succesfully marks student's attendance.
+
+    Use case ends.
+
+**Extensions**
+
+* 3a. No contact matches the information.
+    *    3a.1 LittleLogBook requests for valid input.
+         Use case resumes at step 3.
+
 
 *{More to be added}*
 
