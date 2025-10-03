@@ -278,8 +278,7 @@ _{Explain here how the data archiving feature will be implemented}_
 * has multiple classes that holds multiple students
 * has multiple colleagues
 
-**Value proposition**: Little LogBook helps kindergarten teachers stay organised by managing student and colleague details in one place, making parent contacts quick to access and freeing up more time for teaching
-
+**Value proposition**: Little LogBook helps kindergarten teachers stay organised by managing student and colleague details in one place, making parent contacts quick to access and freeing up more time for teaching.
 
 ## User Stories
 
@@ -311,7 +310,6 @@ _{Explain here how the data archiving feature will be implemented}_
 | `* *`    | kindergarten teacher   | store multiple emergency contacts           | have options if one is unavailable                      |
 | `* *`    | kindergarten teacher   | save colleagues’ information                | reach them when I need help                             |
 | `* *`    | kindergarten teacher   | group colleagues by role                    | contact the right person quickly                        |
-| `* *`    | kindergarten teacher   | take daily attendance                       | track who is present                                    |
 | `* *`    | kindergarten teacher   | "mark all present" option                   | save time by only marking absentees                     |
 | `* *`    | kindergarten teacher   | see color code for attendance               | identify status quickly (red = absent, green = present) |
 | `* *`    | kindergarten teacher   | check a student’s attendance history        | spot patterns of absence                                |
@@ -356,14 +354,13 @@ _{Explain here how the data archiving feature will be implemented}_
 2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 4.  Only authenticated users (teachers) can access the app.
-5.  Data should not be lost even if the app crashes unexpectedly.
 
 *{More to be added}*
 
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
-* **Contact**: A person's name, class (for student), birthday (for student), phone number's (colleague), emails (colleague)
+* **Contact**: A person's name, class (for student), birthday (for student), phone number's (colleague, student's parents), emails (colleague, student's parents)
 * **Notes**: A section inside contact for additional information
 
 --------------------------------------------------------------------------------------------------------------------
