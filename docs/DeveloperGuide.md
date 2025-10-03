@@ -281,21 +281,45 @@ _{Explain here how the data archiving feature will be implemented}_
 **Value proposition**: Little LogBook helps kindergarten teachers stay organised by managing student and colleague details in one place, making parent contacts quick to access and freeing up more time for teaching
 
 
-### User stories
+## User Stories
 
-Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
+### Priority Legend
+- `* * *` : Must-have (High priority)
+- `* *`   : Good-to-have (Medium priority)
+- `*`     : Nice-to-have (Low priority)
 
-| Priority | As a …​           | I want to …​                    | So that I can…​                                             |
-|----------|-------------------|---------------------------------|-------------------------------------------------------------|
-| `* * *`  | new teacher       | see usage instructions          | refer to instructions when I forget how to use the App      |
-| `* * *`  | teacher           | add a new person                |                                                             |
-| `* * *`  | teacher           | delete a person                 | remove contact that I no longer need                        |
-| `* * *`  | teacher           | find a person by name           | locate contact without having to go through the entire list |
-| `* *`    | teacher           | view a person's contact details |                                                             |
-| `* *`    | forgetful teacher | add notes to a person's entries | remember details about the person                           |
-| `* *`    | teacher           | mark attendance of my student   |                                                             |
-
-*{More to be added}*
+| Priority | As a …​                | I want to …​                                | So that I can…​                                         |
+|----------|------------------------|---------------------------------------------|---------------------------------------------------------|
+| `* * *`  | new teacher            | see usage instructions                      | refer to instructions when I forget how to use the App  |
+| `* * *`  | teacher                | add a new person                            | be efficient when managing contacts                     |
+| `* * *`  | teacher                | delete a person                             | remove contacts I no longer need                        |
+| `* * *`  | teacher                | find a person by name                       | locate contact without going through the entire list    |
+| `* *`    | teacher                | view a person's contact details             | get the information I need quickly                      |
+| `* *`    | forgetful teacher      | add notes to a person's entries             | remember details about the person                       |
+| `* *`    | teacher                | mark attendance of my student               | track presence easily                                   |
+| `* *`    | person who makes typos | edit contacts                               | correct mistakes without re-adding the contact          |
+| `* *`    | person who makes typos | input validation (e.g., phone only digits)  | reduce mistakes when entering data                      |
+| `* *`    | kindergarten teacher   | search contacts using partial names         | find information more easily                            |
+| `* *`    | forgetful teacher      | confirmation pop-ups before deleting        | avoid erasing information by accident                   |
+| `* *`    | kindergarten teacher   | sort contacts by categories (students, ...) | filter information quickly                              |
+| `* *`    | forgetful teacher      | detect duplicate contacts                   | avoid multiple entries of the same student              |
+| `* *`    | kindergarten teacher   | attach a student’s photo                    | quickly match names to faces                            |
+| `* *`    | kindergarten teacher   | categorise students (class, age, bus group) | find information more efficiently                       |
+| `* *`    | kindergarten teacher   | mark preferred contact methods              | respect parent preferences                              |
+| `* *`    | kindergarten teacher   | save parents’ contact details               | reach them in emergencies                               |
+| `* *`    | kindergarten teacher   | add pickup person details                   | ensure students go home safely                          |
+| `* *`    | kindergarten teacher   | store multiple emergency contacts           | have options if one is unavailable                      |
+| `* *`    | kindergarten teacher   | save colleagues’ information                | reach them when I need help                             |
+| `* *`    | kindergarten teacher   | group colleagues by role                    | contact the right person quickly                        |
+| `* *`    | kindergarten teacher   | take daily attendance                       | track who is present                                    |
+| `* *`    | kindergarten teacher   | "mark all present" option                   | save time by only marking absentees                     |
+| `* *`    | kindergarten teacher   | see color code for attendance               | identify status quickly (red = absent, green = present) |
+| `* *`    | kindergarten teacher   | check a student’s attendance history        | spot patterns of absence                                |
+| `* *`    | kindergarten teacher   | generate attendance reports                 | submit them to school admin easily                      |
+| `*`      | kindergarten teacher   | get reminders of school events              | stay prepared                                           |
+| `*`      | kindergarten teacher   | get reminders of birthdays                  | celebrate students’ birthdays                           |
+| `*`      | older teacher          | customise font size                         | see more clearly                                        |
+| `*`      | kindergarten teacher   | mark frequently contacted colleagues        | find them faster                                        |
 
 ### Use cases
 
