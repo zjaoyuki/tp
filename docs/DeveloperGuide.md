@@ -300,7 +300,46 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `LittleLogBook` and the **Actor** is the `user`, unless specified otherwise)
+
+**Use case: Add a contact**
+
+**MSS**
+
+1. User opens LittleLogBook.
+2. LittleLogBook shows list of all the contacts added.
+3. User enters the contact information.
+4. LittleLogBook validates input information.
+5. LittleLogBook saves contact and updates contact list.
+6. LittleLogBook displays success confirmation.
+
+Use case ends.
+
+**Extensions**
+
+* 4a. The input information is invalid.
+    * 4a1. LittleLogBook shows an error message.
+      Use case resumes at step 3.
+
+**Use case: View a contact**
+
+**MSS**
+
+1. User opens LittleLogBook.
+2. LittleLogBook shows list of all the contacts added.
+3. User enters a specific contact name.
+4. LittleLogBook validates input information and finds the matching contact.
+5. LittleLogBook displays the contact information.
+
+Use case ends.
+
+**Extensions**
+
+* 4a. The input information is invalid.
+    * 4a1. LittleLogBook shows an error message.
+      Use case resumes at step 3.
+
+
 
 **Use case: Delete a person**
 
