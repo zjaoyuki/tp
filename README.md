@@ -9,6 +9,8 @@ This is **a project for Software Engineering (SE) Module**.<br>
 The AddressBook is named LittleLogBook. LittleLogBook helps Kindergarten
 teachers track details about their students, parents and colleagues.
 
+For the detailed documentation of this project, see the **[LittleLogBook Product Website](https://ay2526s1-cs2103t-f14b-1.github.io/tp/index.html)**.
+
 ## Setting up in Intellij
 Prerequisites: JDK 17, and the latest version of Intellij IDEA.
 1. Open Intellij IDE.
@@ -38,7 +40,6 @@ you can edit or delete them later.
 
 
 ## Acknowledgements:
-* For the detailed documentation of this project, see the **[LittleLogBook Product Website](https://ay2526s1-cs2103t-f14b-1.github.io/tp/index.html)**.
 * This project is a **part of the se-education.org** initiative. 
 If you would like to contribute code to this project, see [se-education.org](https://se-education.org/#contributing-to-se-edu) for more info.
 
