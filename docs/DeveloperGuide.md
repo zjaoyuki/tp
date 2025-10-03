@@ -306,47 +306,38 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. Teacher enters command including the contact information.
-2. System validates input information.
-3. System saves contact and updates contact list.
-4. System displays success confirmation.
+1. User opens LittleLogBook
+2. LittleLogBook shows list of all the contacts added
+3. User enters the contact information
+4. LittleLogBook validates input information
+5. LittleLogBook saves contact and updates contact list
+6. LittleLogBook displays success confirmation
 
-   
 Use case ends.
 
 **Extensions**
 
-* 2a. The input information is invalid.
-
-    * 2a1. LittleLogBook shows an error message.
-
-      Use case resumes at step 1.
-
-* 3a. Duplicate contact detected.
-
-    * 3a1. LittleLogBook shows an error message.
-
-      Use case resumes at step 1.
-
+* 4a. The input information is invalid.
+    * 4a1. LittleLogBook shows an error message.
+      Use case resumes at step 3.
 
 **Use case: View a contact**
 
 **MSS**
 
-1. Teacher enters command to view a specific contact.
-2. System validates input information and find the matching contact.
-3. System displays the contact information.
-
+1. User opens LittleLogBook
+2. LittleLogBook shows list of all the contacts added
+3. User enters a specific contact name.
+4. LittleLogBook validates input information and finds the matching contact.
+5. LittleLogBook displays the contact information.
 
 Use case ends.
 
 **Extensions**
 
-* 2a. The input information is invalid.
-
-    * 2a1. LittleLogBook shows an error message.
-
-      Use case resumes at step 1.
+* 4a. The input information is invalid.
+    * 4a1. LittleLogBook shows an error message.
+      Use case resumes at step 3.
 
 
 
