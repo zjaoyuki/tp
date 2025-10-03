@@ -38,7 +38,7 @@ you can edit or delete them later.
 
 
 ## Acknowledgements:
-* For the detailed documentation of this project, see the **[Address Book Product Website](https://ay2526s1-cs2103t-f14b-1.github.io/tp/index.html)**.
+* For the detailed documentation of this project, see the **[LittleLogBook Product Website](https://ay2526s1-cs2103t-f14b-1.github.io/tp/index.html)**.
 * This project is a **part of the se-education.org** initiative. 
 If you would like to contribute code to this project, see [se-education.org](https://se-education.org/#contributing-to-se-edu) for more info.
 
