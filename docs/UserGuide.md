@@ -195,7 +195,7 @@ LittleLogBook data are saved in the hard disk automatically after any command th
 
 ### Editing the data file
 
-LittleLogBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+LittleLogBook data are saved automatically as a JSON file `[JAR file location]/data/littlelogbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <box type="warning" seamless>
 
