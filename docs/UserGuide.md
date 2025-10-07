@@ -18,11 +18,37 @@ LittleLogBook is a **desktop app for managing contacts, optimized for use via a 
 1. Ensure you have Java `17` or above installed in your Computer.<br>
    **Mac users:** Ensure you have the precise JDK version prescribed [here](https://se-education.org/guides/tutorials/javaInstallationMac.html).
 
-1. Download the latest `.jar` file from [here](https://github.com/se-edu/addressbook-level3/releases).
+1. Download the latest `.jar` file from [here](https://github.com/AY2526S1-CS2103T-F14B-1/tp).
 
 1. Copy the file to the folder you want to use as the _home folder_ for your LittleLogBook.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
+1. **Open and navigate to your jar file using command terminal:**
+   
+   **What is `cd`?** `cd` stands for "change directory" - it's a command that lets you navigate to different folders on your computer through the command line.
+   
+   **Step-by-step instructions:**
+   
+   **For Windows users:**
+   - Press `Windows key + R`, type `cmd`, and press Enter to open Command Prompt
+   - Type `cd` followed by a space, then the full path to your jar file folder
+   - Example: `cd C:\Users\YourName\Desktop\LittleLogBook` (replace with your actual folder path)
+   - Press Enter to navigate to that folder
+   - Type `java -jar littlelogbook.jar` and press Enter to run the application
+   
+   **For Mac/Linux users:**
+   - Press `Cmd + Space` (Mac) or `Ctrl + Alt + T` (Linux) to open Terminal
+   - Type `cd` followed by a space, then the full path to your jar file folder
+   - Example: `cd /Users/YourName/Desktop/LittleLogBook` (replace with your actual folder path)
+   - Press Enter to navigate to that folder
+   - Type `java -jar littlelogbook.jar` and press Enter to run the application
+   
+   **Alternative method (easier for beginners):**
+   - Navigate to the folder containing `littlelogbook.jar` using your file explorer
+   - **Windows:** Hold Shift + Right-click in the empty space of the folder → Select "Open PowerShell window here" or "Open command window here"
+   - **Mac:** Right-click in the folder → Services → New Terminal at Folder
+   - **Linux:** Right-click in the folder → "Open in Terminal"
+   - Type `java -jar littlelogbook.jar` and press Enter
+
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
