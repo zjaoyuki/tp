@@ -1,8 +1,11 @@
 package seedu.address.model.person;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.AppUtil.checkArgument;
+
 /**
  * Represents a Person's note in the address book.
- * Guarantees: immutable; is valid as declared in {@link #isValidName(String)}
+ * Guarantees: immutable; is valid as declared in {@link #isValidNote(String)}
  */
 public class Note {
 
@@ -15,7 +18,7 @@ public class Note {
      * - Prevents: control characters that could cause display issues
      * - Maximum length: 500 characters
      */
-    public static final String VALIDATION_REGEX = "^[\\p{Print}\\s]*$";
+    public static final String VALIDATION_REGEX = "^[^\\x00-\\x1F\\x7F]*$";
     public static final int MAX_LENGTH = 500;
 
     public final String value;
@@ -26,6 +29,8 @@ public class Note {
      * @param value A valid note.
      */
     public Note(String value) {
+        requireNonNull(value);
+        checkArgument(isValidNote(value), MESSAGE_CONSTRAINTS);
         this.value = value;
     }
 
@@ -33,7 +38,7 @@ public class Note {
      * Returns true if a given string is a valid name.
      */
     public static boolean isValidNote(String test) {
-        return test.matches(VALIDATION_REGEX);
+        return test.matches(VALIDATION_REGEX) && test.length() <= MAX_LENGTH;
     }
 
     @Override

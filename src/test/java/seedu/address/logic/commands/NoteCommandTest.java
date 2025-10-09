@@ -1,5 +1,6 @@
 package seedu.address.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NOTE_BOB;
@@ -99,5 +100,28 @@ public class NoteCommandTest {
         NoteCommand noteCommand = new NoteCommand(outOfBoundIndex, new Note(VALID_NOTE_BOB));
 
         assertCommandFailure(noteCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+    }
+
+    @Test
+    public void equals() {
+        Note note = new Note("");
+        NoteCommand firstNoteCommand = new NoteCommand(INDEX_FIRST_PERSON, note);
+        NoteCommand secondNoteCommand = new NoteCommand(INDEX_SECOND_PERSON, note);
+
+        // same object -> returns true
+        assertTrue(firstNoteCommand.equals(firstNoteCommand));
+
+        // same values -> returns true
+        NoteCommand firstNoteCommandCopy = new NoteCommand(INDEX_FIRST_PERSON, note);
+        assertTrue(firstNoteCommand.equals(firstNoteCommandCopy));
+
+        // different types -> returns false
+        assertFalse(firstNoteCommand.equals(1));
+
+        // null -> returns false
+        assertFalse(firstNoteCommand.equals(null));
+
+        // different person -> returns false
+        assertFalse(firstNoteCommand.equals(secondNoteCommand));
     }
 }
