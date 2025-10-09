@@ -11,6 +11,9 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Note;
 import seedu.address.model.person.Person;
 
+/**
+ * Adds note to the user.
+ */
 public class NoteCommand extends Command {
 
     public static final String COMMAND_WORD = "note";
@@ -33,6 +36,9 @@ public class NoteCommand extends Command {
     private final Index index;
     private final Note note;
 
+    /**
+     * Creates an NoteCommand to add the specified {@code index}
+     */
     public NoteCommand(Index index, Note note) {
         this.index = index;
         this.note = note;
@@ -47,7 +53,7 @@ public class NoteCommand extends Command {
         }
 
         Person personToEdit = lastShownList.get(index.getZeroBased());
-        Person editedPerson = new Person (
+        Person editedPerson = new Person(
                 personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
                 personToEdit.getAddress(), note, personToEdit.getTags()
         );
