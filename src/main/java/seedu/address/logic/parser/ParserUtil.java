@@ -97,10 +97,10 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String email} into an {@code Email}.
+     * Parses a {@code String Note} into an {@code Note}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code email} is invalid.
+     * @throws ParseException if the given {@code note} is invalid.
      */
     public static Note parseNote(String note) throws ParseException {
         requireNonNull(note);
