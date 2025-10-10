@@ -1,5 +1,6 @@
 package seedu.address.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
@@ -92,5 +93,12 @@ public class ViewCommandTest {
 
         // different index -> returns false
         assertFalse(firstViewCommand.equals(secondViewCommand));
+    }
+
+    @Test
+    public void toString_test() {
+        ViewCommand viewCommand = new ViewCommand(INDEX_FIRST_PERSON);
+        String expected = ViewCommand.class.getCanonicalName() + "{targetIndex=" + INDEX_FIRST_PERSON + "}";
+        assertEquals(expected, viewCommand.toString());
     }
 }
