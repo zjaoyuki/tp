@@ -6,7 +6,7 @@
 
 # LittleLogBook
 
-LittleLogBook is a **desktop app for managing contacts, optimized for use via a Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+LittleLogBook is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, LittleLogBook can get your contact management tasks done faster than traditional GUI apps.
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -18,24 +18,50 @@ LittleLogBook is a **desktop app for managing contacts, optimized for use via a 
 1. Ensure you have Java `17` or above installed in your Computer.<br>
    **Mac users:** Ensure you have the precise JDK version prescribed [here](https://se-education.org/guides/tutorials/javaInstallationMac.html).
 
-1. Download the latest `.jar` file from [here](https://github.com/se-edu/addressbook-level3/releases).
+1. Download the latest `.jar` file from [here](https://github.com/AY2526S1-CS2103T-F14B-1/tp).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+1. Copy the file to the folder you want to use as the _home folder_ for your LittleLogBook.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
+1. **Open and navigate to your jar file using command terminal:**
+   
+   **What is `cd`?** `cd` stands for "change directory" - it's a command that lets you navigate to different folders on your computer through the command line.
+   
+   **Step-by-step instructions:**
+   
+   **For Windows users:**
+   - Press `Windows key + R`, type `cmd`, and press Enter to open Command Prompt
+   - Type `cd` followed by a space, then the full path to your jar file folder
+   - Example: `cd C:\Users\YourName\Desktop\LittleLogBook` (replace with your actual folder path)
+   - Press Enter to navigate to that folder
+   - Type `java -jar littlelogbook.jar` and press Enter to run the application
+   
+   **For Mac/Linux users:**
+   - Press `Cmd + Space` (Mac) or `Ctrl + Alt + T` (Linux) to open Terminal
+   - Type `cd` followed by a space, then the full path to your jar file folder
+   - Example: `cd /Users/YourName/Desktop/LittleLogBook` (replace with your actual folder path)
+   - Press Enter to navigate to that folder
+   - Type `java -jar littlelogbook.jar` and press Enter to run the application
+   
+   **Alternative method (easier for beginners):**
+   - Navigate to the folder containing `littlelogbook.jar` using your file explorer
+   - **Windows:** Hold Shift + Right-click in the empty space of the folder → Select "Open PowerShell window here" or "Open command window here"
+   - **Mac:** Right-click in the folder → Services → New Terminal at Folder
+   - **Linux:** Right-click in the folder → "Open in Terminal"
+   - Type `java -jar littlelogbook.jar` and press Enter
+
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-   * `list` : Lists all contacts.
+   * `add n/John Doe p/98765432 e/john.doe@gmail.com c/student` : Adds a contact named `John Doe` with category `student` to LittleLogBook.
 
-   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
+   * `delete n/John Doe` : Deletes the contact named `John Doe`.
 
-   * `delete 3` : Deletes the 3rd contact shown in the current list.
+   * `view n/John Doe` : Shows full details of the contact named `John Doe`.
 
-   * `clear` : Deletes all contacts.
+   * `search John` : Searches for contacts with names containing `John`.
 
    * `exit` : Exits the app.
 
@@ -55,11 +81,8 @@ LittleLogBook is a **desktop app for managing contacts, optimized for use via a 
 * Items in square brackets are optional.<br>
   e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 
-* Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
-
 * Parameters can be in any order.<br>
-  e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
+  e.g. if the command specifies `n/NAME p/PHONE`, `p/PHONE n/NAME` is also acceptable.
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
@@ -75,97 +98,114 @@ Shows a message explaining how to access the help page.
 
 Format: `help`
 
+### Adding a contact: `add`
 
-### Adding a person: `add`
+Purpose: Allows teachers to create a new contact entry (student, colleague).
 
-Adds a person to the address book.
+Format: `add n/NAME p/PHONE e/EMAIL c/CATEGORY`
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
+**Parameters & Validation Rules:**
+- **Name (n/):** Alphabetic characters, spaces, hyphens, apostrophes only. Leading/trailing spaces trimmed, multiple spaces collapsed. Case-insensitive for duplicates. Error if empty or contains numbers/symbols.
+- **Phone (p/):** 8-digit Singapore numbers only. Spaces/dashes ignored. Error if not numeric, wrong length, or invalid starting digit.
+- **Email (e/):** Must follow standard email format. Case-insensitive. Error if invalid format.
+- **Category (c/):** Acceptable: `student`, `colleague` (case-insensitive). Error if invalid category.
 
-<box type="tip" seamless>
-
-**Tip:** A person can have any number of tags (including 0)
-</box>
+**Duplicate Handling:**  
+Duplicate if name + phone already exist (case-insensitive). If detected, error message: `Duplicate contact detected.`
 
 Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+* `add n/John Doe p/98765432 e/john.doe@gmail.com c/student`
+* `add n/Mary Tan p/91234567 e/marytan@e.nut.edu c/colleague`
 
-### Viewing contact details : `view`
+**Outputs:**  
+- Success: GUI updates contact list, message: `New <CATEGORY> added`
+- Failure: Error message with reason (invalid/missing parameter, duplicate, etc.)
 
-Shows full information of a contact (including notes, attendance).
+### Deleting a contact: `delete`
 
-Format:  
-`view n/NAME`
+Purpose: Remove outdated or incorrect contacts.
+
+Format: `delete n/NAME`
+
+**Parameters & Validation Rules:**
+- **Name (n/):** Same rules as Add. Case-insensitive match.
+- If multiple matches: error pop-up listing matches. User must specify full name.
+
+Examples:
+* `delete n/John Doe`
+
+**Outputs:**  
+- Success: List updates, message: `<CATEGORY> deleted`
+- Failure: 
+  - No match → `No contact found with name John Doe`
+  - Multiple matches → `Multiple contacts found. Use more details`
+
+### Viewing contact details: `view`
+
+Purpose: Show full information of a contact (including notes, attendance).
+
+Format: `view n/NAME`
+
+**Parameters & Validation Rules:**  
+- Name-based search, same validation as Delete.
 
 Examples:
 * `view n/John Doe`
 
-Rules:
-* Name search follows the same rules as `delete`.
-* If multiple matches are found → error: *Multiple contacts found*.
-* If no match is found → error: *Contact not found*.
-* Data retrieval error → error: *Unable to load contact details*.
+**Outputs:**  
+- Success: Display detailed profile in UI panel.
+- Failure: 
+  - Not found → `Contact not found`
+  - Multiple matches → `Multiple contacts found. Use more details for name`
+  - Database retrieval error → `Unable to load contact details`
 
+### Searching contacts: `search`
 
-### Listing all persons : `list`
+Purpose: Allows teachers to find contacts quickly with partial names.
 
-Shows a list of all persons in the address book.
+Format: `search KEYWORD`
+
+**Parameters & Validation Rules:**  
+- **Keyword:** Alphanumeric string, case-insensitive, matches partial names. Error if empty string.
+
+Examples:
+* `search John`
+* `search Tan`
+
+**Outputs:**  
+- Success: List updates to show all matching contacts.
+- Failure: No results → `No contacts found for "Tan"`
+
+### Adding/Editing notes: `note`
+
+Purpose: Store additional info (student progress, allergies, parent instructions).
+
+Format: `note n/NAME t/NOTE_TEXT`
+
+**Parameters & Validation Rules:**  
+- **Name (n/):** Same validation as above.
+- **Note text (t/):** Any UTF-8 text, up to 500 chars. Leading/trailing spaces trimmed. Error if empty.
+
+Examples:
+* `note n/John Doe t/Allergic to peanuts`
+* `note n/Mary Tan t/Improved in reading this week`
+
+**Outputs:**  
+- Success: Note added to contact, message: `<CATEGORY> DETAILS edited`
+- Failure: 
+  - No match → `No contact found`
+  - Empty note → `Note text cannot be empty`
+  - Database save failure → `Unable to save note. Try again`
+
+### Listing all contacts : `list`
+
+Shows a list of all contacts in LittleLogBook.
 
 Format: `list`
 
-### Editing a person : `edit`
-
-Edits an existing person in the address book.
-
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
-
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
-* At least one of the optional fields must be provided.
-* Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person’s tags by typing `t/` without
-    specifying any tags after it.
-
-Examples:
-*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
-
-### Locating persons by name: `find`
-
-Finds persons whose names contain any of the given keywords.
-
-Format: `find KEYWORD [MORE_KEYWORDS]`
-
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
-
-Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
-
-### Deleting a person : `delete`
-
-Deletes the specified person from the address book.
-
-Format: `delete INDEX`
-
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
-
-Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
-
 ### Clearing all entries : `clear`
 
-Clears all entries from the address book.
+Clears all entries from LittleLogBook.
 
 Format: `clear`
 
@@ -177,17 +217,17 @@ Format: `exit`
 
 ### Saving the data
 
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+LittleLogBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 ### Editing the data file
 
-AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+LittleLogBook data are saved automatically as a JSON file `[JAR file location]/data/littlelogbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <box type="warning" seamless>
 
 **Caution:**
-If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+If your changes to the data file makes its format invalid, LittleLogBook will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
+Furthermore, certain edits can cause LittleLogBook to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
 
 ### Archiving data files `[coming in v2.0]`
@@ -199,7 +239,7 @@ _Details coming soon ..._
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous LittleLogBook home folder.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -213,12 +253,13 @@ _Details coming soon ..._
 ## Command summary
 
 Action     | Format, Examples
------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-**View**   | `view n/NAME`<br> e.g., `view n/John Doe`
-**Clear**  | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+-----------|-----------------------------------------------------------------------------------------------------------------------------------
+**Add**    | `add n/NAME p/PHONE e/EMAIL c/CATEGORY`<br>e.g., `add n/John Doe p/98765432 e/john.doe@gmail.com c/student`
+**Delete** | `delete n/NAME`<br>e.g., `delete n/John Doe`
+**View**   | `view n/NAME`<br>e.g., `view n/John Doe`
+**Search** | `search KEYWORD`<br>e.g., `search John`
+**Note**   | `note n/NAME t/NOTE_TEXT`<br>e.g., `note n/John Doe t/Allergic to peanuts`
 **List**   | `list`
+**Clear**  | `clear`
 **Help**   | `help`
+**Exit**   | `exit`
