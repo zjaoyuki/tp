@@ -2,6 +2,9 @@ package seedu.address.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -89,6 +92,52 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void setSelectedPerson_nullPerson_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.setSelectedPerson(null));
+    }
+
+    @Test
+    public void setSelectedPerson_validPerson_success() {
+        modelManager.addPerson(ALICE);
+        modelManager.setSelectedPerson(ALICE);
+        assertEquals(ALICE, modelManager.getSelectedPerson());
+    }
+
+    @Test
+    public void setSelectedPerson_differentPerson_success() {
+        modelManager.addPerson(ALICE);
+        modelManager.addPerson(BENSON);
+
+        modelManager.setSelectedPerson(ALICE);
+        assertEquals(ALICE, modelManager.getSelectedPerson());
+
+        modelManager.setSelectedPerson(BENSON);
+        assertEquals(BENSON, modelManager.getSelectedPerson());
+    }
+
+    @Test
+    public void getSelectedPerson_noPersonSelected_returnsNull() {
+        assertNull(modelManager.getSelectedPerson());
+    }
+
+    @Test
+    public void selectedPersonProperty_notNull() {
+        assertNotNull(modelManager.selectedPersonProperty());
+    }
+
+    @Test
+    public void selectedPersonProperty_reflectsChanges() {
+        modelManager.addPerson(ALICE);
+        modelManager.setSelectedPerson(ALICE);
+
+        assertEquals(ALICE, modelManager.selectedPersonProperty().get());
+
+        modelManager.addPerson(BENSON);
+        modelManager.setSelectedPerson(BENSON);
+        assertEquals(BENSON, modelManager.selectedPersonProperty().get());
+    }
+
+    @Test
     public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredPersonList().remove(0));
     }
@@ -102,19 +151,19 @@ public class ModelManagerTest {
         // same values -> returns true
         modelManager = new ModelManager(addressBook, userPrefs);
         ModelManager modelManagerCopy = new ModelManager(addressBook, userPrefs);
-        assertTrue(modelManager.equals(modelManagerCopy));
+        assertEquals(modelManager, modelManagerCopy);
 
         // same object -> returns true
-        assertTrue(modelManager.equals(modelManager));
+        assertEquals(modelManager, modelManager);
 
         // null -> returns false
-        assertFalse(modelManager.equals(null));
+        assertNotEquals(null, modelManager);
 
         // different types -> returns false
-        assertFalse(modelManager.equals(5));
+        assertNotEquals(5, modelManager);
 
         // different addressBook -> returns false
-        assertFalse(modelManager.equals(new ModelManager(differentAddressBook, userPrefs)));
+        assertNotEquals(modelManager, new ModelManager(differentAddressBook, userPrefs));
 
         // different filteredList -> returns false
         String[] keywords = ALICE.getName().fullName.split("\\s+");
