@@ -76,6 +76,16 @@ public interface Model {
      */
     void setPerson(Person target, Person editedPerson);
 
+    /**
+     * Sets the currently selected person for detailed view.
+     */
+    void setSelectedPerson(Person person);
+
+    /**
+     * Returns the currently selected person for detailed view.
+     */
+    Person getSelectedPerson();
+
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();
 
@@ -84,4 +94,5 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
+
 }
