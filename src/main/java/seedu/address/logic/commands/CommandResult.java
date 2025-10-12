@@ -96,7 +96,7 @@ public class CommandResult {
                 .add("feedbackToUser", feedbackToUser)
                 .add("showHelp", showHelp)
                 .add("exit", exit)
-                .add("personToShow", personToView)
+                .add("personToView", personToView)
                 .toString();
     }
 
