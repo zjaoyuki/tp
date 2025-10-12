@@ -7,7 +7,23 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.model.person.Person;
+import seedu.address.testutil.PersonBuilder;
+
 public class CommandResultTest {
+
+    @Test
+    public void constructor_withPersonToView_setsFieldsCorrectly() {
+        Person person = new PersonBuilder().build();
+        CommandResult result = new CommandResult("test", person);
+
+        assertEquals("test", result.getFeedbackToUser());
+        assertEquals(person, result.getPersonToView());
+        assertTrue(result.isShowPerson());
+        assertFalse(result.isShowHelp());
+        assertFalse(result.isExit());
+    }
+
     @Test
     public void equals() {
         CommandResult commandResult = new CommandResult("feedback");
@@ -57,7 +73,7 @@ public class CommandResultTest {
         CommandResult commandResult = new CommandResult("feedback");
         String expected = CommandResult.class.getCanonicalName() + "{feedbackToUser="
                 + commandResult.getFeedbackToUser() + ", showHelp=" + commandResult.isShowHelp()
-                + ", exit=" + commandResult.isExit() + ", personToView=" + commandResult.getpersonToView() + "}";
+                + ", exit=" + commandResult.isExit() + ", personToView=" + commandResult.getPersonToView() + "}";
         assertEquals(expected, commandResult.toString());
     }
 }

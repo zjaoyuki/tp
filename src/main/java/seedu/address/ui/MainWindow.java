@@ -189,7 +189,7 @@ public class MainWindow extends UiPart<Stage> {
 
             // Handle view command - show detailed dialog
             if (commandResult.isShowPerson()) {
-                Person personToView = commandResult.getpersonToView();
+                Person personToView = commandResult.getPersonToView();
                 if (personToView != null) {
                     ViewWindow detailedPanel = new ViewWindow();
                     detailedPanel.show(personToView);

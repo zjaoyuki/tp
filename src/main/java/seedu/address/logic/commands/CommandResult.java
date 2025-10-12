@@ -52,7 +52,7 @@ public class CommandResult {
         return personToView != null;
     }
 
-    public Person getpersonToView() {
+    public Person getPersonToView() {
         return personToView;
     }
 
@@ -99,5 +99,4 @@ public class CommandResult {
                 .add("personToView", personToView)
                 .toString();
     }
-
 }
