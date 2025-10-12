@@ -16,6 +16,7 @@ import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.Person;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -184,6 +185,15 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isExit()) {
                 handleExit();
+            }
+
+            // Handle view command - show detailed dialog
+            if (commandResult.isShowPerson()) {
+                Person personToView = commandResult.getpersonToView();
+                if (personToView != null) {
+                    ViewWindow detailedPanel = new ViewWindow();
+                    detailedPanel.show(personToView);
+                }
             }
 
             return commandResult;
