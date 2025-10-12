@@ -20,65 +20,67 @@
         <URL value="@ViewWindow.css" />
       </stylesheets>
 
-      <ScrollPane style="-fx-background-color: white; -fx-border-color: #cccccc; -fx-border-width: 1;" fitToWidth="true">
-         <content>
+        <ScrollPane style="-fx-background-color: white; -fx-border-color: #cccccc; -fx-border-width: 1;"
+                    fitToWidth="true">
             <VBox spacing="15" style="-fx-padding: 20;">
-               <padding>
-                  <Insets top="10" right="15" bottom="10" left="15" />
-               </padding>
+                <padding>
+                    <Insets top="10" right="15" bottom="10" left="15"/>
+                </padding>
 
-               <!-- Header -->
-               <Label fx:id="nameLabel" style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #2c3e50;" />
+                <!-- Header -->
+                <Label fx:id="nameLabel" style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #2c3e50;"/>
 
-               <Separator />
+                <Separator/>
 
-               <!-- Basic Information Section -->
-               <VBox spacing="8">
-                  <Label text="Contact Information" style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #34495e;" />
-                  <HBox spacing="10">
-                     <Label text="Phone:" style="-fx-font-weight: bold; -fx-min-width: 80;" />
-                     <Label fx:id="phoneLabel" />
-                  </HBox>
+                <!-- Basic Information Section -->
+                <VBox spacing="8">
+                    <Label text="Contact Information"
+                           style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #34495e;"/>
+                    <HBox spacing="10">
+                        <Label text="Phone:" style="-fx-font-weight: bold; -fx-min-width: 80;"/>
+                        <Label fx:id="phoneLabel"/>
+                    </HBox>
 
-                  <HBox spacing="10">
-                     <Label text="Email:" style="-fx-font-weight: bold; -fx-min-width: 80;" />
-                     <Label fx:id="emailLabel" />
-                  </HBox>
+                    <HBox spacing="10">
+                        <Label text="Email:" style="-fx-font-weight: bold; -fx-min-width: 80;"/>
+                        <Label fx:id="emailLabel"/>
+                    </HBox>
 
-                  <HBox spacing="10">
-                     <Label text="Address:" style="-fx-font-weight: bold; -fx-min-width: 80;" />
-                     <Label fx:id="addressLabel" wrapText="true" />
-                  </HBox>
-               </VBox>
+                    <HBox spacing="10">
+                        <Label text="Address:" style="-fx-font-weight: bold; -fx-min-width: 80;"/>
+                        <Label fx:id="addressLabel" wrapText="true"/>
+                    </HBox>
+                </VBox>
 
-               <Separator />
+                <Separator/>
 
-               <!-- Tags Section -->
-               <VBox spacing="8">
-                  <Label text="Tags" style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #34495e;" />
-                  <Label fx:id="tagsLabel" wrapText="true" />
-               </VBox>
+                <!-- Tags Section -->
+                <VBox spacing="8">
+                    <Label text="Tags" style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #34495e;"/>
+                    <Label fx:id="tagsLabel" wrapText="true"/>
+                </VBox>
 
-               <Separator />
+                <Separator/>
 
-               <!-- Notes Section -->
-               <VBox spacing="8">
-                  <Label text="Notes" style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #34495e;" />
-                  <TextArea fx:id="notesArea" editable="false" 
-                           style="-fx-background-color: #f8f9fa; -fx-border-color: #ddd;"
-                           wrapText="true" prefRowCount="4" />
-               </VBox>
+                <!-- Notes Section -->
+                <VBox spacing="8">
+                    <Label text="Notes" style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #34495e;"/>
+                    <TextArea fx:id="notesArea" editable="false"
+                              wrapText="true" prefRowCount="4">
+                        <style>-fx-background-color: #f8f9fa; -fx-border-color: #ddd;</style>
+                    </TextArea>
+                </VBox>
 
-               <Separator />
+                <Separator/>
 
-               <!-- Attendance Section -->
-               <VBox spacing="8">
-                  <Label text="Attendance" style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #34495e;" />
-                  <Label fx:id="attendanceLabel" wrapText="true" />
-               </VBox>
+                <!-- Attendance Section -->
+                <VBox spacing="8">
+                    <Label text="Attendance"
+                           style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #34495e;"/>
+                    <Label fx:id="attendanceLabel" wrapText="true"/>
+                </VBox>
             </VBox>
-         </content>
-      </ScrollPane>
+        </ScrollPane>
     </Scene>
   </scene>
 </fx:root>
