@@ -4,49 +4,49 @@
     "name" : "Alice Pauline",
     "phone" : "94351253",
     "email" : "alice@example.com",
-    "address" : "123, Jurong West Ave 6, #08-111",
-    "note": "",
+    "category" : "student",
+    "note": "She is allergic to peanut.",
     "tags" : [ "friends" ]
   }, {
     "name" : "Benson Meier",
     "phone" : "98765432",
     "email" : "johnd@example.com",
-    "address" : "311, Clementi Ave 2, #02-25",
-    "note": "",
+    "category" : "colleague",
+    "note": "He is allergic to chocolate!",
     "tags" : [ "owesMoney", "friends" ]
   }, {
     "name" : "Carl Kurz",
     "phone" : "95352563",
     "email" : "heinz@example.com",
-    "address" : "wall street",
+    "category" : "student",
     "note": "",
     "tags" : [ ]
   }, {
     "name" : "Daniel Meier",
     "phone" : "87652533",
     "email" : "cornelia@example.com",
-    "address" : "10th street",
+    "category" : "colleague",
     "note": "",
     "tags" : [ "friends" ]
   }, {
     "name" : "Elle Meyer",
-    "phone" : "9482224",
+    "phone" : "94822245",
     "email" : "werner@example.com",
-    "address" : "michegan ave",
+    "category" : "student",
     "note": "",
     "tags" : [ ]
   }, {
     "name" : "Fiona Kunz",
-    "phone" : "9482427",
+    "phone" : "94824278",
     "email" : "lydia@example.com",
-    "address" : "little tokyo",
+    "category" : "colleague",
     "note": "",
     "tags" : [ ]
   }, {
     "name" : "George Best",
-    "phone" : "9482442",
+    "phone" : "94824429",
     "email" : "anna@example.com",
-    "address" : "4th street",
+    "category" : "student",
     "note": "",
     "tags" : [ ]
   } ]
