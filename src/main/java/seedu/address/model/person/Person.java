@@ -23,18 +23,18 @@ public class Person {
     private final Note note;
 
     // Data fields
-    private final Address address;
+    private final Category category;
     private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Note note, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
+    public Person(Name name, Phone phone, Email email, Category category, Note note, Set<Tag> tags) {
+        requireAllNonNull(name, phone, email, category, note, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
-        this.address = address;
+        this.category = category;
         this.note = note;
         this.tags.addAll(tags);
     }
@@ -51,8 +51,8 @@ public class Person {
         return email;
     }
 
-    public Address getAddress() {
-        return address;
+    public Category getCategory() {
+        return category;
     }
 
     public Note getNote() {
@@ -68,8 +68,8 @@ public class Person {
     }
 
     /**
-     * Returns true if both persons have the same name.
-     * This defines a weaker notion of equality between two persons.
+     * Returns true if both persons have the same name and phone.
+     * This defines duplicate detection as per MVP requirements (case-insensitive name comparison).
      */
     public boolean isSamePerson(Person otherPerson) {
         if (otherPerson == this) {
@@ -77,7 +77,8 @@ public class Person {
         }
 
         return otherPerson != null
-                && otherPerson.getName().equals(getName());
+                && otherPerson.getName().getNormalizedName().equals(getName().getNormalizedName())
+                && otherPerson.getPhone().equals(getPhone());
     }
 
     /**
@@ -99,14 +100,15 @@ public class Person {
         return name.equals(otherPerson.name)
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
-                && address.equals(otherPerson.address)
+                && category.equals(otherPerson.category)
+                && note.equals(otherPerson.note)
                 && tags.equals(otherPerson.tags);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(name, phone, email, category, note, tags);
     }
 
     @Override
@@ -115,7 +117,8 @@ public class Person {
                 .add("name", name)
                 .add("phone", phone)
                 .add("email", email)
-                .add("address", address)
+                .add("category", category)
+                .add("note", note)
                 .add("tags", tags)
                 .toString();
     }

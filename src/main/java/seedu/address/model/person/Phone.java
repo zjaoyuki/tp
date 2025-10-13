@@ -9,10 +9,11 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Phone {
 
-
     public static final String MESSAGE_CONSTRAINTS =
-            "Phone numbers should only contain numbers, and it should be at least 3 digits long";
-    public static final String VALIDATION_REGEX = "\\d{3,}";
+            "Phone numbers must be 8-digit Singapore numbers (spaces and dashes are ignored)";
+
+    public static final String VALIDATION_REGEX = "^[89]\\d{7}$";
+
     public final String value;
 
     /**
@@ -22,15 +23,24 @@ public class Phone {
      */
     public Phone(String phone) {
         requireNonNull(phone);
-        checkArgument(isValidPhone(phone), MESSAGE_CONSTRAINTS);
-        value = phone;
+        String normalizedPhone = normalizePhone(phone);
+        checkArgument(isValidPhone(normalizedPhone), MESSAGE_CONSTRAINTS);
+        value = normalizedPhone;
+    }
+
+    /**
+     * Normalizes the phone number by removing spaces and dashes.
+     */
+    private static String normalizePhone(String phone) {
+        return phone.replaceAll("[\\s-]", "");
     }
 
     /**
      * Returns true if a given string is a valid phone number.
      */
     public static boolean isValidPhone(String test) {
-        return test.matches(VALIDATION_REGEX);
+        String normalized = normalizePhone(test);
+        return normalized.matches(VALIDATION_REGEX);
     }
 
     @Override
