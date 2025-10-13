@@ -10,17 +10,15 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Name {
 
     public static final String MESSAGE_CONSTRAINTS =
-        "No contacts found for given Name. Names should only contain alphanumeric characters and spaces, "
-                + "and it should not be blank";
+            "Names should only contain alphabetic characters, spaces, hyphens, and apostrophes, and it should not be blank";
 
     /*
-     * The first character of the address must not be a whitespace,
-     * otherwise " " (a blank string) becomes a valid input.
+     * The name must contain only letters, spaces, hyphens, and apostrophes.
+     * It should not be empty after trimming.
      */
-    public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
+    public static final String VALIDATION_REGEX = "^[a-zA-Z\\s\\-']+$";
 
     public final String fullName;
-
 
     /**
      * Constructs a {@code Name}.
@@ -29,15 +27,30 @@ public class Name {
      */
     public Name(String name) {
         requireNonNull(name);
-        checkArgument(isValidName(name), MESSAGE_CONSTRAINTS);
-        fullName = name;
+        String normalizedName = normalizeName(name);
+        checkArgument(isValidName(normalizedName), MESSAGE_CONSTRAINTS);
+        fullName = normalizedName;
+    }
+
+    /**
+     * Normalizes the name by trimming spaces and collapsing multiple spaces into one.
+     */
+    private static String normalizeName(String name) {
+        return name.trim().replaceAll("\\s+", " ");
     }
 
     /**
      * Returns true if a given string is a valid name.
      */
     public static boolean isValidName(String test) {
-        return test.matches(VALIDATION_REGEX);
+        return !test.trim().isEmpty() && test.matches(VALIDATION_REGEX);
+    }
+
+    /**
+     * Returns the normalized name for case-insensitive comparison.
+     */
+    public String getNormalizedName() {
+        return fullName.toLowerCase();
     }
 
 
