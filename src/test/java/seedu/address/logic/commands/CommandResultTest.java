@@ -25,6 +25,30 @@ public class CommandResultTest {
     }
 
     @Test
+    public void isShowPerson() {
+        // With person -> returns true
+        Person person = new PersonBuilder().build();
+        CommandResult withPerson = new CommandResult("test", person);
+        assertTrue(withPerson.isShowPerson());
+
+        // Without person -> returns false
+        CommandResult withoutPerson = new CommandResult("test");
+        assertFalse(withoutPerson.isShowPerson());
+
+        // With null person -> returns false
+        CommandResult withNullPerson = new CommandResult("test", null);
+        assertFalse(withNullPerson.isShowPerson());
+    }
+
+    @Test
+    public void getPersonToShow() {
+        Person person = new PersonBuilder().build();
+        CommandResult result = new CommandResult("test", person);
+
+        assertEquals(person, result.getPersonToView());
+    }
+
+    @Test
     public void equals() {
         CommandResult commandResult = new CommandResult("feedback");
 
