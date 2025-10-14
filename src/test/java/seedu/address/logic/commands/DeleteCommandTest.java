@@ -18,6 +18,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Person;
+import seedu.address.testutil.TypicalPersons;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for
@@ -119,6 +120,23 @@ public class DeleteCommandTest {
                 + "{targetIndex=null, targetName=" + name
                 + ", isDeletedByName=true}";
         assertEquals(expected, deleteCommand.toString());
+    }
+
+    @Test
+    public void execute_validExactName_success() {
+        Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        model.addPerson(TypicalPersons.AMY);
+
+        Person personToDelete = TypicalPersons.AMY;
+        DeleteCommand deleteCommand = new DeleteCommand(personToDelete.getName().fullName);
+
+        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS,
+                Messages.format(personToDelete));
+
+        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        expectedModel.deletePerson(personToDelete);
+
+        assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
     }
 
     /**
