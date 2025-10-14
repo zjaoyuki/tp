@@ -159,6 +159,54 @@ public class AddCommandTest {
         assertEquals(expected, addCommand.toString());
     }
 
+    @Test
+    public void execute_personWithNote_addSuccessful() throws Exception {
+        ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
+        Person validPersonWithNote = new PersonBuilder().withNote("Great student, very attentive").build();
+
+        CommandResult commandResult = new AddCommand(validPersonWithNote).execute(modelStub);
+
+        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, validPersonWithNote.getCategory()),
+                commandResult.getFeedbackToUser());
+        assertEquals(Arrays.asList(validPersonWithNote), modelStub.personsAdded);
+    }
+
+    @Test
+    public void execute_personWithEmptyNote_addSuccessful() throws Exception {
+        ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
+        Person validPersonWithEmptyNote = new PersonBuilder().withNote("").build();
+
+        CommandResult commandResult = new AddCommand(validPersonWithEmptyNote).execute(modelStub);
+
+        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, validPersonWithEmptyNote.getCategory()),
+                commandResult.getFeedbackToUser());
+        assertEquals(Arrays.asList(validPersonWithEmptyNote), modelStub.personsAdded);
+    }
+
+    @Test
+    public void execute_studentWithNote_correctSuccessMessage() throws Exception {
+        ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
+        Person studentWithNote = new PersonBuilder().withCategory("student")
+                .withNote("Prefers morning classes").build();
+
+        CommandResult commandResult = new AddCommand(studentWithNote).execute(modelStub);
+
+        assertEquals("New student added", commandResult.getFeedbackToUser());
+        assertEquals(Arrays.asList(studentWithNote), modelStub.personsAdded);
+    }
+
+    @Test
+    public void execute_colleagueWithNote_correctSuccessMessage() throws Exception {
+        ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
+        Person colleagueWithNote = new PersonBuilder().withCategory("colleague")
+                .withNote("Team lead for mobile app development").build();
+
+        CommandResult commandResult = new AddCommand(colleagueWithNote).execute(modelStub);
+
+        assertEquals("New colleague added", commandResult.getFeedbackToUser());
+        assertEquals(Arrays.asList(colleagueWithNote), modelStub.personsAdded);
+    }
+
     /**
      * A default model stub that have all of the methods failing.
      */
