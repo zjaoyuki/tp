@@ -23,9 +23,9 @@ public class NoteCommand extends Command {
             + "by the index number used in the last person listing. "
             + "Existing note will be overwritten by the input.\n"
             + "Parameters: INDEX (must be a positive integer) "
-            + "no/ [NOTE]\n"
+            + "desc/ [NOTE]\n"
             + "Example: " + COMMAND_WORD + " 1 "
-            + "no/ Allergic to peanut.";
+            + "desc/ Allergic to peanut.";
 
     public static final String MESSAGE_ARGUMENTS = "Index: %1$d, Note: %2$s";
 
@@ -55,7 +55,7 @@ public class NoteCommand extends Command {
         Person personToEdit = lastShownList.get(index.getZeroBased());
         Person editedPerson = new Person(
                 personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
-                personToEdit.getAddress(), note, personToEdit.getTags()
+                personToEdit.getCategory(), note, personToEdit.getTags()
         );
 
         model.setPerson(personToEdit, editedPerson);

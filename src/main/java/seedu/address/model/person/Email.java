@@ -40,8 +40,9 @@ public class Email {
      */
     public Email(String email) {
         requireNonNull(email);
-        checkArgument(isValidEmail(email), MESSAGE_CONSTRAINTS);
-        value = email;
+        String normalizedEmail = email.toLowerCase().trim();
+        checkArgument(isValidEmail(normalizedEmail), MESSAGE_CONSTRAINTS);
+        value = normalizedEmail;
     }
 
     /**
