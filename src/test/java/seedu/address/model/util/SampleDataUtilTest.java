@@ -84,36 +84,39 @@ public class SampleDataUtilTest {
         for (Person person : samplePersons) {
             String name = person.getName().fullName;
             switch (name) {
-                case "Alex Yeoh":
-                    foundAlex = true;
-                    assertEquals("student", person.getCategory().value);
-                    assertEquals("87438807", person.getPhone().value);
-                    break;
-                case "Bernice Yu":
-                    foundBernice = true;
-                    assertEquals("colleague", person.getCategory().value);
-                    assertEquals("99272758", person.getPhone().value);
-                    break;
-                case "Charlotte Oliveiro":
-                    foundCharlotte = true;
-                    assertEquals("student", person.getCategory().value);
-                    assertEquals("93210283", person.getPhone().value);
-                    break;
-                case "David Li":
-                    foundDavid = true;
-                    assertEquals("colleague", person.getCategory().value);
-                    assertEquals("91031282", person.getPhone().value);
-                    break;
-                case "Irfan Ibrahim":
-                    foundIrfan = true;
-                    assertEquals("student", person.getCategory().value);
-                    assertEquals("92492021", person.getPhone().value);
-                    break;
-                case "Roy Balakrishnan":
-                    foundRoy = true;
-                    assertEquals("colleague", person.getCategory().value);
-                    assertEquals("92624417", person.getPhone().value);
-                    break;
+            case "Alex Yeoh":
+                foundAlex = true;
+                assertEquals("student", person.getCategory().value);
+                assertEquals("87438807", person.getPhone().value);
+                break;
+            case "Bernice Yu":
+                foundBernice = true;
+                assertEquals("colleague", person.getCategory().value);
+                assertEquals("99272758", person.getPhone().value);
+                break;
+            case "Charlotte Oliveiro":
+                foundCharlotte = true;
+                assertEquals("student", person.getCategory().value);
+                assertEquals("93210283", person.getPhone().value);
+                break;
+            case "David Li":
+                foundDavid = true;
+                assertEquals("colleague", person.getCategory().value);
+                assertEquals("91031282", person.getPhone().value);
+                break;
+            case "Irfan Ibrahim":
+                foundIrfan = true;
+                assertEquals("student", person.getCategory().value);
+                assertEquals("92492021", person.getPhone().value);
+                break;
+            case "Roy Balakrishnan":
+                foundRoy = true;
+                assertEquals("colleague", person.getCategory().value);
+                assertEquals("92624417", person.getPhone().value);
+                break;
+            default:
+                // Other persons are not checked in this test
+                break;
             }
         }
 
