@@ -10,6 +10,7 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
+import seedu.address.ui.DeletePopup;
 
 /**
  * Deletes a person identified using it's displayed index from the address book.
@@ -20,7 +21,7 @@ public class DeleteCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the person identified by the index number used in the displayed person list or his name.\n"
-            + "Parameters: INDEX (must be a positive integer) or NAME (implementing)\n"
+            + "Parameters: INDEX (must be a positive integer) or NAME\n"
             + "Example: " + COMMAND_WORD + " 1 or " + COMMAND_WORD + " n/John ";
 
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
@@ -52,6 +53,7 @@ public class DeleteCommand extends Command {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
 
+        // delete by name
         if (isDeletedByName) {
             List<Person> exactMatches = lastShownList.stream()
                     .filter(p -> p.getName().fullName.equalsIgnoreCase(targetName))
@@ -64,27 +66,25 @@ public class DeleteCommand extends Command {
                         Messages.format(personToDelete)));
             }
 
-            if (exactMatches.size() > 1) {
-                throw new CommandException(Messages.MESSAGE_DUPLICATE_FIELDS + "name");
+            // same name duplicates or multiple results when partial info is provided
+            List<Person> possibleMatches = exactMatches.isEmpty()
+                    ? lastShownList.stream()
+                    .filter(p -> p.getName().fullName.toLowerCase().contains(targetName.toLowerCase()))
+                    .toList()
+                    : exactMatches;
+
+            if (possibleMatches.isEmpty()) {
+                showNoMatchPopup();
+                throw new CommandException("Deletion cancelled.");
             }
 
-            List<Person> possibleMatches = lastShownList.stream()
-                    .filter(person -> person.getName().fullName.toLowerCase().contains(targetName.toLowerCase()))
-                    .toList();
-
-            if (!possibleMatches.isEmpty()) {
-                StringBuilder suggestion = new StringBuilder("Found the following matches:\n");
-                for (int i = 0; i < possibleMatches.size(); i++) {
-                    suggestion.append(i + 1)
-                            .append(". ")
-                            .append(possibleMatches.get(i).getName().fullName)
-                            .append("\n");
-                }
-                throw new CommandException(suggestion.toString().trim());
-            }
-            throw new CommandException(Messages.MESSAGE_PERSON_NOT_FOUND);
+            Person selectedPerson = showDeletePopup(possibleMatches);
+            model.deletePerson(selectedPerson);
+            return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS,
+                    Messages.format(selectedPerson)));
         }
 
+        // delete by index
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
@@ -92,6 +92,29 @@ public class DeleteCommand extends Command {
         Person personToDelete = lastShownList.get(targetIndex.getZeroBased());
         model.deletePerson(personToDelete);
         return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(personToDelete)));
+    }
+
+    /**
+     * Shows a Delete Pop up for the user to select from matchingResults.
+     * */
+    private Person showDeletePopup(List<Person> matchingResults) throws CommandException {
+        DeletePopup deletePopup = new DeletePopup();
+        deletePopup.show("Multiple matches found. Type index and ENTER to delete or ESC to cancel:",
+                matchingResults);
+
+        if (deletePopup.isConfirmed()) {
+            return deletePopup.getSelectedPerson();
+        } else {
+            throw new CommandException("Deletion cancelled.");
+        }
+    }
+
+    /**
+     * Shows a Delete Pop up to tell the user no match found.
+     */
+    private void showNoMatchPopup() {
+        DeletePopup deletePopup = new DeletePopup();
+        deletePopup.show("No matches found. Press ESC to exit.", List.of());
     }
 
     @Override

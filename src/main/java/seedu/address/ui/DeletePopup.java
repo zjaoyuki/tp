@@ -25,7 +25,7 @@ public class DeletePopup extends UiPart<Stage> {
     private TextField inputField;
 
     private List<Person>  matchingResults;
-    private boolean confirmed = false;
+    private boolean isConfirmed = false;
     private Person selectedPerson = null;
 
     /**
@@ -45,36 +45,85 @@ public class DeletePopup extends UiPart<Stage> {
         this(new Stage());
     }
 
+    /**
+     * Determines the information to be displayed in the Deletion Pop up.
+     *
+     * @param headerMessage indicates the result of delete command with the input name.
+     * @param matchingResults displays the list of possible matching persons, if any.
+     */
     public void show(String headerMessage, List<Person> matchingResults) {
         this.matchingResults = matchingResults;
-        this.confirmed = false;
+        this.isConfirmed = false;
         this.selectedPerson = null;
         headerLabel.setText(headerMessage);
 
-        personListView.setItems(FXCollections.observableArrayList(
-                matchingResults.stream()
-                        .map(Person::toString)
-                        .toList()
-        ));
+        personListView.setItems(FXCollections.observableArrayList(matchingResults));
+        personListView.setCellFactory(lv -> new javafx.scene.control.ListCell<>() {
+            protected void updateItem(Person person, boolean isEmpty) {
+                super.updateItem(person, isEmpty);
+                if (isEmpty || person == null) {
+                    setGraphic(null);
+                    setText(null);
+                } else {
+                    int index = matchingResults.indexOf(person) + 1;
+                    setGraphic(new PersonCard(person, index).getRoot());
+                }
+            }
+        });
 
         inputField.clear();
-        getRoot().show();
+        inputField.requestFocus();
         getRoot().centerOnScreen();
+        getRoot().showAndWait();
     }
 
     private void setUpKeyboardHandlers() {
-
+        inputField.setOnKeyPressed(event -> {
+            switch (event.getCode()) {
+            case ENTER -> handleEnter();
+            case ESCAPE -> handleEscape();
+            default -> {}
+            }
+        });
     }
 
     private void handleEnter() {
+        String input = inputField.getText().trim();
+        int index;
 
+        try {
+            index = Integer.parseInt(input) - 1;
+        } catch (NumberFormatException e) {
+            showError("Please enter a valid index number or press ESC to cancel.");
+            return;
+        }
+
+        if (index >= 0 && index < matchingResults.size()) {
+            selectedPerson = matchingResults.get(index);
+            isConfirmed = true;
+            getRoot().hide();
+        } else {
+            showError("Invalid index. Try again or press ESC to cancel.");
+        }
     }
 
     private void handleEscape() {
-
-    }
-
-    public void close() {
+        isConfirmed = false;
+        selectedPerson = null;
         getRoot().hide();
     }
+
+    private void showError(String message) {
+        headerLabel.setText(message);
+    }
+
+    /**
+     * Check if the user confirms deletion.
+     * */
+    public boolean isConfirmed() { return isConfirmed; }
+
+    /**
+     * Get the person selected for deletion.
+     * */
+    public Person getSelectedPerson() { return selectedPerson; }
 }
