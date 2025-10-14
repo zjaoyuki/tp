@@ -97,8 +97,8 @@ public class ViewWindow extends UiPart<Stage> {
         nameLabel.setText(person.getName().fullName);
         phoneLabel.setText(person.getPhone().value);
         emailLabel.setText(person.getEmail().value);
-        // addressLabel.setText(person.getAddress().value);
-        // temporarily comment this because it is giving out error
+        addressLabel.setText(person.getCategory().value + (person.getNote().value.isEmpty()
+                ? "" : " - " + person.getNote().value));
 
         // Format tags
         if (person.getTags() != null && !person.getTags().isEmpty()) {
