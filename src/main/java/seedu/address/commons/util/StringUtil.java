@@ -6,6 +6,9 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.Arrays;
+import java.util.Set;
+
+import seedu.address.model.tag.Tag;
 
 /**
  * Helper functions for handling strings.
@@ -20,8 +23,8 @@ public class StringUtil {
      *       containsWordIgnoreCase("ABc def", "DEF") == true
      *       containsWordIgnoreCase("ABc def", "AB") == true //even though not a full word match
      *       </pre>
-     * @param sentence cannot be null
-     * @param word cannot be null, cannot be empty, must be a single word
+     * @param sentence cannot be null.
+     * @param word cannot be null, cannot be empty, must be a single word.
      */
     public static boolean containsWordIgnoreCase(String sentence, String word) {
         requireNonNull(sentence);
@@ -40,13 +43,40 @@ public class StringUtil {
     }
 
     /**
+     * Returns true if {@code tagList} contains the {@code wordToFind}.
+     *   Ignores case and can match partial tag substrings.
+     *   <br>examples:<pre>
+     *       containsTagIgnoreCase( [friend, colleague, coursemate], friend) == true
+     *       containsTagIgnoreCase( [friend, colleague, coursemate], FRIEND coll) == true
+     *       </pre>
+     * @param tagList The list of tags associated with a person.
+     * @param wordToFind cannot be null, cannot be empty, must be a single word.
+     * @return Whether the tagList contains the tag of wordToFind.
+     */
+    public static boolean containsTagIgnoreCase(Set<Tag> tagList, String wordToFind) {
+        requireNonNull(wordToFind);
+        requireNonNull(tagList);
+
+        String preppedWord = wordToFind.trim().toLowerCase();
+        checkArgument(!preppedWord.isEmpty(), "Word parameter cannot be empty");
+        checkArgument(preppedWord.split("\\s+").length == 1,
+                "Word parameter should be a single word");
+
+        String preppedSentence = tagList.toString().toLowerCase().trim();
+        String[] wordsInPreppedSentence = preppedSentence.split("\\s+");
+
+        return Arrays.stream(wordsInPreppedSentence)
+                .anyMatch(wordInSentence -> wordInSentence.toLowerCase().contains(preppedWord));
+    }
+
+    /**
      * Returns a detailed message of the t, including the stack trace.
      */
     public static String getDetails(Throwable t) {
         requireNonNull(t);
         StringWriter sw = new StringWriter();
         t.printStackTrace(new PrintWriter(sw));
-        return t.getMessage() + "\n" + sw.toString();
+        return t.getMessage() + "\n" + sw;
     }
 
     /**

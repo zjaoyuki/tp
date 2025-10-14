@@ -5,24 +5,24 @@ import static java.util.Objects.requireNonNull;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.model.Model;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.person.PhoneContainsKeywordsPredicate;
 
 /**
- * Finds and lists all persons in address book whose name contains any of the argument keywords.
- * Keyword matching is case insensitive.
+ * Finds and lists all persons in address book whose phone number contains any of the argument keywords.
+ * Keyword matching works on partial numbers.
  */
-public class FindNameCommand extends Command {
+public class FindPhoneCommand extends Command {
 
-    public static final String COMMAND_WORD = "find-n";
+    public static final String COMMAND_WORD = "find-p";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose names contain any of "
-            + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose phone number contain any of "
+            + "the specified keywords and displays them as a list with index numbers.\n"
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
-            + "Example: " + COMMAND_WORD + " alice bob charlie";
+            + "Example: " + COMMAND_WORD + " 84123578";
 
-    private final NameContainsKeywordsPredicate predicate;
+    private final PhoneContainsKeywordsPredicate predicate;
 
-    public FindNameCommand(NameContainsKeywordsPredicate predicate) {
+    public FindPhoneCommand(PhoneContainsKeywordsPredicate predicate) {
         this.predicate = predicate;
     }
 
@@ -41,12 +41,12 @@ public class FindNameCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof FindNameCommand)) {
+        if (!(other instanceof FindPhoneCommand)) {
             return false;
         }
 
-        FindNameCommand otherFindNameCommand = (FindNameCommand) other;
-        return predicate.equals(otherFindNameCommand.predicate);
+        FindPhoneCommand otherFindPhoneCommand = (FindPhoneCommand) other;
+        return predicate.equals(otherFindPhoneCommand.predicate);
     }
 
     @Override
