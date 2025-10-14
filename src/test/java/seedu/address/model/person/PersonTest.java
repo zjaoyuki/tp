@@ -241,7 +241,8 @@ public class PersonTest {
 
     @Test
     public void hashCode_explicitCoverage() {
-        // Explicitly test to ensure the hashCode line with Objects.hash(name, phone, email, category, note, tags) is covered
+        // Explicitly test to ensure the hashCode line with
+        // Objects.hash(name, phone, email, category, note, tags) is covered
         Person student = new PersonBuilder().withCategory("student").withNote("Excellent performance").build();
         Person colleague = new PersonBuilder().withCategory("colleague").withNote("Team player").build();
         Person studentEmptyNote = new PersonBuilder().withCategory("student").withNote("").build();
