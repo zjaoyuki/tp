@@ -16,7 +16,6 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
@@ -39,9 +38,31 @@ public class AddCommandTest {
 
         CommandResult commandResult = new AddCommand(validPerson).execute(modelStub);
 
-        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, Messages.format(validPerson)),
+        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, validPerson.getCategory()),
                 commandResult.getFeedbackToUser());
         assertEquals(Arrays.asList(validPerson), modelStub.personsAdded);
+    }
+
+    @Test
+    public void execute_studentCategory_correctSuccessMessage() throws Exception {
+        ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
+        Person studentPerson = new PersonBuilder().withCategory("student").build();
+
+        CommandResult commandResult = new AddCommand(studentPerson).execute(modelStub);
+
+        assertEquals("New student added", commandResult.getFeedbackToUser());
+        assertEquals(Arrays.asList(studentPerson), modelStub.personsAdded);
+    }
+
+    @Test
+    public void execute_colleagueCategory_correctSuccessMessage() throws Exception {
+        ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
+        Person colleaguePerson = new PersonBuilder().withCategory("colleague").build();
+
+        CommandResult commandResult = new AddCommand(colleaguePerson).execute(modelStub);
+
+        assertEquals("New colleague added", commandResult.getFeedbackToUser());
+        assertEquals(Arrays.asList(colleaguePerson), modelStub.personsAdded);
     }
 
     @Test
@@ -51,6 +72,60 @@ public class AddCommandTest {
         ModelStub modelStub = new ModelStubWithPerson(validPerson);
 
         assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_PERSON, () -> addCommand.execute(modelStub));
+    }
+
+    @Test
+    public void execute_duplicatePersonCaseInsensitiveName_throwsCommandException() {
+        Person originalPerson = new PersonBuilder().withName("John Doe").withPhone("98765432").build();
+        Person duplicatePerson = new PersonBuilder().withName("john doe").withPhone("98765432").build();
+        AddCommand addCommand = new AddCommand(duplicatePerson);
+        ModelStub modelStub = new ModelStubWithPerson(originalPerson);
+
+        assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_PERSON, () -> addCommand.execute(modelStub));
+    }
+
+    @Test
+    public void execute_duplicatePersonMixedCase_throwsCommandException() {
+        Person originalPerson = new PersonBuilder().withName("Mary Tan").withPhone("91234567").build();
+        Person duplicatePerson = new PersonBuilder().withName("MARY TAN").withPhone("91234567").build();
+        AddCommand addCommand = new AddCommand(duplicatePerson);
+        ModelStub modelStub = new ModelStubWithPerson(originalPerson);
+
+        assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_PERSON, () -> addCommand.execute(modelStub));
+    }
+
+    @Test
+    public void execute_sameNameDifferentPhone_success() throws Exception {
+        ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
+        Person existingPerson = new PersonBuilder().withName("John Doe").withPhone("98765432").build();
+        Person newPerson = new PersonBuilder().withName("John Doe").withPhone("91234567").build();
+
+        // Add existing person first
+        new AddCommand(existingPerson).execute(modelStub);
+
+        // Adding person with same name but different phone should succeed
+        CommandResult commandResult = new AddCommand(newPerson).execute(modelStub);
+
+        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, newPerson.getCategory()),
+                commandResult.getFeedbackToUser());
+        assertEquals(Arrays.asList(existingPerson, newPerson), modelStub.personsAdded);
+    }
+
+    @Test
+    public void execute_samePhoneDifferentName_success() throws Exception {
+        ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
+        Person existingPerson = new PersonBuilder().withName("John Doe").withPhone("98765432").build();
+        Person newPerson = new PersonBuilder().withName("Jane Doe").withPhone("98765432").build();
+
+        // Add existing person first
+        new AddCommand(existingPerson).execute(modelStub);
+
+        // Adding person with same phone but different name should succeed
+        CommandResult commandResult = new AddCommand(newPerson).execute(modelStub);
+
+        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, newPerson.getCategory()),
+                commandResult.getFeedbackToUser());
+        assertEquals(Arrays.asList(existingPerson, newPerson), modelStub.personsAdded);
     }
 
     @Test
