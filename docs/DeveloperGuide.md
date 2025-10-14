@@ -4,7 +4,7 @@
   pageNav: 3
 ---
 
-# AB-3 Developer Guide
+# LittleLogBook Developer Guide
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -272,44 +272,102 @@ _{Explain here how the data archiving feature will be implemented}_
 
 ### Product scope
 
-**Target user profile**:
-
-* has a need to manage a significant number of contacts
+**Target user profile**: Kindergarten Teacher
+* an avid user of typed user commands interface
 * prefer desktop apps over other types
-* can type fast
-* prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
+* has multiple classes that holds multiple students
+* has multiple colleagues
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: Little LogBook helps kindergarten teachers stay organised by managing student and colleague details in one place, making parent contacts quick to access and freeing up more time for teaching.
 
+## User Stories
 
-### User stories
+### Priority Legend
+- `* * *` : Must-have (High priority)
+- `* *`   : Good-to-have (Medium priority)
+- `*`     : Nice-to-have (Low priority)
 
-Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
-
-| Priority | As a …​                                    | I want to …​                 | So that I can…​                                                        |
-|----------|--------------------------------------------|------------------------------|------------------------------------------------------------------------|
-| `* * *`  | new user                                   | see usage instructions       | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person             |                                                                        |
-| `* * *`  | user                                       | delete a person              | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name        | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name         | locate a person easily                                                 |
-
-*{More to be added}*
+| Priority | As a …​                | I want to …​                                | So that I can…​                                         |
+|----------|------------------------|---------------------------------------------|---------------------------------------------------------|
+| `* * *`  | new teacher            | see usage instructions                      | refer to instructions when I forget how to use the App  |
+| `* * *`  | teacher                | add a new person                            | be efficient when managing contacts                     |
+| `* * *`  | teacher                | delete a person                             | remove contacts I no longer need                        |
+| `* * *`  | teacher                | find a person by name                       | locate contact without going through the entire list    |
+| `* *`    | teacher                | view a person's contact details             | get the information I need quickly                      |
+| `* *`    | forgetful teacher      | add notes to a person's entries             | remember details about the person                       |
+| `* *`    | teacher                | mark attendance of my student               | track presence easily                                   |
+| `* *`    | person who makes typos | edit contacts                               | correct mistakes without re-adding the contact          |
+| `* *`    | person who makes typos | input validation (e.g., phone only digits)  | reduce mistakes when entering data                      |
+| `* *`    | kindergarten teacher   | search contacts using partial names         | find information more easily                            |
+| `* *`    | forgetful teacher      | confirmation pop-ups before deleting        | avoid erasing information by accident                   |
+| `* *`    | kindergarten teacher   | sort contacts by categories (students, ...) | filter information quickly                              |
+| `* *`    | forgetful teacher      | detect duplicate contacts                   | avoid multiple entries of the same student              |
+| `* *`    | kindergarten teacher   | attach a student’s photo                    | quickly match names to faces                            |
+| `* *`    | kindergarten teacher   | categorise students (class, age, bus group) | find information more efficiently                       |
+| `* *`    | kindergarten teacher   | mark preferred contact methods              | respect parent preferences                              |
+| `* *`    | kindergarten teacher   | save parents’ contact details               | reach them in emergencies                               |
+| `* *`    | kindergarten teacher   | add pickup person details                   | ensure students go home safely                          |
+| `* *`    | kindergarten teacher   | store multiple emergency contacts           | have options if one is unavailable                      |
+| `* *`    | kindergarten teacher   | save colleagues’ information                | reach them when I need help                             |
+| `* *`    | kindergarten teacher   | group colleagues by role                    | contact the right person quickly                        |
+| `* *`    | kindergarten teacher   | "mark all present" option                   | save time by only marking absentees                     |
+| `* *`    | kindergarten teacher   | see color code for attendance               | identify status quickly (red = absent, green = present) |
+| `* *`    | kindergarten teacher   | check a student’s attendance history        | spot patterns of absence                                |
+| `* *`    | kindergarten teacher   | generate attendance reports                 | submit them to school admin easily                      |
+| `*`      | kindergarten teacher   | get reminders of school events              | stay prepared                                           |
+| `*`      | kindergarten teacher   | get reminders of birthdays                  | celebrate students’ birthdays                           |
+| `*`      | older teacher          | customise font size                         | see more clearly                                        |
+| `*`      | kindergarten teacher   | mark frequently contacted colleagues        | find them faster                                        |
 
 ### Use cases
 
 (For all use cases below, the **System** is the `LittleLogBook` and the **Actor** is the `user`, unless specified otherwise)
 
+**Use case: Add a contact**
+
+**MSS**
+
+1. User opens LittleLogBook.
+2. LittleLogBook shows list of all the contacts added.
+3. User enters the contact information.
+4. LittleLogBook validates input information.
+5. LittleLogBook saves contact and updates contact list.
+6. LittleLogBook displays success confirmation.
+
+Use case ends.
+
+**Extensions**
+
+* 4a. The input information is invalid.
+    * 4a1. LittleLogBook shows an error message.
+      Use case resumes at step 3.
+
+**Use case: View a contact**
+
+**MSS**
+
+1. User opens LittleLogBook.
+2. LittleLogBook shows list of all the contacts added.
+3. User enters a specific contact name.
+4. LittleLogBook validates input information and finds the matching contact.
+5. LittleLogBook displays the contact information.
+
+Use case ends.
+
+**Extensions**
+
+* 4a. The input information is invalid.
+    * 4a1. LittleLogBook shows an error message.
+      Use case resumes at step 3.
+
 **Use case: Delete a contact**
 
 **MSS**
 
-1.  User opens LittleLogBook
-2.  LittleLogBook shows list of all the contacts added
-3.  User types commands to delete a specific contact in the list
-4.  LittleLogBook deletes the person
+1.  User opens LittleLogBook.
+2.  LittleLogBook shows list of all the contacts added.
+3.  User requests to delete a specific contact in the list.
+4.  LittleLogBook deletes the person.
 
     Use case ends.
 
@@ -324,10 +382,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User opens LittleLogBook
-2.  LittleLogBook shows list of all the contacts added
-3.  User types commands to search a contact in the list with partial information
-4.  LittleLogBook shows list of all contacts matching the information
+1.  User opens LittleLogBook.
+2.  LittleLogBook shows list of all the contacts added.
+3.  User requests to search a contact in the list with partial information.
+4.  LittleLogBook shows list of all contacts matching the information.
 
     Use case ends.
 
@@ -337,7 +395,23 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     *    3a.1 LittleLogBook requests for valid input.
          Use case resumes at step 3.
 
-         
+**Use case: Marks attendance**
+
+**MSS**
+
+1.  User opens LittleLogBook.
+2.  LittleLogBook shows list of all the contacts added.
+3.  User requests to mark attendance of a specific student.
+4.  LittleLogBook succesfully marks student's attendance.
+
+    Use case ends.
+
+**Extensions**
+
+* 3a. No contact matches the information.
+    *    3a.1 LittleLogBook requests for valid input.
+         Use case resumes at step 3.
+
 
 *{More to be added}*
 
@@ -346,13 +420,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
 2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+4.  Only authenticated users (teachers) can access the app.
 
 *{More to be added}*
 
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
-* **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Contact**: A person's name, class (for student), birthday (for student), phone number's (colleague, student's parents), emails (colleague, student's parents)
+* **Notes**: A section inside contact for additional information
 
 --------------------------------------------------------------------------------------------------------------------
 
