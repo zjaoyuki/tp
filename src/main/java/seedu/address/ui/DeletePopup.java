@@ -5,9 +5,9 @@ import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.stage.Stage;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ListView;
+import javafx.stage.Stage;
 import seedu.address.model.person.Person;
 
 /**
@@ -24,7 +24,7 @@ public class DeletePopup extends UiPart<Stage> {
     @FXML
     private TextField inputField;
 
-    private List<Person>  matchingResults;
+    private List<Person> matchingResults;
     private boolean isConfirmed = false;
     private Person selectedPerson = null;
 
@@ -82,7 +82,7 @@ public class DeletePopup extends UiPart<Stage> {
             switch (event.getCode()) {
             case ENTER -> handleEnter();
             case ESCAPE -> handleEscape();
-            default -> {}
+            default -> { }
             }
         });
     }
@@ -120,10 +120,14 @@ public class DeletePopup extends UiPart<Stage> {
     /**
      * Check if the user confirms deletion.
      * */
-    public boolean isConfirmed() { return isConfirmed; }
+    public boolean isConfirmed() {
+        return isConfirmed;
+    }
 
     /**
      * Get the person selected for deletion.
      * */
-    public Person getSelectedPerson() { return selectedPerson; }
+    public Person getSelectedPerson() {
+        return selectedPerson;
+    }
 }
