@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.stage.Stage?>
+
+<fx:root resizable = "false" title = "Delete Contact" type = "javafx.stage.Stage"
+         xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+  <scene>
+    <Scene>
+        <VBox spacing="10" style="-fx-padding: 20;">
+            <Label fx:id="headerLabel" wrapText="true"/>
+            <TextField fx:id="inputField" promptText="Type index and press Enter to confirm, ESC to cancel"/>
+            <ListView fx:id="personListView" prefHeight="300"/>
+        </VBox>
+    </Scene>
+  </scene>
+</fx:root>

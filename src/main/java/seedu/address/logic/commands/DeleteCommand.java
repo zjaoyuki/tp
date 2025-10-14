@@ -24,7 +24,6 @@ public class DeleteCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1 or " + COMMAND_WORD + " n/John ";
 
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
-    public static final String MESSAGE_DELETE_PERSON_BY_NAME = "Delete by name feature implementing";
 
     private final Index targetIndex;
     private final String targetName;
@@ -51,12 +50,40 @@ public class DeleteCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+        List<Person> lastShownList = model.getFilteredPersonList();
 
         if (isDeletedByName) {
-            return new CommandResult(String.format(MESSAGE_DELETE_PERSON_BY_NAME));
-        }
+            List<Person> exactMatches = lastShownList.stream()
+                    .filter(p -> p.getName().fullName.equalsIgnoreCase(targetName))
+                    .toList();
 
-        List<Person> lastShownList = model.getFilteredPersonList();
+            if (exactMatches.size() == 1) {
+                Person personToDelete = exactMatches.get(0);
+                model.deletePerson(personToDelete);
+                return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS,
+                        Messages.format(personToDelete)));
+            }
+
+            if (exactMatches.size() > 1) {
+                throw new CommandException(Messages.MESSAGE_DUPLICATE_FIELDS + "name");
+            }
+
+            List<Person> possibleMatches = lastShownList.stream()
+                    .filter(person -> person.getName().fullName.toLowerCase().contains(targetName.toLowerCase()))
+                    .toList();
+
+            if (!possibleMatches.isEmpty()) {
+                StringBuilder suggestion = new StringBuilder("Found the following matches:\n");
+                for (int i = 0; i < possibleMatches.size(); i++) {
+                    suggestion.append(i + 1)
+                            .append(". ")
+                            .append(possibleMatches.get(i).getName().fullName)
+                            .append("\n");
+                }
+                throw new CommandException(suggestion.toString().trim());
+            }
+            throw new CommandException(Messages.MESSAGE_PERSON_NOT_FOUND);
+        }
 
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
