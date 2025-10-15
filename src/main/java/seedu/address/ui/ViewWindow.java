@@ -16,6 +16,10 @@ public class ViewWindow extends UiPart<Stage> {
     private static final double MIN_HEIGHT = 600;
 
     @FXML
+    private Label tagsLabel;
+    @FXML
+    private Label classLabel;
+    @FXML
     private Label nameLabel;
     @FXML
     private Label phoneLabel;
@@ -23,8 +27,6 @@ public class ViewWindow extends UiPart<Stage> {
     private Label emailLabel;
     @FXML
     private Label addressLabel;
-    @FXML
-    private Label tagsLabel;
     @FXML
     private TextArea notesArea;
     @FXML
@@ -97,6 +99,7 @@ public class ViewWindow extends UiPart<Stage> {
         nameLabel.setText(person.getName().fullName);
         phoneLabel.setText(person.getPhone().value);
         emailLabel.setText(person.getEmail().value);
+        classLabel.setText("Class coming soon.");
         addressLabel.setText(person.getCategory().value + (person.getNote().value.isEmpty()
                 ? "" : " - " + person.getNote().value));
 
