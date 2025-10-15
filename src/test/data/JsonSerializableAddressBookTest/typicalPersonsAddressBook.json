@@ -49,5 +49,13 @@
     "category" : "student",
     "note": "",
     "tags" : [ ]
-  } ]
+  }, {
+    "name" : "George Best",
+    "phone" : "94824888",
+    "email" : "annaa@example.com",
+    "category" : "student",
+    "note": "",
+    "tags" : [ ]
+  }
+  ]
 }
