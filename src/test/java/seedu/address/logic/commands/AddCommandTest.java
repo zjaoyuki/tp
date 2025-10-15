@@ -16,6 +16,7 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
@@ -38,31 +39,33 @@ public class AddCommandTest {
 
         CommandResult commandResult = new AddCommand(validPerson).execute(modelStub);
 
-        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, validPerson.getCategory()),
+        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, Messages.format(validPerson)),
                 commandResult.getFeedbackToUser());
         assertEquals(Arrays.asList(validPerson), modelStub.personsAdded);
     }
 
     @Test
-    public void execute_studentCategory_correctSuccessMessage() throws Exception {
+    public void execute_studentClass_correctSuccessMessage() throws Exception {
         ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
-        Person studentPerson = new PersonBuilder().withCategory("student").build();
+        Person studentPerson = new PersonBuilder().withClass("1A").build();
 
         CommandResult commandResult = new AddCommand(studentPerson).execute(modelStub);
 
-        assertEquals("New student added", commandResult.getFeedbackToUser());
+        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, Messages.format(studentPerson)),
+                commandResult.getFeedbackToUser());
         assertEquals(Arrays.asList(studentPerson), modelStub.personsAdded);
     }
 
     @Test
-    public void execute_colleagueCategory_correctSuccessMessage() throws Exception {
+    public void execute_differentClassFormats_correctSuccessMessage() throws Exception {
         ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
-        Person colleaguePerson = new PersonBuilder().withCategory("colleague").build();
+        Person person6D = new PersonBuilder().withClass("6D").build();
 
-        CommandResult commandResult = new AddCommand(colleaguePerson).execute(modelStub);
+        CommandResult commandResult = new AddCommand(person6D).execute(modelStub);
 
-        assertEquals("New colleague added", commandResult.getFeedbackToUser());
-        assertEquals(Arrays.asList(colleaguePerson), modelStub.personsAdded);
+        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, Messages.format(person6D)),
+                commandResult.getFeedbackToUser());
+        assertEquals(Arrays.asList(person6D), modelStub.personsAdded);
     }
 
     @Test
@@ -106,7 +109,7 @@ public class AddCommandTest {
         // Adding person with same name but different phone should succeed
         CommandResult commandResult = new AddCommand(newPerson).execute(modelStub);
 
-        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, newPerson.getCategory()),
+        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, Messages.format(newPerson)),
                 commandResult.getFeedbackToUser());
         assertEquals(Arrays.asList(existingPerson, newPerson), modelStub.personsAdded);
     }
@@ -123,7 +126,7 @@ public class AddCommandTest {
         // Adding person with same phone but different name should succeed
         CommandResult commandResult = new AddCommand(newPerson).execute(modelStub);
 
-        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, newPerson.getCategory()),
+        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, Messages.format(newPerson)),
                 commandResult.getFeedbackToUser());
         assertEquals(Arrays.asList(existingPerson, newPerson), modelStub.personsAdded);
     }
@@ -166,7 +169,7 @@ public class AddCommandTest {
 
         CommandResult commandResult = new AddCommand(validPersonWithNote).execute(modelStub);
 
-        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, validPersonWithNote.getCategory()),
+        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, Messages.format(validPersonWithNote)),
                 commandResult.getFeedbackToUser());
         assertEquals(Arrays.asList(validPersonWithNote), modelStub.personsAdded);
     }
@@ -178,7 +181,7 @@ public class AddCommandTest {
 
         CommandResult commandResult = new AddCommand(validPersonWithEmptyNote).execute(modelStub);
 
-        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, validPersonWithEmptyNote.getCategory()),
+        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, Messages.format(validPersonWithEmptyNote)),
                 commandResult.getFeedbackToUser());
         assertEquals(Arrays.asList(validPersonWithEmptyNote), modelStub.personsAdded);
     }
@@ -186,25 +189,27 @@ public class AddCommandTest {
     @Test
     public void execute_studentWithNote_correctSuccessMessage() throws Exception {
         ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
-        Person studentWithNote = new PersonBuilder().withCategory("student")
+        Person studentWithNote = new PersonBuilder().withClass("2A")
                 .withNote("Prefers morning classes").build();
 
         CommandResult commandResult = new AddCommand(studentWithNote).execute(modelStub);
 
-        assertEquals("New student added", commandResult.getFeedbackToUser());
+        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, Messages.format(studentWithNote)),
+                commandResult.getFeedbackToUser());
         assertEquals(Arrays.asList(studentWithNote), modelStub.personsAdded);
     }
 
     @Test
-    public void execute_colleagueWithNote_correctSuccessMessage() throws Exception {
+    public void execute_seniorStudentWithNote_correctSuccessMessage() throws Exception {
         ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
-        Person colleagueWithNote = new PersonBuilder().withCategory("colleague")
+        Person seniorStudentWithNote = new PersonBuilder().withClass("6C")
                 .withNote("Team lead for mobile app development").build();
 
-        CommandResult commandResult = new AddCommand(colleagueWithNote).execute(modelStub);
+        CommandResult commandResult = new AddCommand(seniorStudentWithNote).execute(modelStub);
 
-        assertEquals("New colleague added", commandResult.getFeedbackToUser());
-        assertEquals(Arrays.asList(colleagueWithNote), modelStub.personsAdded);
+        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, Messages.format(seniorStudentWithNote)),
+                commandResult.getFeedbackToUser());
+        assertEquals(Arrays.asList(seniorStudentWithNote), modelStub.personsAdded);
     }
 
     /**

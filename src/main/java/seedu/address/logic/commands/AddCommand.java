@@ -1,7 +1,8 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_CATEGORY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CLASS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE;
@@ -25,14 +26,16 @@ public class AddCommand extends Command {
             + PREFIX_NAME + "NAME "
             + PREFIX_PHONE + "PHONE "
             + PREFIX_EMAIL + "EMAIL "
-            + PREFIX_CATEGORY + "CATEGORY "
+            + PREFIX_ADDRESS + "ADDRESS "
+            + PREFIX_CLASS + "CLASS "
             + "[" + PREFIX_NOTE + "NOTE] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
             + PREFIX_PHONE + "98765432 "
             + PREFIX_EMAIL + "john.doe@gmail.com "
-            + PREFIX_CATEGORY + "student "
+            + PREFIX_ADDRESS + "Blk 456, Den Road, #01-355 "
+            + PREFIX_CLASS + "5A "
             + PREFIX_NOTE + "Likes to study in the library "
             + PREFIX_TAG + "friends";
 
@@ -58,7 +61,7 @@ public class AddCommand extends Command {
         }
 
         model.addPerson(toAdd);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd.getCategory()));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd.getStudentClass()));
     }
 
     @Override

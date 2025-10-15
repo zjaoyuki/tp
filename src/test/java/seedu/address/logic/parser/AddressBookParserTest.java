@@ -41,7 +41,7 @@ public class AddressBookParserTest {
                 .withName("Amy Bee")
                 .withPhone("81234567")
                 .withEmail("amy@example.com")
-                .withCategory("student")
+                .withClass("student")
                 .withNote("")
                 .withTags()
                 .build();

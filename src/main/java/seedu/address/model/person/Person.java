@@ -20,21 +20,23 @@ public class Person {
     private final Name name;
     private final Phone phone;
     private final Email email;
+    private final Address address;
     private final Note note;
 
     // Data fields
-    private final Category category;
+    private final Class studentClass;
     private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Category category, Note note, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, category, note, tags);
+    public Person(Name name, Phone phone, Email email, Address address, Class studentClass, Note note, Set<Tag> tags) {
+        requireAllNonNull(name, phone, email, address, studentClass, note, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
-        this.category = category;
+        this.address = address;
+        this.studentClass = studentClass;
         this.note = note;
         this.tags.addAll(tags);
     }
@@ -51,8 +53,12 @@ public class Person {
         return email;
     }
 
-    public Category getCategory() {
-        return category;
+    public Address getAddress() {
+        return address;
+    }
+
+    public Class getStudentClass() {
+        return studentClass;
     }
 
     public Note getNote() {
@@ -100,7 +106,8 @@ public class Person {
         return name.equals(otherPerson.name)
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
-                && category.equals(otherPerson.category)
+                && address.equals(otherPerson.address)
+                && studentClass.equals(otherPerson.studentClass)
                 && note.equals(otherPerson.note)
                 && tags.equals(otherPerson.tags);
     }
@@ -108,7 +115,7 @@ public class Person {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, category, note, tags);
+        return Objects.hash(name, phone, email, address, studentClass, note, tags);
     }
 
     @Override
@@ -117,7 +124,8 @@ public class Person {
                 .add("name", name)
                 .add("phone", phone)
                 .add("email", email)
-                .add("category", category)
+                .add("address", address)
+                .add("class", studentClass)
                 .add("note", note)
                 .add("tags", tags)
                 .toString();

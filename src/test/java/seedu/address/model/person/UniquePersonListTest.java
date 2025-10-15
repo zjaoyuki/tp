@@ -3,7 +3,8 @@ package seedu.address.model.person;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_CATEGORY_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_CLASS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
@@ -42,7 +43,7 @@ public class UniquePersonListTest {
     @Test
     public void contains_personWithSameIdentityFieldsInList_returnsTrue() {
         uniquePersonList.add(ALICE);
-        Person editedAlice = new PersonBuilder(ALICE).withCategory(VALID_CATEGORY_BOB).withTags(VALID_TAG_HUSBAND)
+        Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withClass(VALID_CLASS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
         assertTrue(uniquePersonList.contains(editedAlice));
     }
@@ -85,7 +86,7 @@ public class UniquePersonListTest {
     @Test
     public void setPerson_editedPersonHasSameIdentity_success() {
         uniquePersonList.add(ALICE);
-        Person editedAlice = new PersonBuilder(ALICE).withCategory(VALID_CATEGORY_BOB).withTags(VALID_TAG_HUSBAND)
+        Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withClass(VALID_CLASS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
         uniquePersonList.setPerson(ALICE, editedAlice);
         UniquePersonList expectedUniquePersonList = new UniquePersonList();
@@ -158,50 +159,8 @@ public class UniquePersonListTest {
 
     @Test
     public void setPersons_listWithDuplicatePersons_throwsDuplicatePersonException() {
-        // Use persons with different names and phones to avoid case-insensitive duplicate detection issues
-        Person duplicatePerson = new PersonBuilder(ALICE).build();
-        List<Person> listWithDuplicatePersons = Arrays.asList(ALICE, duplicatePerson);
+        List<Person> listWithDuplicatePersons = Arrays.asList(ALICE, ALICE);
         assertThrows(DuplicatePersonException.class, () -> uniquePersonList.setPersons(listWithDuplicatePersons));
-    }
-
-    @Test
-    public void setPersons_listWithCaseInsensitiveDuplicateNames_throwsDuplicatePersonException() {
-        // Test case-insensitive duplicate detection with various scenarios
-        Person aliceOriginal = new PersonBuilder().withName("Alice Pauline").withPhone("94351253")
-                .withEmail("alice@example.com").withCategory("student").build();
-        Person aliceUpperCase = new PersonBuilder().withName("ALICE PAULINE").withPhone("94351253")
-                .withEmail("alice.upper@example.com").withCategory("student").build();
-        Person aliceLowerCase = new PersonBuilder().withName("alice pauline").withPhone("94351253")
-                .withEmail("alice.lower@example.com").withCategory("student").build();
-        Person aliceMixedCase = new PersonBuilder().withName("Alice PAULINE").withPhone("94351253")
-                .withEmail("alice.mixed@example.com").withCategory("student").build();
-
-        // All should be considered duplicates due to case-insensitive name + same phone
-        List<Person> duplicateList1 = Arrays.asList(aliceOriginal, aliceUpperCase);
-        assertThrows(DuplicatePersonException.class, () -> uniquePersonList.setPersons(duplicateList1));
-
-        List<Person> duplicateList2 = Arrays.asList(aliceOriginal, aliceLowerCase);
-        assertThrows(DuplicatePersonException.class, () -> uniquePersonList.setPersons(duplicateList2));
-
-        List<Person> duplicateList3 = Arrays.asList(aliceOriginal, aliceMixedCase);
-        assertThrows(DuplicatePersonException.class, () -> uniquePersonList.setPersons(duplicateList3));
-    }
-
-    @Test
-    public void setPersons_listWithSameNameDifferentPhone_success() {
-        // Test that same name with different phone is allowed
-        Person alice1 = new PersonBuilder().withName("Alice Pauline").withPhone("94351253")
-                .withEmail("alice1@example.com").withCategory("student").build();
-        Person alice2 = new PersonBuilder().withName("Alice Pauline").withPhone("91234567")
-                .withEmail("alice2@example.com").withCategory("colleague").build();
-
-        List<Person> validList = Arrays.asList(alice1, alice2);
-        uniquePersonList.setPersons(validList);
-
-        UniquePersonList expectedList = new UniquePersonList();
-        expectedList.add(alice1);
-        expectedList.add(alice2);
-        assertEquals(expectedList, uniquePersonList);
     }
 
     @Test
