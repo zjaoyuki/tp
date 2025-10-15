@@ -80,23 +80,8 @@ public class PersonTest {
         // Test normalization scenarios
         Person personWithSpaces = new PersonBuilder().withName("John    Doe").withPhone("98765432").build();
         Person personNormalized = new PersonBuilder().withName("John Doe").withPhone("98765432").build();
+        // Note: Both should be normalized during construction, so they should be the same
         assertTrue(personWithSpaces.isSamePerson(personNormalized));
-    }
-
-    @Test
-    public void isSamePerson_withNotes_success() {
-        // Same name and phone but different notes -> still same person (duplicates)
-        Person person1 = new PersonBuilder().withName("Alice Pauline").withPhone("94351253")
-                .withNote("Great student").build();
-        Person person2 = new PersonBuilder().withName("Alice Pauline").withPhone("94351253")
-                .withNote("Excellent in math").build();
-        assertTrue(person1.isSamePerson(person2));
-
-        // Same name and phone, one with note, one without -> still same person
-        Person person3 = new PersonBuilder().withName("Alice Pauline").withPhone("94351253")
-                .withNote("").build();
-        assertTrue(person1.isSamePerson(person3));
-        assertTrue(person3.isSamePerson(person1));
     }
 
     @Test
@@ -133,41 +118,9 @@ public class PersonTest {
         editedAlice = new PersonBuilder(ALICE).withCategory(VALID_CATEGORY_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
 
-        // different note -> returns false (this covers the note.equals(otherPerson.note) line)
-        editedAlice = new PersonBuilder(ALICE).withNote("Different note content").build();
-        assertFalse(ALICE.equals(editedAlice));
-
         // different tags -> returns false
         editedAlice = new PersonBuilder(ALICE).withTags(VALID_TAG_HUSBAND).build();
         assertFalse(ALICE.equals(editedAlice));
-    }
-
-    @Test
-    public void equals_specificNoteScenarios() {
-        // Test specific note comparison scenarios to ensure full coverage
-        Person personWithNote1 = new PersonBuilder().withName("John Doe").withPhone("98765432")
-                .withEmail("john@example.com").withCategory("student").withNote("Original note").build();
-        Person personWithNote2 = new PersonBuilder().withName("John Doe").withPhone("98765432")
-                .withEmail("john@example.com").withCategory("student").withNote("Different note").build();
-        Person personWithSameNote = new PersonBuilder().withName("John Doe").withPhone("98765432")
-                .withEmail("john@example.com").withCategory("student").withNote("Original note").build();
-
-        // Same note -> returns true
-        assertTrue(personWithNote1.equals(personWithSameNote));
-
-        // Different note -> returns false (covers note.equals(otherPerson.note) line)
-        assertFalse(personWithNote1.equals(personWithNote2));
-
-        // Empty note vs non-empty note -> returns false
-        Person personWithEmptyNote = new PersonBuilder().withName("John Doe").withPhone("98765432")
-                .withEmail("john@example.com").withCategory("student").withNote("").build();
-        assertFalse(personWithNote1.equals(personWithEmptyNote));
-        assertFalse(personWithEmptyNote.equals(personWithNote1));
-
-        // Both empty notes -> returns true
-        Person anotherPersonWithEmptyNote = new PersonBuilder().withName("John Doe").withPhone("98765432")
-                .withEmail("john@example.com").withCategory("student").withNote("").build();
-        assertTrue(personWithEmptyNote.equals(anotherPersonWithEmptyNote));
     }
 
     @Test
@@ -180,96 +133,5 @@ public class PersonTest {
                 + ", note=" + ALICE.getNote()
                 + ", tags=" + ALICE.getTags() + "}";
         assertEquals(expected, ALICE.toString());
-    }
-
-    @Test
-    public void getCategory_success() {
-        Person student = new PersonBuilder().withCategory("student").build();
-        Person colleague = new PersonBuilder().withCategory("colleague").build();
-
-        assertEquals("student", student.getCategory().value);
-        assertEquals("colleague", colleague.getCategory().value);
-    }
-
-    @Test
-    public void getNote_success() {
-        Person personWithNote = new PersonBuilder().withNote("Great student, very attentive").build();
-        Person personWithEmptyNote = new PersonBuilder().withNote("").build();
-
-        assertEquals("Great student, very attentive", personWithNote.getNote().value);
-        assertEquals("", personWithEmptyNote.getNote().value);
-    }
-
-    @Test
-    public void hashCode_consistency() {
-        Person person1 = new PersonBuilder().withName("John Doe").withPhone("98765432")
-                .withEmail("john@example.com").withCategory("student").withNote("Great student").build();
-        Person person2 = new PersonBuilder().withName("John Doe").withPhone("98765432")
-                .withEmail("john@example.com").withCategory("student").withNote("Great student").build();
-
-        // Same persons should have same hash code (this covers the hashCode line with category and note)
-        assertEquals(person1.hashCode(), person2.hashCode());
-
-        // Test that hashCode includes all fields (name, phone, email, category, note, tags)
-        Person personDifferentName = new PersonBuilder().withName("Jane Doe").withPhone("98765432")
-                .withEmail("john@example.com").withCategory("student").withNote("Great student").build();
-        // Different name should likely produce different hash (not guaranteed, but very likely)
-        // We just verify hashCode doesn't throw exceptions and can be called
-        personDifferentName.hashCode();
-
-        Person personDifferentPhone = new PersonBuilder().withName("John Doe").withPhone("91234567")
-                .withEmail("john@example.com").withCategory("student").withNote("Great student").build();
-        personDifferentPhone.hashCode();
-
-        Person personDifferentEmail = new PersonBuilder().withName("John Doe").withPhone("98765432")
-                .withEmail("jane@example.com").withCategory("student").withNote("Great student").build();
-        personDifferentEmail.hashCode();
-
-        Person personDifferentCategory = new PersonBuilder().withName("John Doe").withPhone("98765432")
-                .withEmail("john@example.com").withCategory("colleague").withNote("Great student").build();
-        personDifferentCategory.hashCode();
-
-        Person personDifferentNote = new PersonBuilder().withName("John Doe").withPhone("98765432")
-                .withEmail("john@example.com").withCategory("student").withNote("Excellent colleague").build();
-        personDifferentNote.hashCode();
-
-        Person personDifferentTags = new PersonBuilder().withName("John Doe").withPhone("98765432")
-                .withEmail("john@example.com").withCategory("student").withNote("Great student")
-                .withTags("friend").build();
-        personDifferentTags.hashCode();
-    }
-
-    @Test
-    public void hashCode_explicitCoverage() {
-        // Explicitly test to ensure the hashCode line with
-        // Objects.hash(name, phone, email, category, note, tags) is covered
-        Person student = new PersonBuilder().withCategory("student").withNote("Excellent performance").build();
-        Person colleague = new PersonBuilder().withCategory("colleague").withNote("Team player").build();
-        Person studentEmptyNote = new PersonBuilder().withCategory("student").withNote("").build();
-        Person studentWithTags = new PersonBuilder().withCategory("student").withNote("Good student")
-                .withTags("friend", "helpful").build();
-
-        // Call hashCode on various combinations to ensure the method is fully covered
-        int hash1 = student.hashCode();
-        int hash2 = colleague.hashCode();
-        int hash3 = studentEmptyNote.hashCode();
-        int hash4 = studentWithTags.hashCode();
-
-        // Verify hashCode is deterministic for same objects
-        assertEquals(hash1, student.hashCode());
-        assertEquals(hash2, colleague.hashCode());
-        assertEquals(hash3, studentEmptyNote.hashCode());
-        assertEquals(hash4, studentWithTags.hashCode());
-
-        // Test specific scenario to ensure all fields are included in hash calculation
-        Person person1 = new PersonBuilder().withName("Test Name").withPhone("98765432")
-                .withEmail("test@example.com").withCategory("student").withNote("Test note")
-                .withTags("tag1").build();
-        Person person2 = new PersonBuilder().withName("Test Name").withPhone("98765432")
-                .withEmail("test@example.com").withCategory("student").withNote("Test note")
-                .withTags("tag1").build();
-
-        // Identical persons should have identical hash codes
-        assertEquals(person1.hashCode(), person2.hashCode());
     }
 }

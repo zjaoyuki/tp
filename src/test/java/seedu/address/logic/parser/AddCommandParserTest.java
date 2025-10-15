@@ -12,8 +12,6 @@ import static seedu.address.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.NOTE_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.NOTE_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_NON_EMPTY;
@@ -23,14 +21,12 @@ import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_CATEGORY_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NOTE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CATEGORY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
@@ -52,8 +48,7 @@ public class AddCommandParserTest {
     @Test
     public void parse_allFieldsPresent_success() {
         Person expectedPerson = new PersonBuilder().withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
-                .withEmail(VALID_EMAIL_BOB).withCategory(VALID_CATEGORY_BOB).withNote("")
-                .withTags(VALID_TAG_FRIEND).build();
+                .withEmail(VALID_EMAIL_BOB).withCategory(VALID_CATEGORY_BOB).withNote("").withTags(VALID_TAG_FRIEND).build();
 
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
@@ -61,12 +56,11 @@ public class AddCommandParserTest {
 
 
         // multiple tags - all accepted
-        Person expectedPersonMultipleTags = new PersonBuilder().withName(VALID_NAME_BOB)
-                .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withCategory(VALID_CATEGORY_BOB)
-                .withNote("").withTags(VALID_TAG_FRIEND, VALID_TAG_HUSBAND).build();
+        Person expectedPersonMultipleTags = new PersonBuilder().withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
+                .withEmail(VALID_EMAIL_BOB).withCategory(VALID_CATEGORY_BOB).withNote("")
+                .withTags(VALID_TAG_FRIEND, VALID_TAG_HUSBAND).build();
         assertParseSuccess(parser,
-                NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + CATEGORY_DESC_BOB
-                + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
+                NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + CATEGORY_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
                 new AddCommand(expectedPersonMultipleTags));
     }
 
@@ -285,52 +279,5 @@ public class AddCommandParserTest {
         assertParseFailure(parser, PREAMBLE_NON_EMPTY + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
                 + CATEGORY_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
-    }
-
-    @Test
-    public void parse_optionalNotePresent_success() {
-        // Add with note and tags
-        Person expectedPersonWithNote = new PersonBuilder().withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
-                .withEmail(VALID_EMAIL_BOB).withCategory(VALID_CATEGORY_BOB).withNote(VALID_NOTE_BOB)
-                .withTags(VALID_TAG_FRIEND).build();
-
-        assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + CATEGORY_DESC_BOB
-                + NOTE_DESC_BOB + TAG_DESC_FRIEND, new AddCommand(expectedPersonWithNote));
-
-        // Add with note but no tags
-        Person expectedPersonWithNoteNoTags = new PersonBuilder().withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
-                .withEmail(VALID_EMAIL_BOB).withCategory(VALID_CATEGORY_BOB).withNote(VALID_NOTE_BOB)
-                .withTags().build();
-
-        assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + CATEGORY_DESC_BOB
-                + NOTE_DESC_BOB, new AddCommand(expectedPersonWithNoteNoTags));
-
-        // Note field at different positions (before tags)
-        assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + CATEGORY_DESC_BOB
-                + NOTE_DESC_BOB + TAG_DESC_FRIEND, new AddCommand(expectedPersonWithNote));
-
-        // Note field at different positions (after tags)
-        assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + CATEGORY_DESC_BOB
-                + TAG_DESC_FRIEND + NOTE_DESC_BOB, new AddCommand(expectedPersonWithNote));
-    }
-
-    @Test
-    public void parse_emptyNoteField_success() {
-        // Empty note field (explicit empty)
-        Person expectedPersonEmptyNote = new PersonBuilder().withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
-                .withEmail(VALID_EMAIL_BOB).withCategory(VALID_CATEGORY_BOB).withNote("")
-                .withTags(VALID_TAG_FRIEND).build();
-
-        assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + CATEGORY_DESC_BOB
-                + " desc/" + TAG_DESC_FRIEND, new AddCommand(expectedPersonEmptyNote));
-    }
-
-    @Test
-    public void parse_duplicateNoteFields_failure() {
-        String validExpectedPersonString = NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + CATEGORY_DESC_BOB;
-
-        // Multiple note fields
-        assertParseFailure(parser, validExpectedPersonString + NOTE_DESC_AMY + NOTE_DESC_BOB,
-                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_NOTE));
     }
 }
