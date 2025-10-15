@@ -10,14 +10,13 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Name {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Names should only contain alphabetic characters, spaces, hyphens, and apostrophes, "
-            + "and it should not be blank";
+            "Names should only contain alphabetic characters, spaces, hyphens, and apostrophes, and it should not be blank";
 
     /*
      * The name must contain only letters, spaces, hyphens, and apostrophes.
      * It should not be empty after trimming.
      */
-    public static final String VALIDATION_REGEX = "^[\\p{L}\\s\\-']+$";
+    public static final String VALIDATION_REGEX = "^[a-zA-Z\\s\\-']+$";
 
     public final String fullName;
 
@@ -72,12 +71,12 @@ public class Name {
         }
 
         Name otherName = (Name) other;
-        return getNormalizedName().equals(otherName.getNormalizedName());
+        return fullName.equals(otherName.fullName);
     }
 
     @Override
     public int hashCode() {
-        return getNormalizedName().hashCode();
+        return fullName.hashCode();
     }
 
 }
