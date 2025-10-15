@@ -25,8 +25,12 @@ import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_CLASS_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NOTE_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
@@ -34,6 +38,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CLASS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
@@ -66,17 +71,21 @@ public class AddCommandParserTest {
 
 
         // multiple tags - all accepted
-        Person expectedPersonMultipleTags = new PersonBuilder().withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
-                .withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB).withClass(VALID_CLASS_BOB).withNote("").withTags(VALID_TAG_FRIEND, VALID_TAG_HUSBAND).build();
+        Person expectedPersonMultipleTags = new PersonBuilder().withName(VALID_NAME_BOB)
+                .withPhone(VALID_PHONE_BOB)
+                .withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB).withClass(VALID_CLASS_BOB)
+                .withNote("").withTags(VALID_TAG_FRIEND, VALID_TAG_HUSBAND).build();
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                + CLASS_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, new AddCommand(expectedPersonMultipleTags));
+                + CLASS_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
+                new AddCommand(expectedPersonMultipleTags));
     }
 
     @Test
     public void parse_nameNormalization_success() {
         // Multiple spaces in name should be normalized to single space
         Person expectedPerson = new PersonBuilder().withName("John Doe").withPhone(VALID_PHONE_BOB)
-                .withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB).withClass(VALID_CLASS_BOB).withNote("").build();
+                .withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB).withClass(VALID_CLASS_BOB)
+                .withNote("").build();
 
         assertParseSuccess(parser, " n/John    Doe " + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
                 + CLASS_DESC_BOB, new AddCommand(expectedPerson));
@@ -90,7 +99,8 @@ public class AddCommandParserTest {
     public void parse_phoneNormalization_success() {
         // Phone with spaces should be normalized
         Person expectedPerson = new PersonBuilder().withName(VALID_NAME_BOB).withPhone("98765432")
-                .withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB).withClass(VALID_CLASS_BOB).withNote("").build();
+                .withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB).withClass(VALID_CLASS_BOB)
+                .withNote("").build();
 
         assertParseSuccess(parser, NAME_DESC_BOB + " p/9876 5432" + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
                 + CLASS_DESC_BOB, new AddCommand(expectedPerson));
@@ -107,67 +117,77 @@ public class AddCommandParserTest {
     @Test
     public void parse_classNormalization_success() {
         // Mixed case class should be normalized to lowercase
-        Person expectedStudentPerson = new PersonBuilder().withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
-                .withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB).withClass("student").withNote("").build();
+        Person expectedStudentPerson = new PersonBuilder().withName(VALID_NAME_BOB)
+                .withPhone(VALID_PHONE_BOB)
+                .withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB).withClass("student")
+                .withNote("").build();
 
-        assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + " c/Student",
-                new AddCommand(expectedStudentPerson));
+        assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
+                + " c/Student", new AddCommand(expectedStudentPerson));
 
-        assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + " c/STUDENT",
-                new AddCommand(expectedStudentPerson));
+        assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
+                + " c/STUDENT", new AddCommand(expectedStudentPerson));
 
-        Person expectedColleaguePerson = new PersonBuilder().withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
-                .withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB).withClass("colleague").withNote("").build();
+        Person expectedColleaguePerson = new PersonBuilder().withName(VALID_NAME_BOB)
+                .withPhone(VALID_PHONE_BOB)
+                .withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB).withClass("colleague")
+                .withNote("").build();
 
-        assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + " c/Colleague",
-                new AddCommand(expectedColleaguePerson));
+        assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
+                + " c/Colleague", new AddCommand(expectedColleaguePerson));
 
-        assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + " c/COLLEAGUE",
-                new AddCommand(expectedColleaguePerson));
+        assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
+                + " c/COLLEAGUE", new AddCommand(expectedColleaguePerson));
     }
 
     @Test
     public void parse_emailNormalization_success() {
         // Mixed case email should be normalized to lowercase
         Person expectedPerson = new PersonBuilder().withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
-                .withEmail("john.doe@gmail.com").withAddress(VALID_ADDRESS_BOB).withClass(VALID_CLASS_BOB).withNote("").build();
+                .withEmail("john.doe@gmail.com").withAddress(VALID_ADDRESS_BOB).withClass(VALID_CLASS_BOB)
+                .withNote("").build();
 
-        assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + " e/John.Doe@Gmail.Com" + ADDRESS_DESC_BOB
-                + CLASS_DESC_BOB, new AddCommand(expectedPerson));
+        assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + " e/John.Doe@Gmail.Com"
+                + ADDRESS_DESC_BOB + CLASS_DESC_BOB, new AddCommand(expectedPerson));
     }
 
     @Test
     public void parse_validNameFormats_success() {
         // Names with hyphens
         Person expectedPerson = new PersonBuilder().withName("Mary-Jane").withPhone(VALID_PHONE_BOB)
-                .withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB).withClass(VALID_CLASS_BOB).withNote("").build();
+                .withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB).withClass(VALID_CLASS_BOB)
+                .withNote("").build();
         assertParseSuccess(parser, " n/Mary-Jane" + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
                 + CLASS_DESC_BOB, new AddCommand(expectedPerson));
 
         // Names with apostrophes
         expectedPerson = new PersonBuilder().withName("O'Connor").withPhone(VALID_PHONE_BOB)
-                .withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB).withClass(VALID_CLASS_BOB).withNote("").build();
+                .withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB).withClass(VALID_CLASS_BOB)
+                .withNote("").build();
         assertParseSuccess(parser, " n/O'Connor" + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
                 + CLASS_DESC_BOB, new AddCommand(expectedPerson));
 
         // Names with multiple words, hyphens, and apostrophes
         expectedPerson = new PersonBuilder().withName("Mary-Jane O'Connor Smith").withPhone(VALID_PHONE_BOB)
-                .withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB).withClass(VALID_CLASS_BOB).withNote("").build();
-        assertParseSuccess(parser, " n/Mary-Jane O'Connor Smith" + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                + CLASS_DESC_BOB, new AddCommand(expectedPerson));
+                .withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB).withClass(VALID_CLASS_BOB)
+                .withNote("").build();
+        assertParseSuccess(parser, " n/Mary-Jane O'Connor Smith" + PHONE_DESC_BOB + EMAIL_DESC_BOB
+                + ADDRESS_DESC_BOB + CLASS_DESC_BOB, new AddCommand(expectedPerson));
     }
 
     @Test
     public void parse_validPhoneNumbers_success() {
         // Phone starting with 8
         Person expectedPerson = new PersonBuilder().withName(VALID_NAME_BOB).withPhone("81234567")
-                .withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB).withClass(VALID_CLASS_BOB).withNote("").build();
+                .withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB).withClass(VALID_CLASS_BOB)
+                .withNote("").build();
         assertParseSuccess(parser, NAME_DESC_BOB + " p/81234567" + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
                 + CLASS_DESC_BOB, new AddCommand(expectedPerson));
 
         // Phone starting with 9
         expectedPerson = new PersonBuilder().withName(VALID_NAME_BOB).withPhone("91234567")
-                .withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB).withClass(VALID_CLASS_BOB).withNote("").build();
+                .withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB).withClass(VALID_CLASS_BOB)
+                .withNote("").build();
         assertParseSuccess(parser, NAME_DESC_BOB + " p/91234567" + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
                 + CLASS_DESC_BOB, new AddCommand(expectedPerson));
     }
@@ -201,7 +221,8 @@ public class AddCommandParserTest {
         assertParseFailure(parser,
                 validExpectedPersonString + PHONE_DESC_AMY + EMAIL_DESC_AMY + NAME_DESC_AMY + ADDRESS_DESC_AMY
                         + CLASS_DESC_AMY,
-                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_NAME, PREFIX_ADDRESS, PREFIX_EMAIL, PREFIX_PHONE, PREFIX_CLASS));
+                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_NAME, PREFIX_ADDRESS, PREFIX_EMAIL,
+                        PREFIX_PHONE, PREFIX_CLASS));
 
         // invalid value followed by valid value
 
@@ -252,7 +273,8 @@ public class AddCommandParserTest {
     public void parse_optionalFieldsMissing_success() {
         // zero tags
         Person expectedPerson = new PersonBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
-                .withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_BOB).withClass(VALID_CLASS_BOB).withNote("").build();
+                .withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_BOB).withClass(VALID_CLASS_BOB)
+                .withNote("").build();
         assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_BOB
                         + CLASS_DESC_BOB,
                 new AddCommand(expectedPerson));
@@ -263,28 +285,28 @@ public class AddCommandParserTest {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
 
         // missing name prefix
-        assertParseFailure(parser, VALID_NAME_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + CLASS_DESC_BOB,
-                expectedMessage);
+        assertParseFailure(parser, VALID_NAME_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
+                + CLASS_DESC_BOB, expectedMessage);
 
         // missing phone prefix
-        assertParseFailure(parser, NAME_DESC_BOB + VALID_PHONE_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + CLASS_DESC_BOB,
-                expectedMessage);
+        assertParseFailure(parser, NAME_DESC_BOB + VALID_PHONE_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
+                + CLASS_DESC_BOB, expectedMessage);
 
         // missing email prefix
-        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + VALID_EMAIL_BOB + ADDRESS_DESC_BOB + CLASS_DESC_BOB,
-                expectedMessage);
+        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + VALID_EMAIL_BOB + ADDRESS_DESC_BOB
+                + CLASS_DESC_BOB, expectedMessage);
 
         // missing address prefix
-        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + VALID_ADDRESS_BOB + CLASS_DESC_BOB,
-                expectedMessage);
+        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + VALID_ADDRESS_BOB
+                + CLASS_DESC_BOB, expectedMessage);
 
         // missing class prefix
-        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + VALID_CLASS_BOB,
-                expectedMessage);
+        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
+                + VALID_CLASS_BOB, expectedMessage);
 
         // all prefixes missing
-        assertParseFailure(parser, VALID_NAME_BOB + VALID_PHONE_BOB + VALID_EMAIL_BOB + VALID_ADDRESS_BOB + VALID_CLASS_BOB,
-                expectedMessage);
+        assertParseFailure(parser, VALID_NAME_BOB + VALID_PHONE_BOB + VALID_EMAIL_BOB + VALID_ADDRESS_BOB
+                + VALID_CLASS_BOB, expectedMessage);
     }
 
     @Test
@@ -314,8 +336,8 @@ public class AddCommandParserTest {
                 + INVALID_TAG_DESC + VALID_TAG_FRIEND, Tag.MESSAGE_CONSTRAINTS);
 
         // two invalid values, only first invalid value reported
-        assertParseFailure(parser, INVALID_NAME_DESC + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + INVALID_CLASS_DESC,
-                Name.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, INVALID_NAME_DESC + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
+                + INVALID_CLASS_DESC, Name.MESSAGE_CONSTRAINTS);
 
         // non-empty preamble
         assertParseFailure(parser, PREAMBLE_NON_EMPTY + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
@@ -327,15 +349,16 @@ public class AddCommandParserTest {
     public void parse_optionalNotePresent_success() {
         // Add with note and tags
         Person expectedPersonWithNote = new PersonBuilder().withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
-                .withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB).withClass(VALID_CLASS_BOB).withNote(VALID_NOTE_BOB)
-                .withTags(VALID_TAG_FRIEND).build();
+                .withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB).withClass(VALID_CLASS_BOB)
+                .withNote(VALID_NOTE_BOB).withTags(VALID_TAG_FRIEND).build();
 
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
                 + CLASS_DESC_BOB + NOTE_DESC_BOB + TAG_DESC_FRIEND, new AddCommand(expectedPersonWithNote));
 
         // Add with note but no tags
-        Person expectedPersonWithNoteNoTags = new PersonBuilder().withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
-                .withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB).withClass(VALID_CLASS_BOB).withNote(VALID_NOTE_BOB).withTags().build();
+        Person expectedPersonWithNoteNoTags = new PersonBuilder().withName(VALID_NAME_BOB)
+                .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
+                .withClass(VALID_CLASS_BOB).withNote(VALID_NOTE_BOB).withTags().build();
 
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
                 + CLASS_DESC_BOB + NOTE_DESC_BOB, new AddCommand(expectedPersonWithNoteNoTags));
@@ -353,7 +376,8 @@ public class AddCommandParserTest {
     public void parse_emptyNoteField_success() {
         // Empty note field (explicit empty)
         Person expectedPersonEmptyNote = new PersonBuilder().withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
-                .withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB).withClass(VALID_CLASS_BOB).withNote("").withTags(VALID_TAG_FRIEND).build();
+                .withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB).withClass(VALID_CLASS_BOB)
+                .withNote("").withTags(VALID_TAG_FRIEND).build();
 
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
                 + CLASS_DESC_BOB + " desc/" + TAG_DESC_FRIEND, new AddCommand(expectedPersonEmptyNote));

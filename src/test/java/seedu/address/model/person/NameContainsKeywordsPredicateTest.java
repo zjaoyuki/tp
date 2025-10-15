@@ -15,6 +15,13 @@ import seedu.address.testutil.PersonBuilder;
 
 public class NameContainsKeywordsPredicateTest {
 
+    /**
+     * Parses {@code userInput} into a {@code NameContainsKeywordsPredicate}.
+     */
+    private NameContainsKeywordsPredicate preparePredicate(String userInput) {
+        return new NameContainsKeywordsPredicate(Arrays.asList(userInput.split("\\s+")));
+    }
+
     @Test
     public void equals() {
         List<String> firstPredicateKeywordList = Collections.singletonList("first");

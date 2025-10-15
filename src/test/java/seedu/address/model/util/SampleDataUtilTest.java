@@ -58,8 +58,8 @@ public class SampleDataUtilTest {
                 .count();
 
         // Verify that we have a good distribution of classes
-        assertTrue(class1ACount > 0 || class2BCount > 0 || class3CCount > 0 ||
-                   class4DCount > 0 || class5ACount > 0 || class6BCount > 0);
+        assertTrue(class1ACount > 0 || class2BCount > 0 || class3CCount > 0
+                || class4DCount > 0 || class5ACount > 0 || class6BCount > 0);
     }
 
     @Test
@@ -70,24 +70,27 @@ public class SampleDataUtilTest {
         for (int i = 0; i < samplePersons.length; i++) {
             Person person = samplePersons[i];
             switch (i) {
-                case 0:
-                    assertEquals("1A", person.getStudentClass().value);
-                    break;
-                case 1:
-                    assertEquals("2B", person.getStudentClass().value);
-                    break;
-                case 2:
-                    assertEquals("3C", person.getStudentClass().value);
-                    break;
-                case 3:
-                    assertEquals("4D", person.getStudentClass().value);
-                    break;
-                case 4:
-                    assertEquals("5A", person.getStudentClass().value);
-                    break;
-                case 5:
-                    assertEquals("6B", person.getStudentClass().value);
-                    break;
+            case 0:
+                assertEquals("1A", person.getStudentClass().value);
+                break;
+            case 1:
+                assertEquals("2B", person.getStudentClass().value);
+                break;
+            case 2:
+                assertEquals("3C", person.getStudentClass().value);
+                break;
+            case 3:
+                assertEquals("4D", person.getStudentClass().value);
+                break;
+            case 4:
+                assertEquals("5A", person.getStudentClass().value);
+                break;
+            case 5:
+                assertEquals("6B", person.getStudentClass().value);
+                break;
+            default:
+                // Additional sample persons beyond the expected 6
+                break;
             }
         }
     }
