@@ -28,7 +28,7 @@ class JsonAdaptedPerson {
     private final String name;
     private final String phone;
     private final String email;
-    private final String category;
+    private final String address;
     private final String note;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
 
@@ -39,13 +39,13 @@ class JsonAdaptedPerson {
     public JsonAdaptedPerson(@JsonProperty("name") String name,
                              @JsonProperty("phone") String phone,
                              @JsonProperty("email") String email,
-                             @JsonProperty("category") String category,
+                             @JsonProperty("address") String address,
                              @JsonProperty("note") String note,
                              @JsonProperty("tags") List<JsonAdaptedTag> tags) {
         this.name = name;
         this.phone = phone;
         this.email = email;
-        this.category = category;
+        this.address = address;
         this.note = note;
         if (tags != null) {
             this.tags.addAll(tags);
@@ -59,7 +59,7 @@ class JsonAdaptedPerson {
         name = source.getName().fullName;
         phone = source.getPhone().value;
         email = source.getEmail().value;
-        category = source.getCategory().value;
+        address = source.getCategory().value;
         note = source.getNote().value;
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
@@ -107,15 +107,15 @@ class JsonAdaptedPerson {
         }
         final Email modelEmail = new Email(email);
 
-        if (category == null) {
+        if (address == null) {
             throw new IllegalValueException(
                     String.format(MISSING_FIELD_MESSAGE_FORMAT, Category.class.getSimpleName())
             );
         }
-        if (!Category.isValidCategory(category)) {
+        if (!Category.isValidCategory(address)) {
             throw new IllegalValueException(Category.MESSAGE_CONSTRAINTS);
         }
-        final Category modelCategory = new Category(category);
+        final Category modelAddress = new Category(address);
 
         if (note == null) {
             throw new IllegalValueException(
@@ -130,7 +130,7 @@ class JsonAdaptedPerson {
         final Note modelNote = new Note(note);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelPhone, modelEmail, modelCategory, modelNote, modelTags);
+        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelNote, modelTags);
     }
 
 }

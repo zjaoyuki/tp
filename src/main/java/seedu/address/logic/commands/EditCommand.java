@@ -140,7 +140,6 @@ public class EditCommand extends Command {
         private Email email;
         private Category category;
         private Set<Tag> tags;
-        private Note note;
 
         public EditPersonDescriptor() {}
 
@@ -154,7 +153,6 @@ public class EditCommand extends Command {
             setEmail(toCopy.email);
             setCategory(toCopy.category);
             setTags(toCopy.tags);
-            setNote(toCopy.note);
         }
 
         /**
@@ -194,20 +192,6 @@ public class EditCommand extends Command {
 
         public Optional<Category> getCategory() {
             return Optional.ofNullable(category);
-        }
-
-        /**
-         * Sets {@code note} to this object's {@code note}.
-         */
-        public void setNote(Note note) {
-            this.note = note;
-        }
-
-        /**
-         * Returns an Optional containing the note, or Optional.empty() if note is null.
-         */
-        public Optional<Note> getNote() {
-            return Optional.ofNullable(note);
         }
 
         /**
