@@ -52,6 +52,14 @@ public class ViewCommandTest {
         assertCommandSuccess(viewCommand, model, expectedMessage, expectedModel);
     }
 
+    private void assertCommandSuccess(ViewCommand command, Model actualModel,
+                                      String expectedMessage, Model expectedModel) {
+        CommandResult expectedCommandResult = new CommandResult(expectedMessage,
+                false, true, false, expectedModel.getSelectedPerson());
+
+        CommandTestUtil.assertCommandSuccess(command, actualModel, expectedCommandResult, expectedModel);
+    }
+
     @Test
     public void execute_invalidIndexUnfilteredList_failure() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
@@ -65,7 +73,6 @@ public class ViewCommandTest {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
         Index outOfBoundIndex = INDEX_SECOND_PERSON;
 
-        // ensures that outOfBoundIndex is still in bounds of address book list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getPersonList().size());
 
         ViewCommand viewCommand = new ViewCommand(outOfBoundIndex);

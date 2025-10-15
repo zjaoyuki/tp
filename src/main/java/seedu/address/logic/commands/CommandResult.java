@@ -49,7 +49,7 @@ public class CommandResult {
      * Constructs a {@code CommandResult} with a person to show.
      */
     public CommandResult(String feedbackToUser, Person personToView) {
-        this(feedbackToUser, false, false, false, personToView);
+        this(feedbackToUser, false, true, false, personToView);
     }
 
     public boolean isShowPerson() {
@@ -91,12 +91,13 @@ public class CommandResult {
         return feedbackToUser.equals(otherCommandResult.feedbackToUser)
                 && showHelp == otherCommandResult.showHelp
                 && showView == otherCommandResult.showView
-                && exit == otherCommandResult.exit;
+                && exit == otherCommandResult.exit
+                && personToView == otherCommandResult.personToView;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(feedbackToUser, showHelp, showView, exit);
+        return Objects.hash(feedbackToUser, showHelp, showView, exit, personToView);
     }
 
     @Override
