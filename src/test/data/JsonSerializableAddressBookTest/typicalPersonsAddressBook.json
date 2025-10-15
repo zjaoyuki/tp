@@ -20,7 +20,7 @@
     "email" : "heinz@example.com",
     "address" : "wall street",
     "note": "",
-    "tags" : [ ]
+    "tags" : [ "colleague" ]
   }, {
     "name" : "Daniel Meier",
     "phone" : "87652533",
@@ -34,7 +34,7 @@
     "email" : "werner@example.com",
     "address" : "michegan ave",
     "note": "",
-    "tags" : [ ]
+    "tags" : [ "student" ]
   }, {
     "name" : "Fiona Kunz",
     "phone" : "9482427",
