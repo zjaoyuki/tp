@@ -7,14 +7,54 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.model.person.Person;
+import seedu.address.testutil.PersonBuilder;
+
 public class CommandResultTest {
+
+    @Test
+    public void constructor_withPersonToView_setsFieldsCorrectly() {
+        Person person = new PersonBuilder().build();
+        CommandResult result = new CommandResult("test", person);
+
+        assertEquals("test", result.getFeedbackToUser());
+        assertEquals(person, result.getPersonToView());
+        assertTrue(result.isShowPerson());
+        assertFalse(result.isShowHelp());
+        assertFalse(result.isExit());
+    }
+
+    @Test
+    public void isShowPerson() {
+        // With person -> returns true
+        Person person = new PersonBuilder().build();
+        CommandResult withPerson = new CommandResult("test", person);
+        assertTrue(withPerson.isShowPerson());
+
+        // Without person -> returns false
+        CommandResult withoutPerson = new CommandResult("test");
+        assertFalse(withoutPerson.isShowPerson());
+
+        // With null person -> returns false
+        CommandResult withNullPerson = new CommandResult("test", null);
+        assertFalse(withNullPerson.isShowPerson());
+    }
+
+    @Test
+    public void getPersonToShow() {
+        Person person = new PersonBuilder().build();
+        CommandResult result = new CommandResult("test", person);
+
+        assertEquals(person, result.getPersonToView());
+    }
+
     @Test
     public void equals() {
         CommandResult commandResult = new CommandResult("feedback");
 
         // same values -> returns true
         assertTrue(commandResult.equals(new CommandResult("feedback")));
-        assertTrue(commandResult.equals(new CommandResult("feedback", false, false)));
+        assertTrue(commandResult.equals(new CommandResult("feedback", false, false, null)));
 
         // same object -> returns true
         assertTrue(commandResult.equals(commandResult));
@@ -29,10 +69,10 @@ public class CommandResultTest {
         assertFalse(commandResult.equals(new CommandResult("different")));
 
         // different showHelp value -> returns false
-        assertFalse(commandResult.equals(new CommandResult("feedback", true, false)));
+        assertFalse(commandResult.equals(new CommandResult("feedback", true, false, null)));
 
         // different exit value -> returns false
-        assertFalse(commandResult.equals(new CommandResult("feedback", false, true)));
+        assertFalse(commandResult.equals(new CommandResult("feedback", false, true, null)));
     }
 
     @Test
@@ -46,10 +86,10 @@ public class CommandResultTest {
         assertNotEquals(commandResult.hashCode(), new CommandResult("different").hashCode());
 
         // different showHelp value -> returns different hashcode
-        assertNotEquals(commandResult.hashCode(), new CommandResult("feedback", true, false).hashCode());
+        assertNotEquals(commandResult.hashCode(), new CommandResult("feedback", true, false, null).hashCode());
 
         // different exit value -> returns different hashcode
-        assertNotEquals(commandResult.hashCode(), new CommandResult("feedback", false, true).hashCode());
+        assertNotEquals(commandResult.hashCode(), new CommandResult("feedback", false, true, null).hashCode());
     }
 
     @Test
@@ -57,7 +97,7 @@ public class CommandResultTest {
         CommandResult commandResult = new CommandResult("feedback");
         String expected = CommandResult.class.getCanonicalName() + "{feedbackToUser="
                 + commandResult.getFeedbackToUser() + ", showHelp=" + commandResult.isShowHelp()
-                + ", exit=" + commandResult.isExit() + "}";
+                + ", exit=" + commandResult.isExit() + ", personToView=" + commandResult.getPersonToView() + "}";
         assertEquals(expected, commandResult.toString());
     }
 }

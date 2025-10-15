@@ -56,7 +56,8 @@ public class ViewCommand extends Command {
         return new CommandResult(
                 String.format(MESSAGE_SUCCESS, Messages.format(personToView)),
                 false,
-                false);
+                false,
+                personToView);
     }
 
     @Override
