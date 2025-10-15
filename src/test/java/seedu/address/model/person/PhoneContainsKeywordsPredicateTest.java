@@ -3,6 +3,7 @@ package seedu.address.model.person;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -65,12 +66,18 @@ public class PhoneContainsKeywordsPredicateTest {
 
         // Non-matching keyword
         predicate = new PhoneContainsKeywordsPredicate(Arrays.asList("95357710"));
-        assertFalse(predicate.test(new PersonBuilder().withPhone("22222222").build()));
+        assertFalse(predicate.test(new PersonBuilder().withPhone("92222222").build()));
 
-        // Keywords match name, email and address, but does not match phone
-        predicate = new PhoneContainsKeywordsPredicate(Arrays.asList("Alice", "alice@email.com", "Main", "Street"));
-        assertFalse(predicate.test(new PersonBuilder().withName("Alice").withPhone("12345678")
-                .withEmail("alice@email.com").withAddress("Main Street").build()));
+        // Wrong Keywords matching name, email instead of phone
+        try {
+            predicate = new PhoneContainsKeywordsPredicate(Arrays.asList("Alice", "alice@email.com"));
+            assertFalse(predicate.test(new PersonBuilder().withName("Alice").withPhone("12345678")
+                    .withEmail("alice@email.com").build()));
+            fail();
+        } catch (Exception e) {
+            assertEquals("Phone numbers must be 8-digit Singapore numbers"
+                    + " (spaces and dashes are ignored)", e.getMessage());
+        }
     }
 
     @Test
