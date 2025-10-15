@@ -1,4 +1,4 @@
 coverage:
   ignore:
-    - "ui/**"
-    - "legacy_ui/**"
+    - "src/main/java/seedu/address/ui/**"
+    - "src/main/java/seedu/address/legacy_ui/**"
