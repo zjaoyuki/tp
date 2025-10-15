@@ -25,9 +25,9 @@ LittleLogBook is a **desktop app for managing contacts, optimized for use via a 
 1. **Open and navigate to your jar file using command terminal:**
    
    **What is `cd`?** `cd` stands for "change directory" - it's a command that lets you navigate to different folders on your computer through the command line.
-   
+
    **Step-by-step instructions:**
-   
+
    **For Windows users:**
    - Press `Windows key + R`, type `cmd`, and press Enter to open Command Prompt
    - Type `cd` followed by a space, then the full path to your jar file folder
@@ -129,12 +129,11 @@ Format: `delete n/NAME`
 
 **Parameters & Validation Rules:**
 - **Name (n/):** Same rules as Add. Case-insensitive match.
-- If multiple matches: error pop-up listing matches. User must specify full name.
 
 Examples:
 * `delete n/John Doe`
 
-**Outputs:**  
+**Outputs:**
 - Success: List updates, message: `<CATEGORY> deleted`
 - Failure: 
   - No match → `No contact found with name John Doe`
@@ -146,7 +145,7 @@ Purpose: Show full information of a contact (including notes, attendance).
 
 Format: `view n/NAME`
 
-**Parameters & Validation Rules:**  
+**Parameters & Validation Rules:**
 - Name-based search, same validation as Delete.
 
 Examples:
@@ -165,7 +164,7 @@ Purpose: Allows teachers to find contacts quickly with partial names.
 
 Format: `search KEYWORD`
 
-**Parameters & Validation Rules:**  
+**Parameters & Validation Rules:**
 - **Keyword:** Alphanumeric string, case-insensitive, matches partial names. Error if empty string.
 
 Examples:
@@ -182,7 +181,7 @@ Purpose: Store additional info (student progress, allergies, parent instructions
 
 Format: `note n/NAME t/NOTE_TEXT`
 
-**Parameters & Validation Rules:**  
+**Parameters & Validation Rules:**
 - **Name (n/):** Same validation as above.
 - **Note text (t/):** Any UTF-8 text, up to 500 chars. Leading/trailing spaces trimmed. Error if empty.
 

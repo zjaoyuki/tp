@@ -83,7 +83,7 @@ public class ClassTest {
         assertTrue(Class.isValidClass("6B"));
         assertTrue(Class.isValidClass("6C"));
         assertTrue(Class.isValidClass("6D"));
-        
+
         // valid classes with different cases
         assertTrue(Class.isValidClass("1a"));
         assertTrue(Class.isValidClass("2b"));
