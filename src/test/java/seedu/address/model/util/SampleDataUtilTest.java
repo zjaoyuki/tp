@@ -37,29 +37,29 @@ public class SampleDataUtilTest {
         Person[] samplePersons = SampleDataUtil.getSamplePersons();
         List<Person> personList = Arrays.asList(samplePersons);
 
-        // Count persons by class
-        long class1ACount = personList.stream()
-                .filter(person -> "1A".equals(person.getStudentClass().value))
+        // Count persons by kindergarten class
+        long classK1ACount = personList.stream()
+                .filter(person -> "K1A".equals(person.getStudentClass().value))
                 .count();
-        long class2BCount = personList.stream()
-                .filter(person -> "2B".equals(person.getStudentClass().value))
+        long classK1BCount = personList.stream()
+                .filter(person -> "K1B".equals(person.getStudentClass().value))
                 .count();
-        long class3CCount = personList.stream()
-                .filter(person -> "3C".equals(person.getStudentClass().value))
+        long classK1CCount = personList.stream()
+                .filter(person -> "K1C".equals(person.getStudentClass().value))
                 .count();
-        long class4DCount = personList.stream()
-                .filter(person -> "4D".equals(person.getStudentClass().value))
+        long classK2ACount = personList.stream()
+                .filter(person -> "K2A".equals(person.getStudentClass().value))
                 .count();
-        long class5ACount = personList.stream()
-                .filter(person -> "5A".equals(person.getStudentClass().value))
+        long classK2BCount = personList.stream()
+                .filter(person -> "K2B".equals(person.getStudentClass().value))
                 .count();
-        long class6BCount = personList.stream()
-                .filter(person -> "6B".equals(person.getStudentClass().value))
+        long classK2CCount = personList.stream()
+                .filter(person -> "K2C".equals(person.getStudentClass().value))
                 .count();
 
-        // Verify that we have a good distribution of classes
-        assertTrue(class1ACount > 0 || class2BCount > 0 || class3CCount > 0
-                || class4DCount > 0 || class5ACount > 0 || class6BCount > 0);
+        // Verify that we have a good distribution of kindergarten classes
+        assertTrue(classK1ACount > 0 || classK1BCount > 0 || classK1CCount > 0
+                || classK2ACount > 0 || classK2BCount > 0 || classK2CCount > 0);
     }
 
     @Test
@@ -71,22 +71,22 @@ public class SampleDataUtilTest {
             Person person = samplePersons[i];
             switch (i) {
             case 0:
-                assertEquals("1A", person.getStudentClass().value);
+                assertEquals("K1A", person.getStudentClass().value);
                 break;
             case 1:
-                assertEquals("2B", person.getStudentClass().value);
+                assertEquals("K1B", person.getStudentClass().value);
                 break;
             case 2:
-                assertEquals("3C", person.getStudentClass().value);
+                assertEquals("K1C", person.getStudentClass().value);
                 break;
             case 3:
-                assertEquals("4D", person.getStudentClass().value);
+                assertEquals("K2A", person.getStudentClass().value);
                 break;
             case 4:
-                assertEquals("5A", person.getStudentClass().value);
+                assertEquals("K2B", person.getStudentClass().value);
                 break;
             case 5:
-                assertEquals("6B", person.getStudentClass().value);
+                assertEquals("K2C", person.getStudentClass().value);
                 break;
             default:
                 // Additional sample persons beyond the expected 6

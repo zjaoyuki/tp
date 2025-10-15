@@ -3,7 +3,8 @@
     "name": "Hans Muster",
     "phone": "94824249",
     "email": "invalid@email!3e",
-    "category": "student",
+    "address": "123, Main Street",
+    "studentClass": "K1A",
     "note": "",
     "tags": [ ]
   } ]

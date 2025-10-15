@@ -47,7 +47,7 @@ public class AddCommandTest {
     @Test
     public void execute_studentClass_correctSuccessMessage() throws Exception {
         ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
-        Person studentPerson = new PersonBuilder().withClass("1A").build();
+        Person studentPerson = new PersonBuilder().withClass("K1A").build();
 
         CommandResult commandResult = new AddCommand(studentPerson).execute(modelStub);
 
@@ -59,13 +59,13 @@ public class AddCommandTest {
     @Test
     public void execute_differentClassFormats_correctSuccessMessage() throws Exception {
         ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
-        Person person6D = new PersonBuilder().withClass("6D").build();
+        Person personK2C = new PersonBuilder().withClass("K2C").build();
 
-        CommandResult commandResult = new AddCommand(person6D).execute(modelStub);
+        CommandResult commandResult = new AddCommand(personK2C).execute(modelStub);
 
-        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, Messages.format(person6D)),
+        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, Messages.format(personK2C)),
                 commandResult.getFeedbackToUser());
-        assertEquals(Arrays.asList(person6D), modelStub.personsAdded);
+        assertEquals(Arrays.asList(personK2C), modelStub.personsAdded);
     }
 
     @Test
@@ -189,7 +189,7 @@ public class AddCommandTest {
     @Test
     public void execute_studentWithNote_correctSuccessMessage() throws Exception {
         ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
-        Person studentWithNote = new PersonBuilder().withClass("2A")
+        Person studentWithNote = new PersonBuilder().withClass("K2A")
                 .withNote("Prefers morning classes").build();
 
         CommandResult commandResult = new AddCommand(studentWithNote).execute(modelStub);
@@ -202,7 +202,7 @@ public class AddCommandTest {
     @Test
     public void execute_seniorStudentWithNote_correctSuccessMessage() throws Exception {
         ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
-        Person seniorStudentWithNote = new PersonBuilder().withClass("6C")
+        Person seniorStudentWithNote = new PersonBuilder().withClass("Nursery")
                 .withNote("Team lead for mobile app development").build();
 
         CommandResult commandResult = new AddCommand(seniorStudentWithNote).execute(modelStub);

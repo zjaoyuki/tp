@@ -34,8 +34,8 @@ public class CommandTestUtil {
     public static final String VALID_PHONE_BOB = "82222222";
     public static final String VALID_EMAIL_AMY = "amy@example.com";
     public static final String VALID_EMAIL_BOB = "bob@example.com";
-    public static final String VALID_CLASS_AMY = "2A";
-    public static final String VALID_CLASS_BOB = "3B";
+    public static final String VALID_CLASS_AMY = "K1A";
+    public static final String VALID_CLASS_BOB = "K2B";
     public static final String VALID_NOTE_AMY = "She is allergic to peanut.";
     public static final String VALID_NOTE_BOB = "He is allergic to chocolate!";
     public static final String VALID_TAG_HUSBAND = "husband";
@@ -62,10 +62,9 @@ public class CommandTestUtil {
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
     public static final String INVALID_CLASS_DESC = " " + PREFIX_CLASS
-            + "7E"; // '7E' not valid class
+            + "K1A1"; // 'K1A1' invalid kindergarten class format (extra character)
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
-    public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS
-            + "123, Jurong West Ave 6, #08-111*"; // '*' not allowed in addresses
+    public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty address not allowed
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";

@@ -11,10 +11,9 @@ public class Class {
 
     public static final String MESSAGE_CONSTRAINTS =
             "Class must be one of the following (case-insensitive): "
-            + "1A, 1B, 1C, 1D, 2A, 2B, 2C, 2D, 3A, 3B, 3C, 3D, "
-            + "4A, 4B, 4C, 4D, 5A, 5B, 5C, 5D, 6A, 6B, 6C, 6D";
+            + "Nursery, Pre-K, K1A, K1B, K1C, K2A, K2B, K2C";
 
-    public static final String VALIDATION_REGEX = "^(?i)[1-6][A-D]$";
+    public static final String VALIDATION_REGEX = "^(?i)(Nursery|Pre-K|K[12][A-C])$";
 
     public final String value;
 

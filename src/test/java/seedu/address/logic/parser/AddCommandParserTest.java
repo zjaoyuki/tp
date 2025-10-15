@@ -116,28 +116,39 @@ public class AddCommandParserTest {
 
     @Test
     public void parse_classNormalization_success() {
-        // Mixed case class should be normalized to lowercase
-        Person expectedStudentPerson = new PersonBuilder().withName(VALID_NAME_BOB)
+        // Mixed case class should be normalized to uppercase
+        Person expectedNurseryPerson = new PersonBuilder().withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB)
-                .withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB).withClass("student")
+                .withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB).withClass("NURSERY")
                 .withNote("").build();
 
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                + " c/Student", new AddCommand(expectedStudentPerson));
+                + " c/Nursery", new AddCommand(expectedNurseryPerson));
 
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                + " c/STUDENT", new AddCommand(expectedStudentPerson));
+                + " c/nursery", new AddCommand(expectedNurseryPerson));
 
-        Person expectedColleaguePerson = new PersonBuilder().withName(VALID_NAME_BOB)
+        Person expectedK1APerson = new PersonBuilder().withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB)
-                .withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB).withClass("colleague")
+                .withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB).withClass("K1A")
                 .withNote("").build();
 
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                + " c/Colleague", new AddCommand(expectedColleaguePerson));
+                + " c/K1A", new AddCommand(expectedK1APerson));
 
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                + " c/COLLEAGUE", new AddCommand(expectedColleaguePerson));
+                + " c/k1a", new AddCommand(expectedK1APerson));
+
+        Person expectedK2CPerson = new PersonBuilder().withName(VALID_NAME_BOB)
+                .withPhone(VALID_PHONE_BOB)
+                .withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB).withClass("K2C")
+                .withNote("").build();
+
+        assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
+                + " c/K2C", new AddCommand(expectedK2CPerson));
+
+        assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
+                + " c/k2c", new AddCommand(expectedK2CPerson));
     }
 
     @Test

@@ -23,24 +23,24 @@ public class ClassTest {
     @Test
     public void constructor_classNormalization_success() {
         // Mixed case should be normalized to uppercase
-        Class studentClass = new Class("1a");
-        assertEquals("1A", studentClass.value);
+        Class studentClass = new Class("k1a");
+        assertEquals("K1A", studentClass.value);
 
-        studentClass = new Class("2b");
-        assertEquals("2B", studentClass.value);
+        studentClass = new Class("k2b");
+        assertEquals("K2B", studentClass.value);
 
-        studentClass = new Class("3C");
-        assertEquals("3C", studentClass.value);
+        studentClass = new Class("nursery");
+        assertEquals("NURSERY", studentClass.value);
 
-        studentClass = new Class("6d");
-        assertEquals("6D", studentClass.value);
+        studentClass = new Class("pre-k");
+        assertEquals("PRE-K", studentClass.value);
 
         // Leading and trailing spaces should be trimmed
-        studentClass = new Class("  1A  ");
-        assertEquals("1A", studentClass.value);
+        studentClass = new Class("  K1A  ");
+        assertEquals("K1A", studentClass.value);
 
-        studentClass = new Class("  6d  ");
-        assertEquals("6D", studentClass.value);
+        studentClass = new Class("  nursery  ");
+        assertEquals("NURSERY", studentClass.value);
     }
 
     @Test
@@ -51,51 +51,39 @@ public class ClassTest {
         // invalid classes
         assertFalse(Class.isValidClass("")); // empty string
         assertFalse(Class.isValidClass(" ")); // spaces only
-        assertFalse(Class.isValidClass("7A")); // invalid grade (7)
-        assertFalse(Class.isValidClass("0A")); // invalid grade (0)
-        assertFalse(Class.isValidClass("1E")); // invalid section (E)
-        assertFalse(Class.isValidClass("1a1")); // extra character
+        assertFalse(Class.isValidClass("K3A")); // invalid kindergarten level (K3)
+        assertFalse(Class.isValidClass("K0A")); // invalid kindergarten level (K0)
+        assertFalse(Class.isValidClass("K1D")); // invalid section (D)
+        assertFalse(Class.isValidClass("K1A1")); // extra character
         assertFalse(Class.isValidClass("teacher")); // word instead of class format
-        assertFalse(Class.isValidClass("class1A")); // extra prefix
+        assertFalse(Class.isValidClass("1A")); // old primary school format
+        assertFalse(Class.isValidClass("Grade1")); // invalid format
+        assertFalse(Class.isValidClass("Reception")); // removed class type
+        assertFalse(Class.isValidClass("Foundation")); // removed class type
 
-        // valid classes
-        assertTrue(Class.isValidClass("1A"));
-        assertTrue(Class.isValidClass("1B"));
-        assertTrue(Class.isValidClass("1C"));
-        assertTrue(Class.isValidClass("1D"));
-        assertTrue(Class.isValidClass("2A"));
-        assertTrue(Class.isValidClass("2B"));
-        assertTrue(Class.isValidClass("2C"));
-        assertTrue(Class.isValidClass("2D"));
-        assertTrue(Class.isValidClass("3A"));
-        assertTrue(Class.isValidClass("3B"));
-        assertTrue(Class.isValidClass("3C"));
-        assertTrue(Class.isValidClass("3D"));
-        assertTrue(Class.isValidClass("4A"));
-        assertTrue(Class.isValidClass("4B"));
-        assertTrue(Class.isValidClass("4C"));
-        assertTrue(Class.isValidClass("4D"));
-        assertTrue(Class.isValidClass("5A"));
-        assertTrue(Class.isValidClass("5B"));
-        assertTrue(Class.isValidClass("5C"));
-        assertTrue(Class.isValidClass("5D"));
-        assertTrue(Class.isValidClass("6A"));
-        assertTrue(Class.isValidClass("6B"));
-        assertTrue(Class.isValidClass("6C"));
-        assertTrue(Class.isValidClass("6D"));
+        // valid kindergarten classes
+        assertTrue(Class.isValidClass("Nursery"));
+        assertTrue(Class.isValidClass("Pre-K"));
+        assertTrue(Class.isValidClass("K1A"));
+        assertTrue(Class.isValidClass("K1B"));
+        assertTrue(Class.isValidClass("K1C"));
+        assertTrue(Class.isValidClass("K2A"));
+        assertTrue(Class.isValidClass("K2B"));
+        assertTrue(Class.isValidClass("K2C"));
 
-        // valid classes with different cases
-        assertTrue(Class.isValidClass("1a"));
-        assertTrue(Class.isValidClass("2b"));
-        assertTrue(Class.isValidClass("6d"));
+        // case insensitive
+        assertTrue(Class.isValidClass("nursery"));
+        assertTrue(Class.isValidClass("PRE-K"));
+        assertTrue(Class.isValidClass("k1a"));
+        assertTrue(Class.isValidClass("K2c"));
     }
 
     @Test
     public void equals() {
-        Class studentClass = new Class("1A");
+        Class studentClass = new Class("K1A");
 
         // same values -> returns true
-        assertTrue(studentClass.equals(new Class("1A")));
+        assertTrue(studentClass.equals(new Class("K1A")));
 
         // same object -> returns true
         assertTrue(studentClass.equals(studentClass));
@@ -107,19 +95,19 @@ public class ClassTest {
         assertFalse(studentClass.equals(5.0f));
 
         // different values -> returns false
-        assertFalse(studentClass.equals(new Class("2B")));
+        assertFalse(studentClass.equals(new Class("K2B")));
     }
 
     @Test
     public void hashCode_sameClass_sameHashCode() {
-        Class class1 = new Class("1A");
-        Class class2 = new Class("1A");
+        Class class1 = new Class("K1A");
+        Class class2 = new Class("K1A");
         assertEquals(class1.hashCode(), class2.hashCode());
     }
 
     @Test
     public void toString_validClass_returnsCorrectString() {
-        Class studentClass = new Class("3C");
-        assertEquals("3C", studentClass.toString());
+        Class studentClass = new Class("K2C");
+        assertEquals("K2C", studentClass.toString());
     }
 }
