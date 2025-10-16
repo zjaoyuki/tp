@@ -61,7 +61,11 @@ LittleLogBook is a **desktop app for managing contacts, optimized for use via a 
 
    * `view n/John Doe` : Shows full details of the contact named `John Doe`.
 
-   * `search John` : Searches for contacts with names containing `John`.
+   * `find-n John` : Searches for contacts with names containing `John`.
+   
+   * `find-p 8987` : Searches for contacts with phone number containing `8987`.
+
+   * `find-t student` : Searches for contacts labelled with tag `student`.
 
    * `exit` : Exits the app.
 
@@ -123,21 +127,32 @@ Examples:
 
 ### Deleting a contact: `delete`
 
-Purpose: Remove outdated or incorrect contacts.
+Purpose: Remove outdated or incorrect contacts from the list.
 
-Format: `delete n/NAME`
+Format: `delete n/NAME` or `delete INDEX`
 
 **Parameters & Validation Rules:**
 - **Name (n/):** Same rules as Add. Case-insensitive match.
+- **Index:** The index must be a positive integer 1, 2, 3,...
 
 Examples:
 * `delete n/John Doe`
+* `delete 3`
 
 **Outputs:**
-- Success: List updates, message: `<CATEGORY> deleted`
-- Failure:
-  - No match → `No contact found with name John Doe`
-  - Multiple matches → `Multiple contacts found. Use more details`
+
+Delete by INDEX 
+- Success:  List updates, message: `Deleted Person: [List all his information]`
+- Failure: Message: `Invalid command format!`
+
+Delete by NAME 
+- Success: Exact match: list updates, message: `Deleted Person: [List all his information]`
+- Failure: Triggers Pop up windows for further confirmation. 
+Possible matches and corresponding information will also be displayed in the name list.
+  - No match → Pop up window stating `No matches found. Press ESC to exit`
+  - Multiple matches → Pop up window stating `Multiple matches found. Type index and ENTER to delete or ESC to cancel`
+   
+
 
 ### Viewing contact details: `view`
 
@@ -170,21 +185,9 @@ Success:
   - Attendance (Coming soon)
 
 Failure:
-- View without the index → `Invalid command format` (will update to show index not given)
-- Out Of Bounds index → `Person index provided is invalid` (`view 0` might not detect this)
+- Invalid input for view → `Invalid command format`
+- Out Of Bounds index → `Person index provided is invalid`
 
-### Searching contacts: `search`
-
-Purpose: Allows teachers to find contacts quickly with partial names.
-
-Format: `search KEYWORD`
-
-**Parameters & Validation Rules:**
-- **Keyword:** Alphanumeric string, case-insensitive, matches partial names. Error if empty string.
-
-Examples:
-* `search John`
-* `search Tan`
 
 **Outputs:**
 - Success: List updates to show all matching contacts.
@@ -192,24 +195,97 @@ Examples:
 
 ### Adding/Editing notes: `note`
 
-Purpose: Store additional info (student progress, allergies, parent instructions).
+Purpose: Store additional info (student progress, allergies, parent instructions, etc.).
 
-Format: `note n/NAME t/NOTE_TEXT`
+Format: `note INDEX desc/NOTE_TEXT`
 
 **Parameters & Validation Rules:**
-- **Name (n/):** Same validation as above.
-- **Note text (t/):** Any UTF-8 text, up to 500 chars. Leading/trailing spaces trimmed. Error if empty.
+- **INDEX (required):** The index number of the contact shown in the displayed contact list.
+  - Must be a positive number (1, 2, 3, ...)
+  - Cannot be 0 or negative
+  - Must correspond to an existing contact in the current list
+- **Note text (desc/):** The additional info to be written. Remove current note if left empty.
+  - Accepts all letters, numbers, symbols, spaces
+  - Cannot be control characters (e.g. Tab, invisible commands, etc.)
+  - Up to 500 characters
+  - Leading/trailing spaces trimmed
 
 Examples:
-* `note n/John Doe t/Allergic to peanuts`
-* `note n/Mary Tan t/Improved in reading this week`
+* `note 1 desc/Allergic to peanuts`
+* `note 2 desc/Improved in reading this week`
 
 **Outputs:**
-- Success: Note added to contact, message: `<CATEGORY> DETAILS edited`
+- Success: Note added to contact, message: `Added note to Person: <Person>`
 - Failure:
-  - No match → `No contact found`
-  - Empty note → `Note text cannot be empty`
-  - Database save failure → `Unable to save note. Try again`
+  - No matching index→ `The person index provided is invalid`
+  - Empty note → `Removed note from Person: <Person>`
+
+### Finding contacts by name : `find-n`
+Purpose: Allows teachers to find contacts quickly with partial names(contiguous).
+
+Format: `find-n KEYWORD`
+
+**Parameters:**
+- **Keyword:** Alphanumeric string, case-insensitive, matches partial names. Error if empty string.
+
+Examples:
+* `find-n John ecka`
+* `find-n Tan`
+
+**Outputs:**
+- Success: The find-n results in matches: `<x> persons listed!`
+- Failure:
+    - No match → `0 persons listed!`
+    - Empty string → `Invalid command format!
+        find-n: Finds all persons whose names contain any of the specified keywords (case-insensitive) and 
+        displays them as a list with index numbers.
+        Parameters: KEYWORD [MORE_KEYWORDS]...
+        Example: find-n alice bob charlie`
+
+### Finding contacts by phone number : `find-p`
+Purpose: Allows teachers to find contacts quickly with partial number(contiguous).
+
+Format: `find-p KEYWORD`
+
+**Parameters:**
+- **Keyword:** numeric string, matches partial numbers. Error if empty string.
+
+Examples:
+* `find-p 8431 967`
+* `find-p 84313390`
+* `find-p 3133`
+
+**Outputs:**
+- Success: The find-p results in matches: `<x> persons listed!`
+- Failure:
+    - No match → `0 persons listed!`
+    - Empty string → `Invalid command format! 
+        find-p: Finds all persons whose phone number contain any of the specified keywords and displays them as 
+        a list with index numbers.
+        Parameters: KEYWORD [MORE_KEYWORDS]...
+        Example: find-p 84123578`  
+
+### Finding contacts by tags : `find-t`
+Purpose: Allows teachers to find contacts quickly with tags(contiguous).
+
+Format: `find-t KEYWORD`
+
+**Parameters:**
+- **Keyword:** alphanumeric string, matches partial tag. Error if empty string.
+
+Examples:
+* `find-t student`
+* `find-t stu colle`
+* `find-t ague`
+
+**Outputs:**
+- Success: The find-t results in matches: `<x> persons listed!`
+- Failure:
+    - No match → `0 persons listed!`
+    - Empty string → `Invalid command format! 
+        find-t: Finds all persons whose tag contain any of the specified keywords (case-insensitive) and displays them as a list with index numbers.
+        Parameters: KEYWORD [MORE_KEYWORDS]...
+        Example: find-t friend colleague`
 
 ### Listing all contacts : `list`
 
@@ -272,6 +348,11 @@ Action     | Format, Examples
 **Delete** | `delete n/NAME`<br>e.g., `delete n/John Doe`
 **View**   | `view INDEX`<br>e.g., `view 1`
 **Search** | `search KEYWORD`<br>e.g., `search John`
+**Delete** | `delete n/NAME`<br>e.g., `delete n/John Doe`<br>`delete n/INDEX`<br>e.g., `delete 1`
+**View**   | `view n/NAME`<br>e.g., `view n/John Doe`
+**Find-n** | `find-n KEYWORD`<br>e.g., `find-n John`
+**Find-p** | `find-p KEYWORD`<br>e.g., `find-p 84871234`
+**Find-t** | `find-t KEYWORD`<br>e.g., `find-t student`
 **Note**   | `note n/NAME t/NOTE_TEXT`<br>e.g., `note n/John Doe t/Allergic to peanuts`
 **List**   | `list`
 **Clear**  | `clear`
