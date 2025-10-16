@@ -34,13 +34,13 @@ public class TypicalPersons {
             .withNote("He can't take beer!").withTags("owesMoney", "friends").build();
     public static final Person CARL = new PersonBuilder().withName("Carl Kurz").withPhone("95352563")
             .withEmail("heinz@example.com").withAddress("wall street")
-            .withClass("K1C").withNote("").build();
+            .withClass("K1C").withNote("").withTags("colleague").build();
     public static final Person DANIEL = new PersonBuilder().withName("Daniel Meier").withPhone("87652533")
             .withEmail("cornelia@example.com").withAddress("10th street")
             .withClass("K2A").withNote("").withTags("friends").build();
     public static final Person ELLE = new PersonBuilder().withName("Elle Meyer").withPhone("94822240")
             .withEmail("werner@example.com").withAddress("michegan ave")
-            .withClass("K2B").withNote("").build();
+            .withClass("K2B").withNote("").withTags("student").build();
     public static final Person FIONA = new PersonBuilder().withName("Fiona Kunz").withPhone("94824270")
             .withEmail("lydia@example.com").withAddress("little tokyo")
             .withClass("K2C").withNote("").build();
