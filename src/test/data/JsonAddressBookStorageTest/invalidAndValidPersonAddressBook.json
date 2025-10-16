@@ -3,14 +3,16 @@
     "name": "Valid Person",
     "phone": "94824249",
     "email": "hans@example.com",
-    "category": "student",
+    "address": "123, Main Street",
+    "studentClass": "K1A",
     "note": "",
     "tags": [ ]
   }, {
     "name": "Person With Invalid Phone Field",
     "phone": "948asdf2424",
     "email": "hans@example.com",
-    "category": "colleague",
+    "address": "456, Second Street",
+    "studentClass": "K1B",
     "note": "",
     "tags": [ ]
   } ]

@@ -129,7 +129,6 @@ Format: `delete n/NAME`
 
 **Parameters & Validation Rules:**
 - **Name (n/):** Same rules as Add. Case-insensitive match.
-- If multiple matches: error pop-up listing matches. User must specify full name.
 
 Examples:
 * `delete n/John Doe`

@@ -21,14 +21,13 @@ public class LogsCenter {
     private static final int MAX_FILE_COUNT = 5;
     private static final int MAX_FILE_SIZE_IN_BYTES = (int) (Math.pow(2, 20) * 5); // 5MB
     private static final String LOG_FILE = "addressbook.log";
-    private static final Logger logger; // logger for this class
+    private static Logger logger; // logger for this class
     private static Logger baseLogger; // to be used as the parent of all other loggers created by this class.
     private static Level currentLogLevel = Level.INFO;
 
     // This static block ensures essential loggers are created early
     static {
         setBaseLogger();
-        logger = LogsCenter.getLogger(LogsCenter.class);
     }
 
     /**
@@ -37,7 +36,7 @@ public class LogsCenter {
      */
     public static void init(Config config) {
         currentLogLevel = config.getLogLevel();
-        logger.info("Log level will be set as: " + currentLogLevel);
+        getClassLogger().info("Log level will be set as: " + currentLogLevel);
         // set the level of the baseLogger which will be inherited by other loggers
         baseLogger.setLevel(currentLogLevel);
     }
@@ -98,9 +97,17 @@ public class LogsCenter {
             fileHandler.setLevel(Level.ALL);
             baseLogger.addHandler(fileHandler);
         } catch (IOException e) {
-            logger.warning("Error adding file handler for logger.");
+            getClassLogger().warning("Error adding file handler for logger.");
         }
     }
 
-
+    /**
+     * Gets the logger for this class, creating it if it doesn't exist.
+     */
+    private static Logger getClassLogger() {
+        if (logger == null) {
+            logger = LogsCenter.getLogger(LogsCenter.class);
+        }
+        return logger;
+    }
 }

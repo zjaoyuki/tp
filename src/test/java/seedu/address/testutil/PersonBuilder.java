@@ -3,7 +3,8 @@ package seedu.address.testutil;
 import java.util.HashSet;
 import java.util.Set;
 
-import seedu.address.model.person.Category;
+import seedu.address.model.person.Address;
+import seedu.address.model.person.Class;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Note;
@@ -20,13 +21,15 @@ public class PersonBuilder {
     public static final String DEFAULT_NAME = "Amy Bee";
     public static final String DEFAULT_PHONE = "81234567";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
-    public static final String DEFAULT_CATEGORY = "student";
+    public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
+    public static final String DEFAULT_CLASS = "K1A";
     public static final String DEFAULT_NOTE = "She is allergic to peanut.";
 
     private Name name;
     private Phone phone;
     private Email email;
-    private Category category;
+    private Address address;
+    private Class studentClass;
     private Note note;
     private Set<Tag> tags;
 
@@ -37,7 +40,8 @@ public class PersonBuilder {
         name = new Name(DEFAULT_NAME);
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
-        category = new Category(DEFAULT_CATEGORY);
+        address = new Address(DEFAULT_ADDRESS);
+        studentClass = new Class(DEFAULT_CLASS);
         note = new Note(DEFAULT_NOTE);
         tags = new HashSet<>();
     }
@@ -49,7 +53,8 @@ public class PersonBuilder {
         name = personToCopy.getName();
         phone = personToCopy.getPhone();
         email = personToCopy.getEmail();
-        category = personToCopy.getCategory();
+        address = personToCopy.getAddress();
+        studentClass = personToCopy.getStudentClass();
         note = personToCopy.getNote();
         tags = new HashSet<>(personToCopy.getTags());
     }
@@ -71,10 +76,10 @@ public class PersonBuilder {
     }
 
     /**
-     * Sets the {@code Category} of the {@code Person} that we are building.
+     * Sets the {@code Class} of the {@code Person} that we are building.
      */
-    public PersonBuilder withCategory(String category) {
-        this.category = new Category(category);
+    public PersonBuilder withClass(String studentClass) {
+        this.studentClass = new Class(studentClass);
         return this;
     }
 
@@ -95,6 +100,14 @@ public class PersonBuilder {
     }
 
     /**
+     * Sets the {@code Address} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withAddress(String address) {
+        this.address = new Address(address);
+        return this;
+    }
+
+    /**
      * Sets the {@code Note} of the {@code Person} that we are building.
      */
     public PersonBuilder withNote(String note) {
@@ -103,7 +116,7 @@ public class PersonBuilder {
     }
 
     public Person build() {
-        return new Person(name, phone, email, category, note, tags);
+        return new Person(name, phone, email, address, studentClass, note, tags);
     }
 
 }

@@ -15,6 +15,13 @@ import seedu.address.testutil.PersonBuilder;
 
 public class NameContainsKeywordsPredicateTest {
 
+    /**
+     * Parses {@code userInput} into a {@code NameContainsKeywordsPredicate}.
+     */
+    private NameContainsKeywordsPredicate preparePredicate(String userInput) {
+        return new NameContainsKeywordsPredicate(Arrays.asList(userInput.split("\\s+")));
+    }
+
     @Test
     public void equals() {
         List<String> firstPredicateKeywordList = Collections.singletonList("first");
@@ -57,6 +64,11 @@ public class NameContainsKeywordsPredicateTest {
         // Mixed-case keywords
         predicate = new NameContainsKeywordsPredicate(Arrays.asList("aLIce", "bOB"));
         assertTrue(predicate.test(new PersonBuilder().withName("Alice Bob").build()));
+
+        // EP: keywords match name, phone, and email
+        predicate = preparePredicate("91234567 alice@email.com Alice");
+        assertTrue(predicate.test(new PersonBuilder().withName("Alice").withPhone("91234567")
+                .withEmail("alice@email.com").withClass("K1A").build()));
     }
 
     @Test
@@ -72,7 +84,7 @@ public class NameContainsKeywordsPredicateTest {
         // Keywords match phone, email and category, but does not match name
         predicate = new NameContainsKeywordsPredicate(Arrays.asList("91234567", "alice@email.com", "Main", "Street"));
         assertFalse(predicate.test(new PersonBuilder().withName("Alice").withPhone("91234567")
-                .withEmail("alice@email.com").withCategory("student").build()));
+                .withEmail("alice@email.com").withClass("K2B").build()));
     }
 
     @Test

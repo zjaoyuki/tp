@@ -8,7 +8,8 @@ import java.util.Set;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.parser.Prefix;
-import seedu.address.model.person.Category;
+import seedu.address.model.person.Address;
+import seedu.address.model.person.Class;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Note;
@@ -67,11 +68,12 @@ public class MessagesTest {
         Name name = new Name("John Doe");
         Phone phone = new Phone("91234567"); // Valid Singapore phone number starting with 9
         Email email = new Email("john@example.com");
-        Category category = new Category("student");
+        Address address = new Address("123 Main Street");
+        Class studentClass = new Class("Nursery"); // Valid kindergarten class format
         Note note = new Note("Test note");
         Set<Tag> tags = Set.of(new Tag("friend"), new Tag("colleague"));
 
-        Person person = new Person(name, phone, email, category, note, tags);
+        Person person = new Person(name, phone, email, address, studentClass, note, tags);
 
         String result = Messages.format(person);
 
@@ -79,7 +81,7 @@ public class MessagesTest {
         assertTrue(result.contains("John Doe"));
         assertTrue(result.contains("Phone: 91234567"));
         assertTrue(result.contains("Email: john@example.com"));
-        assertTrue(result.contains("Category: student"));
+        assertTrue(result.contains("Class: NURSERY")); // Class values are stored in uppercase
         assertTrue(result.contains("Tags:"));
         assertTrue(result.contains("friend"));
         assertTrue(result.contains("colleague"));
@@ -91,11 +93,12 @@ public class MessagesTest {
         Name name = new Name("Jane Doe");
         Phone phone = new Phone("87654321"); // Valid Singapore phone number starting with 8
         Email email = new Email("jane@example.com");
-        Category category = new Category("colleague");
+        Address address = new Address("456 Oak Avenue");
+        Class studentClass = new Class("K1A"); // Valid kindergarten class format
         Note note = new Note("");
         Set<Tag> tags = Set.of(); // Empty set of tags
 
-        Person person = new Person(name, phone, email, category, note, tags);
+        Person person = new Person(name, phone, email, address, studentClass, note, tags);
 
         String result = Messages.format(person);
 
@@ -103,9 +106,9 @@ public class MessagesTest {
         assertTrue(result.contains("Jane Doe"));
         assertTrue(result.contains("Phone: 87654321"));
         assertTrue(result.contains("Email: jane@example.com"));
-        assertTrue(result.contains("Category: colleague"));
+        assertTrue(result.contains("Class: K1A"));
         assertTrue(result.contains("Tags:"));
-        // Should end with "Tags: " and nothing after
+        // Should end with "Tags: " and nothing after for empty tags
         assertTrue(result.endsWith("Tags: "));
     }
 

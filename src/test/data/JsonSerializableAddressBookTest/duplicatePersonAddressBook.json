@@ -3,14 +3,16 @@
     "name": "Alice Pauline",
     "phone": "94351253",
     "email": "alice@example.com",
-    "category": "student",
+    "address": "123, Jurong West Ave 6, #08-111",
+    "studentClass": "K1A",
     "note": "",
     "tags": [ "friends" ]
   }, {
     "name": "Alice Pauline",
     "phone": "94351253",
     "email": "pauline@example.com",
-    "category": "colleague",
+    "address": "456, Clementi Ave 3, #02-25",
+    "studentClass": "K1B",
     "note": "",
     "tags": [ ]
   } ]

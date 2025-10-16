@@ -159,12 +159,13 @@ public class LogicManagerTest {
         logic = new LogicManager(model, storage);
 
         // Use a simple add command that should parse successfully
-        String addCommand = "add n/Amy Bee p/81111111 e/amy@example.com c/student";
+        String addCommand = "add n/Amy Bee p/81111111 e/amy@example.com a/123 Main St c/K1A";
 
         // Create expected model with the person added (since the command succeeds in memory)
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         Person expectedPerson = new PersonBuilder().withName("Amy Bee").withPhone("81111111")
-                .withEmail("amy@example.com").withCategory("student").withNote("").withTags().build();
+                .withEmail("amy@example.com").withAddress("123 Main St").withClass("K1A")
+                .withNote("").withTags().build();
         expectedModel.addPerson(expectedPerson);
 
         assertCommandFailure(addCommand, CommandException.class, expectedMessage, expectedModel);
