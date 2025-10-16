@@ -172,26 +172,26 @@ Format: `view INDEX`
   - Must correspond to an existing contact in the current list
 
 Example:
-* `view 1` - Shows detailed information for the 1st contact in the current list
+* `view 1` - Shows detailed information for the 1st contact in the current list.
 
 **Outputs:**
+
 Success:
 - A popup window appears displaying:
-    - Full name
-    - Personal Information
-    - Tags (displayed as individual colored labels)
+  - Full name
+  - Personal Information
+    - Tags
     - Student class
   - Contact Information
-    - Phone number 
-    - Email address 
-    - Home address 
-  - Notes (in a scrollable text area)
+    - Phone number
+    - Email address
+    - Home address
+  - Notes (Scrollable text area)
   - Attendance (Coming soon)
 
-Attendance information
-- Failure:
-- - View without the index → `Invalid command format` (will update to show index not given)
-  - Out Of Bounds index → `Person index provided is invalid` (`view 0` might not detect this)
+Failure:
+- Invalid input for view → `Invalid command format`
+- Out Of Bounds index → `Person index provided is invalid`
 
 
 **Outputs:**
@@ -336,8 +336,11 @@ Furthermore, certain edits can cause LittleLogBook to behave in unexpected ways 
 
 Action     | Format, Examples
 -----------|-----------------------------------------------------------------------------------------------------------------------------------
-**Add**    | `add n/NAME p/PHONE e/EMAIL a/ADDRESS c/CLASS [desc/NOTE] [t/TAG]...`<br>e.g., `add n/John Doe p/98765432 e/john.doe@gmail.com a/Blk 456, Den Road, #01-355 c/K1A`
-**Delete** | `delete n/NAME`<br>e.g., `delete n/John Doe`<br>`delete INDEX`<br>e.g., `delete 1`
+**Add**    | `add n/NAME p/PHONE e/EMAIL c/CATEGORY`<br>e.g., `add n/John Doe p/98765432 e/john.doe@gmail.com c/student`
+**Delete** | `delete n/NAME`<br>e.g., `delete n/John Doe`
+**View**   | `view INDEX`<br>e.g., `view 1`
+**Search** | `search KEYWORD`<br>e.g., `search John`
+**Delete** | `delete n/NAME`<br>e.g., `delete n/John Doe`<br>`delete n/INDEX`<br>e.g., `delete 1`
 **View**   | `view INDEX`<br>e.g., `view 1`
 **Find-n** | `find-n KEYWORD`<br>e.g., `find-n John`
 **Find-p** | `find-p KEYWORD`<br>e.g., `find-p 84871234`
