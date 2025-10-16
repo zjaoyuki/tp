@@ -278,7 +278,7 @@ _Details coming soon ..._
 Action     | Format, Examples
 -----------|-----------------------------------------------------------------------------------------------------------------------------------
 **Add**    | `add n/NAME p/PHONE e/EMAIL c/CATEGORY`<br>e.g., `add n/John Doe p/98765432 e/john.doe@gmail.com c/student`
-**Delete** | `delete n/NAME`<br>e.g., `delete n/John Doe`
+**Delete** | `delete n/NAME`<br>e.g., `delete n/John Doe`<br>`delete n/INDEX`<br>e.g., `delete 1`
 **View**   | `view n/NAME`<br>e.g., `view n/John Doe`
 **Search** | `search KEYWORD`<br>e.g., `search John`
 **Note**   | `note n/NAME t/NOTE_TEXT`<br>e.g., `note n/John Doe t/Allergic to peanuts`
