@@ -127,21 +127,32 @@ Examples:
 
 ### Deleting a contact: `delete`
 
-Purpose: Remove outdated or incorrect contacts.
+Purpose: Remove outdated or incorrect contacts from the list.
 
-Format: `delete n/NAME`
+Format: `delete n/NAME` or `delete INDEX`
 
 **Parameters & Validation Rules:**
 - **Name (n/):** Same rules as Add. Case-insensitive match.
+- **Index:** The index must be a positive integer 1, 2, 3,...
 
 Examples:
 * `delete n/John Doe`
+* `delete 3`
 
 **Outputs:**
-- Success: List updates, message: `<CATEGORY> deleted`
-- Failure:
-  - No match → `No contact found with name John Doe`
-  - Multiple matches → `Multiple contacts found. Use more details`
+
+Delete by INDEX 
+- Success:  List updates, message: `Deleted Person: [List all his information]`
+- Failure: Message: `Invalid command format!`
+
+Delete by NAME 
+- Success: Exact match: list updates, message: `Deleted Person: [List all his information]`
+- Failure: Triggers Pop up windows for further confirmation. 
+Possible matches and corresponding information will also be displayed in the name list.
+  - No match → Pop up window stating `No matches found. Press ESC to exit`
+  - Multiple matches → Pop up window stating `Multiple matches found. Type index and ENTER to delete or ESC to cancel`
+   
+
 
 ### Viewing contact details: `view`
 
@@ -334,7 +345,7 @@ _Details coming soon ..._
 Action     | Format, Examples
 -----------|-----------------------------------------------------------------------------------------------------------------------------------
 **Add**    | `add n/NAME p/PHONE e/EMAIL c/CATEGORY`<br>e.g., `add n/John Doe p/98765432 e/john.doe@gmail.com c/student`
-**Delete** | `delete n/NAME`<br>e.g., `delete n/John Doe`
+**Delete** | `delete n/NAME`<br>e.g., `delete n/John Doe`<br>`delete n/INDEX`<br>e.g., `delete 1`
 **View**   | `view n/NAME`<br>e.g., `view n/John Doe`
 **Find-n** | `find-n KEYWORD`<br>e.g., `find-n John`
 **Find-p** | `find-p KEYWORD`<br>e.g., `find-p 84871234`
