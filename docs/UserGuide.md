@@ -56,6 +56,8 @@ LittleLogBook is a **desktop app for managing contacts, optimized for use via a 
    Some example commands you can try:
 
    * `add n/John Doe p/98765432 e/john.doe@gmail.com a/Blk 456, Den Road, #01-355 c/K1A` : Adds a contact named `John Doe` with category `student` to LittleLogBook.
+   
+   * `note 1 desc/Allergic to peanut` : Add the not "Allergic to peanut" to contact at index 1. 
 
    * `delete n/John Doe` : Deletes the contact named `John Doe`.
 
@@ -136,7 +138,7 @@ Format: `delete n/NAME` or `delete INDEX`
 
 **Parameters & Validation Rules:**
 - **Name (n/):** Same rules as Add. Case-insensitive match.
-- **Index:** The index must be a positive integer 1, 2, 3,...
+- **Index:** The index must be a positive integer (1, 2, 3,...)
 
 Examples:
 * `delete n/John Doe`
@@ -145,11 +147,11 @@ Examples:
 **Outputs:**
 
 Delete by INDEX 
-- Success:  List updates, message: `Deleted Person: [List all his information]`
+- Success:  List updates, message: `Deleted Person: <Person>`
 - Failure: Message: `Invalid command format!`
 
 Delete by NAME 
-- Success: Exact match: list updates, message: `Deleted Person: [List all his information]`
+- Success: Exact match: list updates, message: `Deleted Person: <Person>`
 - Failure: Triggers Pop up windows for further confirmation. 
 Possible matches and corresponding information will also be displayed in the name list.
   - No match → Pop up window stating `No matches found. Press ESC to exit`
@@ -200,14 +202,14 @@ Attendance information
 
 Purpose: Store additional info (student progress, allergies, parent instructions, etc.).
 
-Format: `note INDEX desc/NOTE_TEXT`
+Format: `note INDEX desc/NOTE_TEXT` or `note INDEX` (Remove note)
 
 **Parameters & Validation Rules:**
 - **INDEX (required):** The index number of the contact shown in the displayed contact list.
   - Must be a positive number (1, 2, 3, ...)
   - Cannot be 0 or negative
   - Must correspond to an existing contact in the current list
-- **Note text (desc/):** The additional info to be written. Remove current note if left empty.
+- **Note text (desc/):** The note to be written. Remove current note if omitted or left empty.
   - Accepts all letters, numbers, symbols, spaces
   - Cannot be control characters (e.g. Tab, invisible commands, etc.)
   - Up to 500 characters
@@ -215,13 +217,15 @@ Format: `note INDEX desc/NOTE_TEXT`
 
 Examples:
 * `note 1 desc/Allergic to peanuts`
-* `note 2 desc/Improved in reading this week`
+* `note 1`
 
 **Outputs:**
-- Success: Note added to contact, message: `Added note to Person: <Person>`
-- Failure:
-  - No matching index→ `The person index provided is invalid`
+- Success:
+  - Note added to contact, message: `Added note to Person: <Person>`
   - Empty note → `Removed note from Person: <Person>`
+- Failure:
+  - No matching index → `The person index provided is invalid`
+  - No index provided → `Invalid command format!` (And inform user of correct command format)
 
 ### Finding contacts by name : `find-n`
 Purpose: Allows teachers to find contacts quickly with partial names(contiguous).
@@ -239,11 +243,7 @@ Examples:
 - Success: The find-n results in matches: `<x> persons listed!`
 - Failure:
     - No match → `0 persons listed!`
-    - Empty string → `Invalid command format!
-        find-n: Finds all persons whose names contain any of the specified keywords (case-insensitive) and 
-        displays them as a list with index numbers.
-        Parameters: KEYWORD [MORE_KEYWORDS]...
-        Example: find-n alice bob charlie`
+    - Empty string → `Invalid command format!` (And inform user of correct command format)
 
 ### Finding contacts by phone number : `find-p`
 Purpose: Allows teachers to find contacts quickly with partial number(contiguous).
@@ -262,11 +262,7 @@ Examples:
 - Success: The find-p results in matches: `<x> persons listed!`
 - Failure:
     - No match → `0 persons listed!`
-    - Empty string → `Invalid command format! 
-        find-p: Finds all persons whose phone number contain any of the specified keywords and displays them as 
-        a list with index numbers.
-        Parameters: KEYWORD [MORE_KEYWORDS]...
-        Example: find-p 84123578`  
+    - Empty string → `Invalid command format!` (And inform user of correct command format)
 
 ### Finding contacts by tags : `find-t`
 Purpose: Allows teachers to find contacts quickly with tags(contiguous).
@@ -285,10 +281,7 @@ Examples:
 - Success: The find-t results in matches: `<x> persons listed!`
 - Failure:
     - No match → `0 persons listed!`
-    - Empty string → `Invalid command format! 
-        find-t: Finds all persons whose tag contain any of the specified keywords (case-insensitive) and displays them as a list with index numbers.
-        Parameters: KEYWORD [MORE_KEYWORDS]...
-        Example: find-t friend colleague`
+    - Empty string → `Invalid command format!` (And inform user of correct command format)
 
 ### Listing all contacts : `list`
 
@@ -323,10 +316,6 @@ If your changes to the data file makes its format invalid, LittleLogBook will di
 Furthermore, certain edits can cause LittleLogBook to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
 
-### Archiving data files `[coming in v2.0]`
-
-_Details coming soon ..._
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
@@ -353,7 +342,7 @@ Action     | Format, Examples
 **Find-n** | `find-n KEYWORD`<br>e.g., `find-n John`
 **Find-p** | `find-p KEYWORD`<br>e.g., `find-p 84871234`
 **Find-t** | `find-t KEYWORD`<br>e.g., `find-t student`
-**Note**   | `note INDEX desc/NOTE_TEXT`<br>e.g., `note 1 desc/Allergic to peanuts`
+**Note**   | `note INDEX desc/NOTE_TEXT`<br>e.g., `note 1 desc/Allergic to peanuts` <br> `note INDEX` <br>e.g., `note 1`
 **List**   | `list`
 **Clear**  | `clear`
 **Help**   | `help`
