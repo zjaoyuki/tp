@@ -19,13 +19,13 @@
     "phone" : "95352563",
     "email" : "heinz@example.com",
     "category" : "student",
-    "note": "",
-    "tags" : [ ]
+    "note": "She is allergic to peanut.",
+    "tags" : [ "colleague" ]
   }, {
     "name" : "Daniel Meier",
     "phone" : "87652533",
     "email" : "cornelia@example.com",
-    "category" : "colleague",
+    "category" : "student",
     "note": "",
     "tags" : [ "friends" ]
   }, {
@@ -34,17 +34,17 @@
     "email" : "werner@example.com",
     "category" : "student",
     "note": "",
-    "tags" : [ ]
+    "tags" : [ "student" ]
   }, {
     "name" : "Fiona Kunz",
-    "phone" : "94824278",
+    "phone" : "94824276",
     "email" : "lydia@example.com",
-    "category" : "colleague",
+    "category" : "student",
     "note": "",
     "tags" : [ ]
   }, {
     "name" : "George Best",
-    "phone" : "94824429",
+    "phone" : "94824427",
     "email" : "anna@example.com",
     "category" : "student",
     "note": "",
