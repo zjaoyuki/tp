@@ -99,9 +99,8 @@ public class ViewWindow extends UiPart<Stage> {
         nameLabel.setText(person.getName().fullName);
         phoneLabel.setText(person.getPhone().value);
         emailLabel.setText(person.getEmail().value);
-        classLabel.setText("Class coming soon.");
-        addressLabel.setText(person.getCategory().value + (person.getNote().value.isEmpty()
-                ? "" : " - " + person.getNote().value));
+        addressLabel.setText(person.getAddress().value);
+        classLabel.setText(person.getStudentClass().value);
 
         // Format tags
         if (person.getTags() != null && !person.getTags().isEmpty()) {
@@ -135,6 +134,7 @@ public class ViewWindow extends UiPart<Stage> {
         phoneLabel.setText("");
         emailLabel.setText("");
         addressLabel.setText("");
+        classLabel.setText("");
         tagsLabel.setText("");
         notesArea.setText("");
         attendanceLabel.setText("");

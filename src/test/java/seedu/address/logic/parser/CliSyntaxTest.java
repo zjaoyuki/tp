@@ -14,7 +14,7 @@ public class CliSyntaxTest {
         assertEquals("p/", CliSyntax.PREFIX_PHONE.getPrefix());
         assertEquals("e/", CliSyntax.PREFIX_EMAIL.getPrefix());
         assertEquals("a/", CliSyntax.PREFIX_ADDRESS.getPrefix());
-        assertEquals("c/", CliSyntax.PREFIX_CATEGORY.getPrefix());
+        assertEquals("c/", CliSyntax.PREFIX_CLASS.getPrefix());
         assertEquals("t/", CliSyntax.PREFIX_TAG.getPrefix());
         assertEquals("desc/", CliSyntax.PREFIX_NOTE.getPrefix());
     }
@@ -26,7 +26,7 @@ public class CliSyntaxTest {
         assertNotNull(CliSyntax.PREFIX_PHONE);
         assertNotNull(CliSyntax.PREFIX_EMAIL);
         assertNotNull(CliSyntax.PREFIX_ADDRESS);
-        assertNotNull(CliSyntax.PREFIX_CATEGORY);
+        assertNotNull(CliSyntax.PREFIX_CLASS);
         assertNotNull(CliSyntax.PREFIX_TAG);
         assertNotNull(CliSyntax.PREFIX_NOTE);
     }
@@ -38,7 +38,7 @@ public class CliSyntaxTest {
         assertEquals("p/", CliSyntax.PREFIX_PHONE.toString());
         assertEquals("e/", CliSyntax.PREFIX_EMAIL.toString());
         assertEquals("a/", CliSyntax.PREFIX_ADDRESS.toString());
-        assertEquals("c/", CliSyntax.PREFIX_CATEGORY.toString());
+        assertEquals("c/", CliSyntax.PREFIX_CLASS.toString());
         assertEquals("t/", CliSyntax.PREFIX_TAG.toString());
         assertEquals("desc/", CliSyntax.PREFIX_NOTE.toString());
     }
@@ -51,7 +51,7 @@ public class CliSyntaxTest {
             CliSyntax.PREFIX_PHONE.toString(),
             CliSyntax.PREFIX_EMAIL.toString(),
             CliSyntax.PREFIX_ADDRESS.toString(),
-            CliSyntax.PREFIX_CATEGORY.toString(),
+            CliSyntax.PREFIX_CLASS.toString(),
             CliSyntax.PREFIX_TAG.toString(),
             CliSyntax.PREFIX_NOTE.toString()
         };

@@ -9,7 +9,8 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Category;
+import seedu.address.model.person.Address;
+import seedu.address.model.person.Class;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Note;
@@ -82,6 +83,21 @@ public class ParserUtil {
     }
 
     /**
+     * Parses a {@code String address} into an {@code Address}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code address} is invalid.
+     */
+    public static Address parseAddress(String address) throws ParseException {
+        requireNonNull(address);
+        String trimmedAddress = address.trim();
+        if (!Address.isValidAddress(trimmedAddress)) {
+            throw new ParseException(Address.MESSAGE_CONSTRAINTS);
+        }
+        return new Address(trimmedAddress);
+    }
+
+    /**
      * Parses a {@code String Note} into an {@code Note}.
      * Leading and trailing whitespaces will be trimmed.
      *
@@ -89,11 +105,11 @@ public class ParserUtil {
      */
     public static Note parseNote(String note) throws ParseException {
         requireNonNull(note);
-        String trimmedEmail = note.trim();
-        if (!Note.isValidNote(trimmedEmail)) {
-            throw new ParseException(Email.MESSAGE_CONSTRAINTS);
+        String trimmedNote = note.trim();
+        if (!Note.isValidNote(trimmedNote)) {
+            throw new ParseException(Note.MESSAGE_CONSTRAINTS);
         }
-        return new Note(trimmedEmail);
+        return new Note(trimmedNote);
     }
 
     /**
@@ -124,17 +140,17 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String category} into a {@code Category}.
+     * Parses a {@code String studentClass} into a {@code Class}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code category} is invalid.
+     * @throws ParseException if the given {@code studentClass} is invalid.
      */
-    public static Category parseCategory(String category) throws ParseException {
-        requireNonNull(category);
-        String trimmedCategory = category.trim();
-        if (!Category.isValidCategory(trimmedCategory)) {
-            throw new ParseException(Category.MESSAGE_CONSTRAINTS);
+    public static Class parseClass(String studentClass) throws ParseException {
+        requireNonNull(studentClass);
+        String trimmedClass = studentClass.trim();
+        if (!Class.isValidClass(trimmedClass)) {
+            throw new ParseException(Class.MESSAGE_CONSTRAINTS);
         }
-        return new Category(trimmedCategory);
+        return new Class(trimmedClass);
     }
 }

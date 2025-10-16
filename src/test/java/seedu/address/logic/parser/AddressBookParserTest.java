@@ -45,13 +45,14 @@ public class AddressBookParserTest {
                 .withName("Amy Bee")
                 .withPhone("81234567")
                 .withEmail("amy@example.com")
-                .withCategory("student")
+                .withAddress("123, Jurong West Ave 6, #08-111")
+                .withClass("K1B")
                 .withNote("")
                 .withTags()
                 .build();
 
         // Construct command string directly to avoid PersonUtil issues
-        String commandString = "add n/Amy Bee p/81234567 e/amy@example.com c/student";
+        String commandString = "add n/Amy Bee p/81234567 e/amy@example.com a/123, Jurong West Ave 6, #08-111 c/K1B";
 
         AddCommand command = (AddCommand) parser.parseCommand(commandString);
         assertEquals(new AddCommand(expectedPerson), command);
