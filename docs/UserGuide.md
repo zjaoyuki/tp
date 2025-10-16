@@ -152,21 +152,21 @@ Format: `view INDEX`
   - Must correspond to an existing contact in the current list
 
 Example:
-* `view 1` - Shows detailed information for the 1st contact in the current list
+* `view 1` - Shows detailed information for the 1st contact in the current list.
 
 **Outputs:**
 
 Success:
 - A popup window appears displaying:
-    - Full name
-    - Personal Information
-    - Tags (displayed as individual colored labels)
+  - Full name
+  - Personal Information
+    - Tags
     - Student class
   - Contact Information
     - Phone number
     - Email address
     - Home address
-  - Notes (in a scrollable text area)
+  - Notes (Scrollable text area)
   - Attendance (Coming soon)
 
 Failure:
@@ -270,7 +270,7 @@ Action     | Format, Examples
 -----------|-----------------------------------------------------------------------------------------------------------------------------------
 **Add**    | `add n/NAME p/PHONE e/EMAIL c/CATEGORY`<br>e.g., `add n/John Doe p/98765432 e/john.doe@gmail.com c/student`
 **Delete** | `delete n/NAME`<br>e.g., `delete n/John Doe`
-**View**   | `view n/NAME`<br>e.g., `view n/John Doe`
+**View**   | `view INDEX`<br>e.g., `view 1`
 **Search** | `search KEYWORD`<br>e.g., `search John`
 **Note**   | `note n/NAME t/NOTE_TEXT`<br>e.g., `note n/John Doe t/Allergic to peanuts`
 **List**   | `list`
