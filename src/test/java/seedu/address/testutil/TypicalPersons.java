@@ -38,10 +38,10 @@ public class TypicalPersons {
     public static final Person DANIEL = new PersonBuilder().withName("Daniel Meier").withPhone("87652533")
             .withEmail("cornelia@example.com").withNote("").withTags("friends").build();
     public static final Person ELLE = new PersonBuilder().withName("Elle Meyer").withPhone("94822245")
-            .withEmail("werner@example.com").withCategory("student").withNote("").build();
-    public static final Person FIONA = new PersonBuilder().withName("Fiona Kunz").withPhone("94824278")
-            .withEmail("lydia@example.com").withCategory("colleague").withNote("").build();
-    public static final Person GEORGE = new PersonBuilder().withName("George Best").withPhone("94824429")
+            .withEmail("werner@example.com").withTags("student").withNote("").build();
+    public static final Person FIONA = new PersonBuilder().withName("Fiona Kunz").withPhone("94824276")
+            .withEmail("lydia@example.com").withCategory("student").withNote("").build();
+    public static final Person GEORGE = new PersonBuilder().withName("George Best").withPhone("94824427")
             .withEmail("anna@example.com").withCategory("student").withNote("").build();
     public static final Person GEORGE_DUPLICATE = new PersonBuilder().withName("George Best").withPhone("94824888")
             .withEmail("annaa@example.com").withCategory("student").withNote("").build();
