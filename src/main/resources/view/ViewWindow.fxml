@@ -32,6 +32,24 @@
 
                 <Separator/>
 
+                <!-- Personal Information Section -->
+                <VBox spacing="8">
+                    <Label text="Personal Information"
+                           style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #34495e;"/>
+
+                    <HBox spacing="10">
+                        <Label text="Tags: " style="-fx-font-weight: bold; -fx-min-width: 80;"/>
+                        <Label fx:id="tagsLabel" />
+                    </HBox>
+
+                    <HBox spacing="10">
+                        <Label text="Class: " style="-fx-font-weight: bold; -fx-min-width: 80;"/>
+                        <Label fx:id="classLabel" />
+                    </HBox>
+                </VBox>
+
+                <Separator/>
+
                 <!-- Basic Information Section -->
                 <VBox spacing="8">
                     <Label text="Contact Information"
@@ -50,14 +68,6 @@
                         <Label text="Address:" style="-fx-font-weight: bold; -fx-min-width: 80;"/>
                         <Label fx:id="addressLabel" wrapText="true"/>
                     </HBox>
-                </VBox>
-
-                <Separator/>
-
-                <!-- Tags Section -->
-                <VBox spacing="8">
-                    <Label text="Tags" style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #34495e;"/>
-                    <Label fx:id="tagsLabel" wrapText="true"/>
                 </VBox>
 
                 <Separator/>

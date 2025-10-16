@@ -23,7 +23,7 @@ LittleLogBook is a **desktop app for managing contacts, optimized for use via a 
 1. Copy the file to the folder you want to use as the _home folder_ for your LittleLogBook.
 
 1. **Open and navigate to your jar file using command terminal:**
-   
+
    **What is `cd`?** `cd` stands for "change directory" - it's a command that lets you navigate to different folders on your computer through the command line.
 
    **Step-by-step instructions:**
@@ -34,14 +34,14 @@ LittleLogBook is a **desktop app for managing contacts, optimized for use via a 
    - Example: `cd C:\Users\YourName\Desktop\LittleLogBook` (replace with your actual folder path)
    - Press Enter to navigate to that folder
    - Type `java -jar littlelogbook.jar` and press Enter to run the application
-   
+
    **For Mac/Linux users:**
    - Press `Cmd + Space` (Mac) or `Ctrl + Alt + T` (Linux) to open Terminal
    - Type `cd` followed by a space, then the full path to your jar file folder
    - Example: `cd /Users/YourName/Desktop/LittleLogBook` (replace with your actual folder path)
    - Press Enter to navigate to that folder
    - Type `java -jar littlelogbook.jar` and press Enter to run the application
-   
+
    **Alternative method (easier for beginners):**
    - Navigate to the folder containing `littlelogbook.jar` using your file explorer
    - **Windows:** Hold Shift + Right-click in the empty space of the folder → Select "Open PowerShell window here" or "Open command window here"
@@ -110,14 +110,14 @@ Format: `add n/NAME p/PHONE e/EMAIL c/CATEGORY`
 - **Email (e/):** Must follow standard email format. Case-insensitive. Error if invalid format.
 - **Category (c/):** Acceptable: `student`, `colleague` (case-insensitive). Error if invalid category.
 
-**Duplicate Handling:**  
+**Duplicate Handling:**
 Duplicate if name + phone already exist (case-insensitive). If detected, error message: `Duplicate contact detected.`
 
 Examples:
 * `add n/John Doe p/98765432 e/john.doe@gmail.com c/student`
 * `add n/Mary Tan p/91234567 e/marytan@e.nut.edu c/colleague`
 
-**Outputs:**  
+**Outputs:**
 - Success: GUI updates contact list, message: `New <CATEGORY> added`
 - Failure: Error message with reason (invalid/missing parameter, duplicate, etc.)
 
@@ -135,7 +135,7 @@ Examples:
 
 **Outputs:**
 - Success: List updates, message: `<CATEGORY> deleted`
-- Failure: 
+- Failure:
   - No match → `No contact found with name John Doe`
   - Multiple matches → `Multiple contacts found. Use more details`
 
@@ -151,9 +151,9 @@ Format: `view n/NAME`
 Examples:
 * `view n/John Doe`
 
-**Outputs:**  
+**Outputs:**
 - Success: Display detailed profile in UI panel.
-- Failure: 
+- Failure:
   - Not found → `Contact not found`
   - Multiple matches → `Multiple contacts found. Use more details for name`
   - Database retrieval error → `Unable to load contact details`
@@ -171,7 +171,7 @@ Examples:
 * `search John`
 * `search Tan`
 
-**Outputs:**  
+**Outputs:**
 - Success: List updates to show all matching contacts.
 - Failure: No results → `No contacts found for "Tan"`
 
@@ -189,9 +189,9 @@ Examples:
 * `note n/John Doe t/Allergic to peanuts`
 * `note n/Mary Tan t/Improved in reading this week`
 
-**Outputs:**  
+**Outputs:**
 - Success: Note added to contact, message: `<CATEGORY> DETAILS edited`
-- Failure: 
+- Failure:
   - No match → `No contact found`
   - Empty note → `Note text cannot be empty`
   - Database save failure → `Unable to save note. Try again`
