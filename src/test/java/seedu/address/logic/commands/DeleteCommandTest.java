@@ -150,6 +150,7 @@ public class DeleteCommandTest {
                 .filter(p -> p.getName().fullName.equalsIgnoreCase("Benson Meier"))
                 .toList();
         assertEquals(1, matches.size());
+        assertTrue(matches.contains(TypicalPersons.BENSON));
     }
 
     @Test
@@ -159,6 +160,8 @@ public class DeleteCommandTest {
                 .filter(p -> p.getName().fullName.equalsIgnoreCase("George Best"))
                 .toList();
         assertTrue(exactMatches.size() > 1);
+        assertTrue(exactMatches.contains(TypicalPersons.GEORGE));
+        assertTrue(exactMatches.contains(TypicalPersons.GEORGE_DUPLICATE));
     }
 
     @Test
@@ -168,6 +171,8 @@ public class DeleteCommandTest {
                 .filter(p -> p.getName().fullName.toLowerCase().contains("meier"))
                 .toList();
         assertTrue(matches.size() > 1);
+        assertTrue(matches.contains(TypicalPersons.BENSON));
+        assertTrue(matches.contains(TypicalPersons.DANIEL));
     }
 
     @Test
