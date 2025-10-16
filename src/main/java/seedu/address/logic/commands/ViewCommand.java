@@ -56,6 +56,7 @@ public class ViewCommand extends Command {
         return new CommandResult(
                 String.format(MESSAGE_SUCCESS, Messages.format(personToView)),
                 false,
+                true,
                 false,
                 personToView);
     }
