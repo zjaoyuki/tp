@@ -155,6 +155,7 @@ Example:
 * `view 1` - Shows detailed information for the 1st contact in the current list
 
 **Outputs:**
+
 Success:
 - A popup window appears displaying:
     - Full name
@@ -162,16 +163,15 @@ Success:
     - Tags (displayed as individual colored labels)
     - Student class
   - Contact Information
-    - Phone number 
-    - Email address 
-    - Home address 
+    - Phone number
+    - Email address
+    - Home address
   - Notes (in a scrollable text area)
   - Attendance (Coming soon)
 
-Attendance information
-- Failure:
-- - View without the index → `Invalid command format` (will update to show index not given)
-  - Out Of Bounds index → `Person index provided is invalid` (`view 0` might not detect this)
+Failure:
+- View without the index → `Invalid command format` (will update to show index not given)
+- Out Of Bounds index → `Person index provided is invalid` (`view 0` might not detect this)
 
 ### Searching contacts: `search`
 
