@@ -178,7 +178,7 @@ public class DeleteCommandTest {
                 .toList();
         assertTrue(matches.isEmpty());
         assertThrows(CommandException.class, () -> {
-                throw new CommandException("Deletion cancelled.");
+            throw new CommandException("Deletion cancelled.");
         });
     }
 
