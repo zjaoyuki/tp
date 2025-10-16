@@ -136,11 +136,19 @@ Examples:
 * `delete 3`
 
 **Outputs:**
-- Success: List updates, message: `Deleted Person: [List all his information]`
-- Failure: Triggers Pop up windows for further confirmation.
-  - No match → Pop up window stating`No matches found. Press ESC to exit`
-  - Multiple matches → `Multiple matches found. Type index and ENTER to delete or ESC to cancel`
-  - ESC pressed: Message: `Deletion cancelled`
+
+Delete by INDEX 
+- Success:  List updates, message: `Deleted Person: [List all his information]`
+- Failure: Message: `Invalid command format!`
+
+Delete by NAME 
+- Success: Exact match: list updates, message: `Deleted Person: [List all his information]`
+- Failure: Triggers Pop up windows for further confirmation. 
+Possible matches and corresponding information will also be displayed in the name list.
+  - No match → Pop up window stating `No matches found. Press ESC to exit`
+  - Multiple matches → Pop up window stating `Multiple matches found. Type index and ENTER to delete or ESC to cancel`
+   
+
 
 ### Viewing contact details: `view`
 
