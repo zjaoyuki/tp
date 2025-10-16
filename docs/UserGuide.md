@@ -192,24 +192,30 @@ Examples:
 
 ### Adding/Editing notes: `note`
 
-Purpose: Store additional info (student progress, allergies, parent instructions).
+Purpose: Store additional info (student progress, allergies, parent instructions, etc.).
 
-Format: `note n/NAME t/NOTE_TEXT`
+Format: `note INDEX desc/NOTE_TEXT`
 
 **Parameters & Validation Rules:**
-- **Name (n/):** Same validation as above.
-- **Note text (t/):** Any UTF-8 text, up to 500 chars. Leading/trailing spaces trimmed. Error if empty.
+- **INDEX (required):** The index number of the contact shown in the displayed contact list.
+  - Must be a positive number (1, 2, 3, ...)
+  - Cannot be 0 or negative
+  - Must correspond to an existing contact in the current list
+- **Note text (desc/):** The additional info to be written. Remove current note if left empty.
+  - Accepts all letters, numbers, symbols, spaces
+  - Cannot be control characters (e.g. Tab, invisible commands, etc.)
+  - Up to 500 characters
+  - Leading/trailing spaces trimmed
 
 Examples:
-* `note n/John Doe t/Allergic to peanuts`
-* `note n/Mary Tan t/Improved in reading this week`
+* `note 1 desc/Allergic to peanuts`
+* `note 2 desc/Improved in reading this week`
 
 **Outputs:**
-- Success: Note added to contact, message: `<CATEGORY> DETAILS edited`
+- Success: Note added to contact, message: `Added note to Person: <Person>`
 - Failure:
-  - No match → `No contact found`
-  - Empty note → `Note text cannot be empty`
-  - Database save failure → `Unable to save note. Try again`
+  - No matching index→ `The person index provided is invalid`
+  - Empty note → `Removed note from Person: <Person>`
 
 ### Listing all contacts : `list`
 
