@@ -60,7 +60,8 @@
     "name" : "George Best",
     "phone" : "94824888",
     "email" : "annaa@example.com",
-    "category" : "student",
+    "address" : "4th street",
+    "studentClass" : "Nursery",
     "note": "",
     "tags" : [ ]
   }
