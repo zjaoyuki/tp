@@ -123,21 +123,24 @@ Examples:
 
 ### Deleting a contact: `delete`
 
-Purpose: Remove outdated or incorrect contacts.
+Purpose: Remove outdated or incorrect contacts from the list.
 
-Format: `delete n/NAME`
+Format: `delete n/NAME` or `delete INDEX`
 
 **Parameters & Validation Rules:**
 - **Name (n/):** Same rules as Add. Case-insensitive match.
+- **Index:** The index must be a positive integer 1, 2, 3,...
 
 Examples:
 * `delete n/John Doe`
+* `delete 3`
 
 **Outputs:**
-- Success: List updates, message: `<CATEGORY> deleted`
-- Failure:
-  - No match → `No contact found with name John Doe`
-  - Multiple matches → `Multiple contacts found. Use more details`
+- Success: List updates, message: `Deleted Person: [List all his information]`
+- Failure: Triggers Pop up windows for further confirmation.
+  - No match → Pop up window stating`No matches found. Press ESC to exit`
+  - Multiple matches → `Multiple matches found. Type index and ENTER to delete or ESC to cancel`
+  - ESC pressed: Message: `Deletion cancelled`
 
 ### Viewing contact details: `view`
 
