@@ -61,7 +61,11 @@ LittleLogBook is a **desktop app for managing contacts, optimized for use via a 
 
    * `view n/John Doe` : Shows full details of the contact named `John Doe`.
 
-   * `search John` : Searches for contacts with names containing `John`.
+   * `find-n John` : Searches for contacts with names containing `John`.
+   
+   * `find-p 8987` : Searches for contacts with phone number containing `8987`.
+
+   * `find-t student` : Searches for contacts labelled with tag `student`.
 
    * `exit` : Exits the app.
 
@@ -158,18 +162,6 @@ Examples:
   - Multiple matches → `Multiple contacts found. Use more details for name`
   - Database retrieval error → `Unable to load contact details`
 
-### Searching contacts: `search`
-
-Purpose: Allows teachers to find contacts quickly with partial names.
-
-Format: `search KEYWORD`
-
-**Parameters & Validation Rules:**
-- **Keyword:** Alphanumeric string, case-insensitive, matches partial names. Error if empty string.
-
-Examples:
-* `search John`
-* `search Tan`
 
 **Outputs:**
 - Success: List updates to show all matching contacts.
@@ -195,6 +187,73 @@ Examples:
   - No match → `No contact found`
   - Empty note → `Note text cannot be empty`
   - Database save failure → `Unable to save note. Try again`
+
+### Finding contacts by name : `find-n`
+Purpose: Allows teachers to find contacts quickly with partial names(contiguous).
+
+Format: `find-n KEYWORD`
+
+**Parameters:**
+- **Keyword:** Alphanumeric string, case-insensitive, matches partial names. Error if empty string.
+
+Examples:
+* `find-n John ecka`
+* `find-n Tan`
+
+**Outputs:**
+- Success: The find-n results in matches: `<x> persons listed!`
+- Failure:
+    - No match → `0 persons listed!`
+    - Empty string → `Invalid command format!
+        find-n: Finds all persons whose names contain any of the specified keywords (case-insensitive) and 
+        displays them as a list with index numbers.
+        Parameters: KEYWORD [MORE_KEYWORDS]...
+        Example: find-n alice bob charlie`
+
+### Finding contacts by phone number : `find-p`
+Purpose: Allows teachers to find contacts quickly with partial number(contiguous).
+
+Format: `find-p KEYWORD`
+
+**Parameters:**
+- **Keyword:** numeric string, matches partial numbers. Error if empty string.
+
+Examples:
+* `find-p 8431 967`
+* `find-p 84313390`
+* `find-p 3133`
+
+**Outputs:**
+- Success: The find-p results in matches: `<x> persons listed!`
+- Failure:
+    - No match → `0 persons listed!`
+    - Empty string → `Invalid command format! 
+        find-p: Finds all persons whose phone number contain any of the specified keywords and displays them as 
+        a list with index numbers.
+        Parameters: KEYWORD [MORE_KEYWORDS]...
+        Example: find-p 84123578`  
+
+### Finding contacts by tags : `find-t`
+Purpose: Allows teachers to find contacts quickly with tags(contiguous).
+
+Format: `find-t KEYWORD`
+
+**Parameters:**
+- **Keyword:** alphanumeric string, matches partial tag. Error if empty string.
+
+Examples:
+* `find-t student`
+* `find-t stu colle`
+* `find-t ague`
+
+**Outputs:**
+- Success: The find-t results in matches: `<x> persons listed!`
+- Failure:
+    - No match → `0 persons listed!`
+    - Empty string → `Invalid command format! 
+        find-t: Finds all persons whose tag contain any of the specified keywords (case-insensitive) and displays them as a list with index numbers.
+        Parameters: KEYWORD [MORE_KEYWORDS]...
+        Example: find-t friend colleague`
 
 ### Listing all contacts : `list`
 
@@ -256,7 +315,9 @@ Action     | Format, Examples
 **Add**    | `add n/NAME p/PHONE e/EMAIL c/CATEGORY`<br>e.g., `add n/John Doe p/98765432 e/john.doe@gmail.com c/student`
 **Delete** | `delete n/NAME`<br>e.g., `delete n/John Doe`
 **View**   | `view n/NAME`<br>e.g., `view n/John Doe`
-**Search** | `search KEYWORD`<br>e.g., `search John`
+**Find-n** | `find-n KEYWORD`<br>e.g., `find-n John`
+**Find-p** | `find-p KEYWORD`<br>e.g., `find-p 84871234`
+**Find-t** | `find-t KEYWORD`<br>e.g., `find-t student`
 **Note**   | `note n/NAME t/NOTE_TEXT`<br>e.g., `note n/John Doe t/Allergic to peanuts`
 **List**   | `list`
 **Clear**  | `clear`
