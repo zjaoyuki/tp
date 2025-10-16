@@ -55,7 +55,7 @@ LittleLogBook is a **desktop app for managing contacts, optimized for use via a 
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-   * `add n/John Doe p/98765432 e/john.doe@gmail.com c/student` : Adds a contact named `John Doe` with category `student` to LittleLogBook.
+   * `add n/John Doe p/98765432 e/john.doe@gmail.com a/Blk 456, Den Road, #01-355 c/K1A` : Adds a contact named `John Doe` with class `K1A` to LittleLogBook.
    
    * `note 1 desc/Allergic to peanut` : Add the not "Allergic to peanut" to contact at index 1. 
 
@@ -106,25 +106,28 @@ Format: `help`
 
 ### Adding a contact: `add`
 
-Purpose: Allows teachers to create a new contact entry (student, colleague).
+Purpose: Allows teachers to create a new contact entry for students or colleagues.
 
-Format: `add n/NAME p/PHONE e/EMAIL c/CATEGORY`
+Format: `add n/NAME p/PHONE e/EMAIL a/ADDRESS c/CLASS [desc/NOTE] [t/TAG]...`
 
 **Parameters & Validation Rules:**
 - **Name (n/):** Alphabetic characters, spaces, hyphens, apostrophes only. Leading/trailing spaces trimmed, multiple spaces collapsed. Case-insensitive for duplicates. Error if empty or contains numbers/symbols.
 - **Phone (p/):** 8-digit Singapore numbers only. Spaces/dashes ignored. Error if not numeric, wrong length, or invalid starting digit.
 - **Email (e/):** Must follow standard email format. Case-insensitive. Error if invalid format.
-- **Category (c/):** Acceptable: `student`, `colleague` (case-insensitive). Error if invalid category.
+- **Address (a/):** Any non-blank text. Error if empty or contains only whitespace.
+- **Class (c/):** Valid kindergarten classes: K1A, K1B, K1C, K2A, K2B, K2C, Nursery, Pre-K (case-insensitive). Error if invalid class format.
+- **Note (desc/):** Optional. Any text up to 500 characters. Leading/trailing spaces trimmed.
+- **Tag (t/):** Optional. Alphanumeric characters only. Multiple tags can be added.
 
 **Duplicate Handling:**
 Duplicate if name + phone already exist (case-insensitive). If detected, error message: `Duplicate contact detected.`
 
 Examples:
-* `add n/John Doe p/98765432 e/john.doe@gmail.com c/student`
-* `add n/Mary Tan p/91234567 e/marytan@e.nut.edu c/colleague`
+* `add n/John Doe p/98765432 e/john.doe@gmail.com a/Blk 456, Den Road, #01-355 c/K1A`
+* `add n/Mary Tan p/91234567 e/marytan@e.nut.edu a/123 Jurong West Ave 6 c/K2B desc/Allergic to peanuts t/student`
 
 **Outputs:**
-- Success: GUI updates contact list, message: `New <CATEGORY> added`
+- Success: GUI updates contact list, message: `New contact added`
 - Failure: Error message with reason (invalid/missing parameter, duplicate, etc.)
 
 ### Deleting a contact: `delete`
@@ -334,8 +337,6 @@ Furthermore, certain edits can cause LittleLogBook to behave in unexpected ways 
 Action     | Format, Examples
 -----------|-----------------------------------------------------------------------------------------------------------------------------------
 **Add**    | `add n/NAME p/PHONE e/EMAIL c/CATEGORY`<br>e.g., `add n/John Doe p/98765432 e/john.doe@gmail.com c/student`
-**Delete** | `delete n/NAME`<br>e.g., `delete n/John Doe`
-**View**   | `view INDEX`<br>e.g., `view 1`
 **Search** | `search KEYWORD`<br>e.g., `search John`
 **Delete** | `delete n/NAME`<br>e.g., `delete n/John Doe`<br>`delete n/INDEX`<br>e.g., `delete 1`
 **View**   | `view INDEX`<br>e.g., `view 1`
