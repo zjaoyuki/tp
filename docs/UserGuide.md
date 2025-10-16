@@ -337,8 +337,6 @@ Furthermore, certain edits can cause LittleLogBook to behave in unexpected ways 
 Action     | Format, Examples
 -----------|-----------------------------------------------------------------------------------------------------------------------------------
 **Add**    | `add n/NAME p/PHONE e/EMAIL c/CATEGORY`<br>e.g., `add n/John Doe p/98765432 e/john.doe@gmail.com c/student`
-**Delete** | `delete n/NAME`<br>e.g., `delete n/John Doe`
-**View**   | `view INDEX`<br>e.g., `view 1`
 **Search** | `search KEYWORD`<br>e.g., `search John`
 **Delete** | `delete n/NAME`<br>e.g., `delete n/John Doe`<br>`delete n/INDEX`<br>e.g., `delete 1`
 **View**   | `view INDEX`<br>e.g., `view 1`
