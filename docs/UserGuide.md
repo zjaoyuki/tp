@@ -141,22 +141,37 @@ Examples:
 
 ### Viewing contact details: `view`
 
-Purpose: Show full information of a contact (including notes, attendance).
+Purpose: Show full information of a contact (including notes, classes, attendance).
 
-Format: `view n/NAME`
+Format: `view INDEX`
 
-**Parameters & Validation Rules:**
-- Name-based search, same validation as Delete.
+**Parameters:**
+- INDEX (required): The index number of the contact shown in the displayed contact list.
+  - Must be a positive integer (1, 2, 3, ...)
+  - Cannot be zero or negative
+  - Must correspond to an existing contact in the current list
 
-Examples:
-* `view n/John Doe`
+Example:
+* `view 1` - Shows detailed information for the 1st contact in the current list
 
 **Outputs:**
-- Success: Display detailed profile in UI panel.
+Success:
+- A popup window appears displaying:
+    - Full name
+    - Personal Information
+    - Tags (displayed as individual colored labels)
+    - Student class
+  - Contact Information
+    - Phone number 
+    - Email address 
+    - Home address 
+  - Notes (in a scrollable text area)
+  - Attendance (Coming soon)
+
+Attendance information
 - Failure:
-  - Not found → `Contact not found`
-  - Multiple matches → `Multiple contacts found. Use more details for name`
-  - Database retrieval error → `Unable to load contact details`
+- - View without the index → `Invalid command format` (will update to show index not given)
+  - Out Of Bounds index → `Person index provided is invalid` (`view 0` might not detect this)
 
 ### Searching contacts: `search`
 
