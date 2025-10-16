@@ -35,6 +35,7 @@ public class MainWindow extends UiPart<Stage> {
     private PersonListPanel personListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+    private ViewWindow viewWindow;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -67,6 +68,7 @@ public class MainWindow extends UiPart<Stage> {
         setAccelerators();
 
         helpWindow = new HelpWindow();
+        viewWindow = new ViewWindow();
     }
 
     public Stage getPrimaryStage() {
@@ -148,6 +150,18 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
+    /**
+     * Opens the View window or focuses on it if it's already opened.
+     */
+    @FXML
+    public void handleView() {
+        if (!viewWindow.isShowing()) {
+            viewWindow.show();
+        } else {
+            viewWindow.focus();
+        }
+    }
+
     void show() {
         primaryStage.show();
     }
@@ -161,6 +175,7 @@ public class MainWindow extends UiPart<Stage> {
                 (int) primaryStage.getX(), (int) primaryStage.getY());
         logic.setGuiSettings(guiSettings);
         helpWindow.hide();
+        viewWindow.hide();
         primaryStage.hide();
     }
 
@@ -183,6 +198,10 @@ public class MainWindow extends UiPart<Stage> {
                 handleHelp();
             }
 
+            if (commandResult.isShowView()) {
+                handleView();
+            }
+
             if (commandResult.isExit()) {
                 handleExit();
             }
@@ -191,8 +210,7 @@ public class MainWindow extends UiPart<Stage> {
             if (commandResult.isShowPerson()) {
                 Person personToView = commandResult.getPersonToView();
                 if (personToView != null) {
-                    ViewWindow detailedPanel = new ViewWindow();
-                    detailedPanel.show(personToView);
+                    viewWindow.show(personToView); // Update the existing window
                 }
             }
 

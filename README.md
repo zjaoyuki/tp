@@ -15,7 +15,7 @@ For the detailed documentation of this project, see the **[LittleLogBook Product
 Prerequisites: JDK 17, and the latest version of Intellij IDEA.
 1. Open Intellij IDE.
 2. Open this project in Intellij.
-3. Configure the project to use JDK 17 and set Project Language level to the default 
+3. Configure the project to use JDK 17 and set Project Language level to the default
 SDK option.
 
 ## Running LittleLogBook
@@ -28,11 +28,11 @@ Here's what using LittleLogBook looks like in the GUI:
 
 `add n/ Yeo p/82923242  e/ Yeo@gmail.com a/Geylang Avenue 4  r/allergic to peanuts t/colleague`
 
-`New person added: Yeo; Phone: 82923242; Email: Yeo@gmail.com; Address: Geylang Avenue 4  r/allergic to peanuts; Tags: 
+`New person added: Yeo; Phone: 82923242; Email: Yeo@gmail.com; Address: Geylang Avenue 4  r/allergic to peanuts; Tags:
 [colleague]`
 
 LittleLogBook will save the contacts you have added and
-you can edit or delete them later. 
+you can edit or delete them later.
 
 ## Supported Commands:
 `add` `delete` `view`
@@ -40,7 +40,7 @@ you can edit or delete them later.
 
 
 ## Acknowledgements:
-* This project is a **part of the se-education.org** initiative. 
+* This project is a **part of the se-education.org** initiative.
 If you would like to contribute code to this project, see [se-education.org](https://se-education.org/#contributing-to-se-edu) for more info.
 
 
