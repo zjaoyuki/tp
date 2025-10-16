@@ -199,7 +199,7 @@ Attendance information
 
 Purpose: Store additional info (student progress, allergies, parent instructions, etc.).
 
-Format: `note INDEX desc/NOTE_TEXT`
+Format: `note INDEX desc/NOTE_TEXT` or `note INDEX` (Remove note)
 
 **Parameters & Validation Rules:**
 - **INDEX (required):** The index number of the contact shown in the displayed contact list.
@@ -339,7 +339,7 @@ Action     | Format, Examples
 **Find-n** | `find-n KEYWORD`<br>e.g., `find-n John`
 **Find-p** | `find-p KEYWORD`<br>e.g., `find-p 84871234`
 **Find-t** | `find-t KEYWORD`<br>e.g., `find-t student`
-**Note**   | `note INDEX desc/NOTE_TEXT`<br>e.g., `note 1 desc/Allergic to peanuts`
+**Note**   | `note INDEX desc/NOTE_TEXT`<br>e.g., `note 1 desc/Allergic to peanuts` <br> `note INDEX` <br>e.g., `note 1`
 **List**   | `list`
 **Clear**  | `clear`
 **Help**   | `help`
