@@ -6,8 +6,19 @@
 
 # LittleLogBook
 
+## Product description
 LittleLogBook helps **kindergarten teachers** keep track of **student and parent information** with ease.
 Unlike traditional contact management tools, it’s optimised for fast typing and minimal clicking, making it ideal for those who prefer keyboard-driven workflows.
+
+## Target User
+LittleLogBook is designed for kindergarten teachers who need to 
+manage student and parent contact information efficiently.
+
+**Assumptions** about our target user:
+1. A kindergarten teacher who is an avid user of typed user commands
+(able to use Command prompt/terminal).
+2. The teacher teaches multiple classes. Each class holds multiple students.
+3. The teacher will also have multiple colleagues to work with.
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -29,34 +40,36 @@ Unlike traditional contact management tools, it’s optimised for fast typing an
 
    **Step-by-step instructions:**
 
-   **For Windows users:**
-   - Press `Windows key + R`, type `cmd`, and press Enter to open Command Prompt
-   - Type `cd` followed by a space, then the full path to your jar file folder
-   - Example: `cd C:\Users\YourName\Desktop\LittleLogBook` (replace with your actual folder path)
-   - Press Enter to navigate to that folder
-   - Type `java -jar littlelogbook.jar` and press Enter to run the application
+   1. **For Windows users:**
+      - Press `Windows key + R`, type `cmd`, and press Enter to open Command Prompt
+      - Type `cd` followed by a space, then the full path to your jar file folder
+      - Example: `cd C:\Users\YourName\Desktop\LittleLogBook` (replace with your actual folder path)
+      - Press Enter to navigate to that folder
+      - Type `java -jar littlelogbook.jar` and press Enter to run the application
 
-   **For Mac/Linux users:**
-   - Press `Cmd + Space` (Mac) or `Ctrl + Alt + T` (Linux) to open Terminal
-   - Type `cd` followed by a space, then the full path to your jar file folder
-   - Example: `cd /Users/YourName/Desktop/LittleLogBook` (replace with your actual folder path)
-   - Press Enter to navigate to that folder
-   - Type `java -jar littlelogbook.jar` and press Enter to run the application
+   1. **For Mac/Linux users:**
+      - Press `Cmd + Space` (Mac) or `Ctrl + Alt + T` (Linux) to open Terminal
+      - Type `cd` followed by a space, then the full path to your jar file folder
+      - Example: `cd /Users/YourName/Desktop/LittleLogBook` (replace with your actual folder path)
+      - Press Enter to navigate to that folder
+      - Type `java -jar littlelogbook.jar` and press Enter to run the application
 
-   **Alternative method (easier for beginners):**
-   - Navigate to the folder containing `littlelogbook.jar` using your file explorer
-   - **Windows:** Hold Shift + Right-click in the empty space of the folder → Select "Open PowerShell window here" or "Open command window here"
-   - **Mac:** Right-click in the folder → Services → New Terminal at Folder
-   - **Linux:** Right-click in the folder → "Open in Terminal"
-   - Type `java -jar littlelogbook.jar` and press Enter
+   1. **Alternative method (easier for beginners):**
+      - Navigate to the folder containing `littlelogbook.jar` using your file explorer
+      - **Windows:** Hold Shift + Right-click in the empty space of the folder → Select "Open PowerShell window here" or "Open command window here"
+      - **Mac:** Right-click in the folder → Services → New Terminal at Folder
+      - **Linux:** Right-click in the folder → "Open in Terminal"
+      - Type `java -jar littlelogbook.jar` and press Enter
 
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui](images/Ui.png)
+         ![Ui](images/Ui.png)
 
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-   * `add n/John Doe p/98765432 e/john.doe@gmail.com c/student` : Adds a contact named `John Doe` with category `student` to LittleLogBook.
+   * `add n/John Doe p/98765432 e/john.doe@gmail.com a/Blk 456, Den Road, #01-355 c/K1A` : Adds a contact named `John Doe` with class `K1A` to LittleLogBook.
+   
+   * `note 1 desc/Allergic to peanut` : Add the not "Allergic to peanut" to contact at index 1. 
 
    * `delete n/John Doe` : Deletes the contact named `John Doe`.
 
@@ -105,25 +118,28 @@ Format: `help`
 
 ### Adding a contact: `add`
 
-Purpose: Allows teachers to create a new contact entry (student, colleague).
+Purpose: Allows teachers to create a new contact entry for students or colleagues.
 
-Format: `add n/NAME p/PHONE e/EMAIL c/CATEGORY`
+Format: `add n/NAME p/PHONE e/EMAIL a/ADDRESS c/CLASS [desc/NOTE] [t/TAG]...`
 
 **Parameters & Validation Rules:**
 - **Name (n/):** Alphabetic characters, spaces, hyphens, apostrophes only. Leading/trailing spaces trimmed, multiple spaces collapsed. Case-insensitive for duplicates. Error if empty or contains numbers/symbols.
 - **Phone (p/):** 8-digit Singapore numbers only. Spaces/dashes ignored. Error if not numeric, wrong length, or invalid starting digit.
 - **Email (e/):** Must follow standard email format. Case-insensitive. Error if invalid format.
-- **Category (c/):** Acceptable: `student`, `colleague` (case-insensitive). Error if invalid category.
+- **Address (a/):** Any non-blank text. Error if empty or contains only whitespace.
+- **Class (c/):** Valid kindergarten classes: K1A, K1B, K1C, K2A, K2B, K2C, Nursery, Pre-K (case-insensitive). Error if invalid class format.
+- **Note (desc/):** Optional. Any text up to 500 characters. Leading/trailing spaces trimmed.
+- **Tag (t/):** Optional. Alphanumeric characters only. Multiple tags can be added.
 
 **Duplicate Handling:**
 Duplicate if name + phone already exist (case-insensitive). If detected, error message: `Duplicate contact detected.`
 
 Examples:
-* `add n/John Doe p/98765432 e/john.doe@gmail.com c/student`
-* `add n/Mary Tan p/91234567 e/marytan@e.nut.edu c/colleague`
+* `add n/John Doe p/98765432 e/john.doe@gmail.com a/Blk 456, Den Road, #01-355 c/K1A`
+* `add n/Mary Tan p/91234567 e/marytan@e.nut.edu a/123 Jurong West Ave 6 c/K2B desc/Allergic to peanuts t/student`
 
 **Outputs:**
-- Success: GUI updates contact list, message: `New <CATEGORY> added`
+- Success: GUI updates contact list, message: `New contact added`
 - Failure: Error message with reason (invalid/missing parameter, duplicate, etc.)
 
 ### Deleting a contact: `delete`
@@ -134,7 +150,7 @@ Format: `delete n/NAME` or `delete INDEX`
 
 **Parameters & Validation Rules:**
 - **Name (n/):** Same rules as Add. Case-insensitive match.
-- **Index:** The index must be a positive integer 1, 2, 3,...
+- **Index:** The index must be a positive integer (1, 2, 3,...)
 
 Examples:
 * `delete n/John Doe`
@@ -143,16 +159,17 @@ Examples:
 **Outputs:**
 
 Delete by INDEX 
-- Success:  List updates, message: `Deleted Person: [List all his information]`
+- Success:  List updates, message: `Deleted Person: <Person>`
 - Failure: Message: `Invalid command format!`
 
 Delete by NAME 
-- Success: Exact match: list updates, message: `Deleted Person: [List all his information]`
+- Success: Exact match: list updates, message: `Deleted Person: <Person>`
 - Failure: Triggers Pop up windows for further confirmation. 
 Possible matches and corresponding information will also be displayed in the name list.
   - No match → Pop up window stating `No matches found. Press ESC to exit`
+  ![delete_no_matches.png](images/delete_no_matches.png)
   - Multiple matches → Pop up window stating `Multiple matches found. Type index and ENTER to delete or ESC to cancel`
-   
+  ![delete_multiple_matches.png](images/delete_multiple_matches.png)
 
 
 ### Viewing contact details: `view`
@@ -200,14 +217,14 @@ Failure:
 
 Purpose: Store additional info (student progress, allergies, parent instructions, etc.).
 
-Format: `note INDEX desc/NOTE_TEXT`
+Format: `note INDEX desc/NOTE_TEXT` or `note INDEX` (Remove note)
 
 **Parameters & Validation Rules:**
 - **INDEX (required):** The index number of the contact shown in the displayed contact list.
   - Must be a positive number (1, 2, 3, ...)
   - Cannot be 0 or negative
   - Must correspond to an existing contact in the current list
-- **Note text (desc/):** The additional info to be written. Remove current note if left empty.
+- **Note text (desc/):** The note to be written. Remove current note if omitted or left empty.
   - Accepts all letters, numbers, symbols, spaces
   - Cannot be control characters (e.g. Tab, invisible commands, etc.)
   - Up to 500 characters
@@ -215,13 +232,15 @@ Format: `note INDEX desc/NOTE_TEXT`
 
 Examples:
 * `note 1 desc/Allergic to peanuts`
-* `note 2 desc/Improved in reading this week`
+* `note 1`
 
 **Outputs:**
-- Success: Note added to contact, message: `Added note to Person: <Person>`
-- Failure:
-  - No matching index→ `The person index provided is invalid`
+- Success:
+  - Note added to contact, message: `Added note to Person: <Person>`
   - Empty note → `Removed note from Person: <Person>`
+- Failure:
+  - No matching index → `The person index provided is invalid`
+  - No index provided → `Invalid command format!` (And inform user of correct command format)
 
 ### Finding contacts by name : `find-n`
 Purpose: Allows teachers to find contacts quickly with partial names(contiguous).
@@ -239,11 +258,7 @@ Examples:
 - Success: The find-n results in matches: `<x> persons listed!`
 - Failure:
     - No match → `0 persons listed!`
-    - Empty string → `Invalid command format!
-        find-n: Finds all persons whose names contain any of the specified keywords (case-insensitive) and 
-        displays them as a list with index numbers.
-        Parameters: KEYWORD [MORE_KEYWORDS]...
-        Example: find-n alice bob charlie`
+    - Empty string → `Invalid command format!` (And inform user of correct command format)
 
 ### Finding contacts by phone number : `find-p`
 Purpose: Allows teachers to find contacts quickly with partial number(contiguous).
@@ -262,11 +277,7 @@ Examples:
 - Success: The find-p results in matches: `<x> persons listed!`
 - Failure:
     - No match → `0 persons listed!`
-    - Empty string → `Invalid command format! 
-        find-p: Finds all persons whose phone number contain any of the specified keywords and displays them as 
-        a list with index numbers.
-        Parameters: KEYWORD [MORE_KEYWORDS]...
-        Example: find-p 84123578`  
+    - Empty string → `Invalid command format!` (And inform user of correct command format)
 
 ### Finding contacts by tags : `find-t`
 Purpose: Allows teachers to find contacts quickly with tags(contiguous).
@@ -285,10 +296,7 @@ Examples:
 - Success: The find-t results in matches: `<x> persons listed!`
 - Failure:
     - No match → `0 persons listed!`
-    - Empty string → `Invalid command format! 
-        find-t: Finds all persons whose tag contain any of the specified keywords (case-insensitive) and displays them as a list with index numbers.
-        Parameters: KEYWORD [MORE_KEYWORDS]...
-        Example: find-t friend colleague`
+    - Empty string → `Invalid command format!` (And inform user of correct command format)
 
 ### Listing all contacts : `list`
 
@@ -323,10 +331,6 @@ If your changes to the data file makes its format invalid, LittleLogBook will di
 Furthermore, certain edits can cause LittleLogBook to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
 
-### Archiving data files `[coming in v2.0]`
-
-_Details coming soon ..._
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
@@ -348,15 +352,13 @@ _Details coming soon ..._
 Action     | Format, Examples
 -----------|-----------------------------------------------------------------------------------------------------------------------------------
 **Add**    | `add n/NAME p/PHONE e/EMAIL c/CATEGORY`<br>e.g., `add n/John Doe p/98765432 e/john.doe@gmail.com c/student`
-**Delete** | `delete n/NAME`<br>e.g., `delete n/John Doe`
-**View**   | `view INDEX`<br>e.g., `view 1`
 **Search** | `search KEYWORD`<br>e.g., `search John`
 **Delete** | `delete n/NAME`<br>e.g., `delete n/John Doe`<br>`delete n/INDEX`<br>e.g., `delete 1`
-**View**   | `view n/NAME`<br>e.g., `view n/John Doe`
+**View**   | `view INDEX`<br>e.g., `view 1`
 **Find-n** | `find-n KEYWORD`<br>e.g., `find-n John`
 **Find-p** | `find-p KEYWORD`<br>e.g., `find-p 84871234`
 **Find-t** | `find-t KEYWORD`<br>e.g., `find-t student`
-**Note**   | `note n/NAME t/NOTE_TEXT`<br>e.g., `note n/John Doe t/Allergic to peanuts`
+**Note**   | `note INDEX desc/NOTE_TEXT`<br>e.g., `note 1 desc/Allergic to peanuts` <br> `note INDEX` <br>e.g., `note 1`
 **List**   | `list`
 **Clear**  | `clear`
 **Help**   | `help`
