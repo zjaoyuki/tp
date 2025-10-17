@@ -6,6 +6,17 @@
 
 # LittleLogBook
 
+## Target User
+LittleLogBook is designed for kindergarten teachers who need to 
+manage student and parent contact information efficiently.
+
+**Assumptions** about our target user:
+1. A kindergarten teacher who is an avid user of typed user commands
+(able to use Command prompt/terminal).
+2. The teacher teaches multiple classes. Each class holds multiple students.
+3. The teacher will also have multiple colleagues to work with.
+
+## Product description
 LittleLogBook is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, LittleLogBook can get your contact management tasks done faster than traditional GUI apps.
 
 <!-- * Table of Contents -->
