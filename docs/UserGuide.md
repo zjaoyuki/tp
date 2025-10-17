@@ -36,18 +36,18 @@ LittleLogBook is a **desktop app for managing contacts, optimized for use via a 
       - Type `java -jar littlelogbook.jar` and press Enter to run the application
 
    1. **For Mac/Linux users:**
-         - Press `Cmd + Space` (Mac) or `Ctrl + Alt + T` (Linux) to open Terminal
-         - Type `cd` followed by a space, then the full path to your jar file folder
-         - Example: `cd /Users/YourName/Desktop/LittleLogBook` (replace with your actual folder path)
-         - Press Enter to navigate to that folder
-         - Type `java -jar littlelogbook.jar` and press Enter to run the application
+      - Press `Cmd + Space` (Mac) or `Ctrl + Alt + T` (Linux) to open Terminal
+      - Type `cd` followed by a space, then the full path to your jar file folder
+      - Example: `cd /Users/YourName/Desktop/LittleLogBook` (replace with your actual folder path)
+      - Press Enter to navigate to that folder
+      - Type `java -jar littlelogbook.jar` and press Enter to run the application
 
    1. **Alternative method (easier for beginners):**
-         - Navigate to the folder containing `littlelogbook.jar` using your file explorer
-         - **Windows:** Hold Shift + Right-click in the empty space of the folder → Select "Open PowerShell window here" or "Open command window here"
-         - **Mac:** Right-click in the folder → Services → New Terminal at Folder
-         - **Linux:** Right-click in the folder → "Open in Terminal"
-         - Type `java -jar littlelogbook.jar` and press Enter
+      - Navigate to the folder containing `littlelogbook.jar` using your file explorer
+      - **Windows:** Hold Shift + Right-click in the empty space of the folder → Select "Open PowerShell window here" or "Open command window here"
+      - **Mac:** Right-click in the folder → Services → New Terminal at Folder
+      - **Linux:** Right-click in the folder → "Open in Terminal"
+      - Type `java -jar littlelogbook.jar` and press Enter
 
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
          ![Ui](images/Ui.png)
