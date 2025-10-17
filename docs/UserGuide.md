@@ -6,7 +6,8 @@
 
 # LittleLogBook
 
-LittleLogBook is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, LittleLogBook can get your contact management tasks done faster than traditional GUI apps.
+LittleLogBook helps **kindergarten teachers** keep track of **student and parent information** with ease.
+Unlike traditional contact management tools, it’s optimised for fast typing and minimal clicking, making it ideal for those who prefer keyboard-driven workflows.
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -98,7 +99,7 @@ LittleLogBook is a **desktop app for managing contacts, optimized for use via a 
 
 Shows a message explaining how to access the help page.
 
-![help message](images/helpMessage.png)
+![help message](images/help_message.png)
 
 Format: `help`
 
@@ -183,6 +184,8 @@ Success:
     - Home address
   - Notes (Scrollable text area)
   - Attendance (Coming soon)
+
+![view_contact_window](images/view_contact_window.png)
 
 Failure:
 - Invalid input for view → `Invalid command format`
@@ -336,7 +339,7 @@ _Details coming soon ..._
 ## Known issues
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
-2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
+2. **If you minimise the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimised, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
 
 --------------------------------------------------------------------------------------------------------------------
 
