@@ -155,8 +155,9 @@ Delete by NAME
 - Failure: Triggers Pop up windows for further confirmation. 
 Possible matches and corresponding information will also be displayed in the name list.
   - No match → Pop up window stating `No matches found. Press ESC to exit`
+  ![delete_no_matches.png](images/delete_no_matches.png)
   - Multiple matches → Pop up window stating `Multiple matches found. Type index and ENTER to delete or ESC to cancel`
-   
+  ![delete_multiple_matches.png](images/delete_multiple_matches.png)
 
 
 ### Viewing contact details: `view`
